@@ -12,7 +12,7 @@
     <meta name="msapplication-navbutton-color" content="#600090">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="#600090">
-    <link rel="shortcut icon" href="http://cdn.billy119.cn/image/site/laughMan-icon.png">
+    <link rel="shortcut icon" href="http://billy7x17.github.io/pics/laughMan-icon.png">
     <link rel="alternate" type="application/atom+xml" title="Billy" href="/atom.xml">
     <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css">
     <link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.css">
@@ -37,7 +37,7 @@
 <style>
 
     header.intro-header {
-        background-image: url('http://cdn.billy119.cn/image/site/head.jpg')
+        background-image: url('http://billy7x17.github.io/pics/head.jpg')
     }
 </style>
 <!-- hack iOS CSS :active style -->
@@ -128,13 +128,13 @@
 
 
 <img class="wechat-title-img"
-     src="http://cdn.billy119.cn/image/site/head.jpg">
+     src="http://billy7x17.github.io/pics/image/site/head.jpg">
 
 
 <style>
     
     header.intro-header {
-        background-image: url('http://cdn.billy119.cn/image/site/head.jpg?imageView2/1/w/1400/h/400/interlace/1/q/90')
+        background-image: url('http://billy7x17.github.io/pics/image/site/head.jpg?imageView2/1/w/1400/h/400/interlace/1/q/90')
     }
 
     
@@ -191,9 +191,9 @@
 <p>首先，openstack会判断是否需要生成configdrive，如果需要，那么组装、生成文件(其实是一个不小的文件堆)，然后用gzip压缩算法对其进行压缩，压缩成字符串后再用base64编码，通过rest接口传过来入库。</p>
 <p>由于我们要自己实现一套conductor，所以我对这段configdrive编码进行了一系列研究。base64解码并gzip解压后，生成了一个文件，这个文件类型让我非常恼火，因为使用好压软件是可以打开的，但是用代码怎么也敲不开，试了许多种文件类型，最后将其传到linux后发现可挂载，终于意识到是iso类型…  但java对iso类型无爱，也只能是上传至tftp服务器后由裸金属节点主动下载挂载后操作了，当然这是由脚本执行的。</p>
 <p>openstack-ironic-conductor正常会对其进行解码、解压，然后再挂载至裸金属节点上。</p>
-<p>下面是configdrive文件的结构：<br><img src="http://cdn.billy119.cn/image/blog/ironic-configdrive%E7%9B%AE%E5%BD%95.png" alt=""></p>
-<p><img src="http://cdn.billy119.cn/image/blogironic-configdrive%E7%9B%AE%E5%BD%952.png" alt=""></p>
-<p><img src="http://cdn.billy119.cn/image/blogironic-configdrive%E7%9B%AE%E5%BD%953.png" alt=""></p>
+<p>下面是configdrive文件的结构：<br><img src="ironic-configdrive%E7%9B%AE%E5%BD%95.png" alt=""></p>
+<p><img src="ironic-configdrive%E7%9B%AE%E5%BD%952.png" alt=""></p>
+<p><img src="ironic-configdrive%E7%9B%AE%E5%BD%953.png" alt=""></p>
 <p>meta_data.json</p>
 <pre><code>{
     &quot;admin_pass&quot;: &quot;199001122373&quot;,
@@ -436,7 +436,7 @@
 <script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
 
 <!--wechat title img-->
-<img class="wechat-title-img" src="http://cdn.billy119.cn/image/site/laughMan.jpg">
+<img class="wechat-title-img" src="http://billy7x17.github.io/pics/laughMan.jpg">
 </body>
 
 </html>

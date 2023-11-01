@@ -12,7 +12,7 @@
     <meta name="msapplication-navbutton-color" content="#600090">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="#600090">
-    <link rel="shortcut icon" href="http://cdn.billy119.cn/image/site/laughMan-icon.png">
+    <link rel="shortcut icon" href="http://billy7x17.github.io/pics/laughMan-icon.png">
     <link rel="alternate" type="application/atom+xml" title="Billy" href="/atom.xml">
     <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css">
     <link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.css">
@@ -37,7 +37,7 @@
 <style>
 
     header.intro-header {
-        background-image: url('http://cdn.billy119.cn/image/site/head.jpg')
+        background-image: url('http://billy7x17.github.io/pics/head.jpg')
     }
 </style>
 <!-- hack iOS CSS :active style -->
@@ -128,13 +128,13 @@
 
 
 <img class="wechat-title-img"
-     src="http://cdn.billy119.cn/image/site/head.jpg">
+     src="http://billy7x17.github.io/pics/image/site/head.jpg">
 
 
 <style>
     
     header.intro-header {
-        background-image: url('http://cdn.billy119.cn/image/site/head.jpg?imageView2/1/w/1400/h/400/interlace/1/q/90')
+        background-image: url('http://billy7x17.github.io/pics/image/site/head.jpg?imageView2/1/w/1400/h/400/interlace/1/q/90')
     }
 
     
@@ -186,7 +186,7 @@
             <!-- Post Container -->
             <div class="col-lg-8 col-lg-offset-1 col-sm-9 post-container">
                 <h1 id="rabbitmq之网络分区"><a href="#rabbitmq之网络分区" class="headerlink" title="rabbitmq之网络分区"></a>rabbitmq之网络分区</h1><p>在rabbitmq高可用测试过程中，由于对其中一节点所在虚拟机进行开关机等操作，导致rabbitmq集群不可访问，在管理页面中发现如下提示：</p>
-<p><img src="http://cdn.billy119.cn/image/jpg/rabbitmq%E5%87%BA%E7%8E%B0%E7%BD%91%E7%BB%9C%E5%88%86%E5%8C%BA.png" alt="rabbitmq网络分区"></p>
+<p><img src="rabbitmq%E5%87%BA%E7%8E%B0%E7%BD%91%E7%BB%9C%E5%88%86%E5%8C%BA.png" alt="rabbitmq网络分区"></p>
 <p>提示 “<strong>检测到网络分区</strong>“，经过对图片中<a href="http://www.rabbitmq.com/partitions.html" target="_blank" rel="external">超链接</a>的阅读，发现这是由于在虚拟机运行rabbitmq节点时，被执行挂起/恢复操作导致的。</p>
 <h2 id="网络分区会影响什么"><a href="#网络分区会影响什么" class="headerlink" title="网络分区会影响什么"></a>网络分区会影响什么</h2><p>当网络分区存在于集群中时，被分区分开的节点会各自独立运行，彼此认为对方是异常的。队列、绑定、交换机都可以被分别创建、操作，互不影响。若连接到多个分区的连接没有中断的话，队列消息就会入到多个网络分区中的队列中，直到问题修复为止。</p>
 <h2 id="什么引起的网络分区"><a href="#什么引起的网络分区" class="headerlink" title="什么引起的网络分区"></a>什么引起的网络分区</h2><p>当我们说到“网络分区”，实际上是指集群中某个节点与异常节点访问中断造成的分区。网络异常、操作系统的暂停、恢复都会引起这种情形，换句话说异常节点并没有意识到自己是异常的，甚至是服务停止，但是集群中其他节点却认为它是异常的。</p>
@@ -428,7 +428,7 @@ autoheal
 <script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
 
 <!--wechat title img-->
-<img class="wechat-title-img" src="http://cdn.billy119.cn/image/site/laughMan.jpg">
+<img class="wechat-title-img" src="http://billy7x17.github.io/pics/laughMan.jpg">
 </body>
 
 </html>
