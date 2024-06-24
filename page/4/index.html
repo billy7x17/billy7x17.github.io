@@ -279,6 +279,30 @@
 
 <div class="post-preview "
      style="background-image: url('https://billy7x17.github.io/pics/image/site/head.jpg')">
+    <a href="/2017/04/24/ironic对多网卡的支持/">
+        <h2 class="post-title">
+            ironic对多网卡的支持
+        </h2>
+        <p class="post-meta">
+            <i class="fa fa-calendar" aria-hidden="true"></i> 2017-04-24
+        </p>
+        
+        <div class="post-content-preview">
+            <p>
+                ironic对多网卡的支持在实际生产环境中，标准的物理机一般会有4个或以上的网卡数量，那么openstack的ironic是如何支持多网卡的呢？
+从代码中分析，nova-compute在获取node所有的port的mac地址后，放入了Set(集合)中，set是无序的，在最后取mac地址真正创建n..
+            </p>
+        </div>
+    </a>
+
+</div>
+
+<hr>
+
+
+
+<div class="post-preview "
+     style="background-image: url('https://billy7x17.github.io/pics/image/site/head.jpg')">
     <a href="/2017/04/20/ironic对configdrive的支持/">
         <h2 class="post-title">
             ironic对configdrive的支持
@@ -456,40 +480,6 @@ p.s. 2017.12.11更新 version Pike
 
 
 
-<div class="post-preview "
-     style="background-image: url('/pics/head.jpg')">
-    <a href="/2016/09/14/XenServer申请免费许可证流程/">
-        <h2 class="post-title">
-            XenServer申请免费许可证流程
-        </h2>
-        <p class="post-meta">
-            <i class="fa fa-calendar" aria-hidden="true"></i> 2016-09-14
-        </p>
-        
-        <div class="post-content-preview">
-            <p>
-                XenServer申请免费许可证流程
-在XenCenter的菜单栏上，工具 -&gt; 许可证管理器
-
-点击“申请激活密钥”
-
-十几秒钟后，会提示
-
-点击保存，保存到一个能记得住的位置
-
-然后访问官方的申请地址：https://activate.vmd.citrix.com/
-
-点击选择文件，把..
-            </p>
-        </div>
-    </a>
-
-</div>
-
-<hr>
-
-
-
 
 <!-- 翻页 pager -->
 
@@ -499,6 +489,10 @@ p.s. 2017.12.11更新 version Pike
         <a href="/page/3/">&larr; Newer Posts</a>
     </li>
     
+    
+    <li class="next">
+        <a href="/page/5/">Older Posts &rarr;</a>
+    </li>
     
 </ul>
 
@@ -706,6 +700,8 @@ p.s. 2017.12.11更新 version Pike
                     
                     <a href="/tags/#tftp" title="tftp"
                        rel="2">tftp</a>
+                    
+                    
                     
                     
                     
