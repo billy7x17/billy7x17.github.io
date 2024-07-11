@@ -196,22 +196,22 @@
             <div class="col-lg-8 col-lg-offset-1 col-sm-9 post-container">
                 <h1 id="简述vmware对block-device-mapping的支持"><a href="#简述vmware对block-device-mapping的支持" class="headerlink" title="简述vmware对block device mapping的支持"></a>简述vmware对block device mapping的支持</h1><ol>
 <li><p>创建影子虚拟机3f95bxxx，并以镜像的大小创建虚拟磁盘</p>
-<p> <img src="/vmware_bdm_1.jpg" alt="vmware_bdm_1.jpg"></p>
+<p> <img src="/2017/05/11/%E7%AE%80%E8%BF%B0vmware%E5%AF%B9block-device-mapping%E7%9A%84%E6%94%AF%E6%8C%81/vmware_bdm_1.jpg" alt="vmware_bdm_1.jpg"></p>
 </li>
 <li><p>创建成功后，删除其描述文件（descriptor）。<br>cinder从glance获取读镜像的流，从vcenter获取写入虚拟磁盘的流，开始传输，这个过程在vcenter的任务中不会显示。传输大概需要10分钟。</p>
-<p> <img src="/vmware_bdm_2.jpg" alt="vmware_bdm_2.jpg"></p>
+<p> <img src="/2017/05/11/%E7%AE%80%E8%BF%B0vmware%E5%AF%B9block-device-mapping%E7%9A%84%E6%94%AF%E6%8C%81/vmware_bdm_2.jpg" alt="vmware_bdm_2.jpg"></p>
 </li>
 <li><p>重新配置虚拟机：将上传好的镜像文件挂载到影子虚拟机3f95bxxx上。<br>再对影子虚拟机3f95bxxx进行克隆，名称为volume-e66bexxx，过程大约为7分钟。</p>
-<p> <img src="/vmware_bdm_3.jpg" alt="vmware_bdm_3.jpg"></p>
+<p> <img src="/2017/05/11/%E7%AE%80%E8%BF%B0vmware%E5%AF%B9block-device-mapping%E7%9A%84%E6%94%AF%E6%8C%81/vmware_bdm_3.jpg" alt="vmware_bdm_3.jpg"></p>
 </li>
 <li><p>克隆完成后，删除影子虚拟机3f95bxxx。<br>重新配置虚拟机：更改volume-e66bexxx的disk UUID为3f95bxxx</p>
-<p> <img src="/vmware_bdm_4.jpg" alt="vmware_bdm_4.jpg"></p>
+<p> <img src="/2017/05/11/%E7%AE%80%E8%BF%B0vmware%E5%AF%B9block-device-mapping%E7%9A%84%E6%94%AF%E6%8C%81/vmware_bdm_4.jpg" alt="vmware_bdm_4.jpg"></p>
 </li>
 <li><p>对block_device_mapping参数传入的卷大小和镜像的比对，对虚拟磁盘进行扩容。此时，真正创建虚拟机(spawn)之前的动作就都做完了。<br>下面的动作都是由nova-compute的vmdk driver来做的了，创建虚拟机、重新配置虚拟机与块不相干。<br>由于volume-e66bexxx在创建时不一定与虚拟机的目标位置相同，所以需要重定位虚拟机。此过程需要5分钟。</p>
-<p> <img src="/vmware_bdm_5.jpg" alt="vmware_bdm_5.jpg"></p>
+<p> <img src="/2017/05/11/%E7%AE%80%E8%BF%B0vmware%E5%AF%B9block-device-mapping%E7%9A%84%E6%94%AF%E6%8C%81/vmware_bdm_5.jpg" alt="vmware_bdm_5.jpg"></p>
 </li>
 <li><p>最后将虚拟磁盘通过重新配置虚拟机挂载到虚拟机指定的位置。<br>然后重命名、开机。</p>
-<p> <img src="/vmware_bdm_6.jpg" alt="vmware_bdm_6.jpg"></p>
+<p> <img src="/2017/05/11/%E7%AE%80%E8%BF%B0vmware%E5%AF%B9block-device-mapping%E7%9A%84%E6%94%AF%E6%8C%81/vmware_bdm_6.jpg" alt="vmware_bdm_6.jpg"></p>
 </li>
 </ol>
 
