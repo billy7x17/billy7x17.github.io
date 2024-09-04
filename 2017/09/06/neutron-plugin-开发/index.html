@@ -226,6 +226,15 @@ class MyPlugin(neutron_plugin_base_v2.NeutronPluginBaseV2):
 </code></pre>
 <p>如果在具体实现这些接口的过程中，需要参考的话，有两个地方非常值得参考：一个是 neutron&#x2F;db&#x2F;db_base_plugin_v2.py，这个是neutron官方给出的一个基于数据库的实现。它只是操作数据库中的内容，模拟各个资源的创建、修改、删除等操作，但没有在物理机器上做任何改变。第二个地方就是 neutron&#x2F;plugins 里面收纳的各个公司的插件实现，我们可以从中学习到其他公司是怎么写插件的。</p>
 
+<div id="gitalk-container"></div>
+<script src="https://cdn.bootcss.com/blueimp-md5/2.12.0/js/md5.min.js"></script><link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css"><script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+
+		<script>
+		var gitalkConfig = {"clientID":"Ov23liFG19AhSmVEYtNI","clientSecret":"236b24cf5e0eaf843c4a766f2e458b3b85702a04","repo":"billy7x17.github.io","owner":"billy7x17","admin":["billy7x17"],"distractionFreeMode":true};
+	    gitalkConfig.id = md5(location.pathname);
+		var gitalk = new Gitalk(gitalkConfig);
+	    gitalk.render("gitalk-container");
+	    </script>
                 <hr>
                 
 
@@ -250,25 +259,6 @@ class MyPlugin(neutron_plugin_base_v2.NeutronPluginBaseV2):
 
 
                 <!--加入新的评论系统-->
-                
-                <!-- 来必力City版安装代码 -->
-                <div id="lv-container" data-id="city" data-uid="MTAyMC82MDEwNC8zNjU3MA==">
-                    <script type="text/javascript">
-                        (function(d, s) {
-                            var j, e = d.getElementsByTagName(s)[0];
-
-                            if (typeof LivereTower === 'function') { return; }
-
-                            j = d.createElement(s);
-                            j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
-                            j.async = true;
-
-                            e.parentNode.insertBefore(j, e);
-                        })(document, 'script');
-                    </script>
-                    <noscript> 为正常使用来必力评论功能请激活JavaScript</noscript>
-                </div>
-                <!-- City版安装代码已完成 -->
                 
 
                 

@@ -198,6 +198,15 @@
 <p>这时我就陷入困惑了，代码从未更新过，如果真的涉嫌钓鱼行为，那么这个开源项目应该早就被封了。<br>遂去issues找一找看是否有遇到过相同情形的人。<br>果然，是有的<a target="_blank" rel="noopener" href="https://github.com/ChatGPTNextWeb/ChatGPT-Next-Web/issues/3573">https://github.com/ChatGPTNextWeb/ChatGPT-Next-Web/issues/3573</a><br>看到了一条评论可能性非常大。<br><img src="/2024/07/11/chatgpt-next-web%E9%83%A8%E7%BD%B2/issues_commit.png" alt="issues_commit"><br>因为开源项目被人改成钓鱼网站，但被列入钓鱼特征库里的却是开源项目的特征，就导致网站被自动误识别为钓鱼网站，从而封禁域名。。<br>这也太扯了，只能走申诉流程了<br>申诉流程就不细讲了，填好信息和申诉原有发送即可。<br>申诉发起后，会收到一个radix的邮件，然后申诉成功后邮箱也会收到邮件：<br><img src="/2024/07/11/chatgpt-next-web%E9%83%A8%E7%BD%B2/radix%E7%94%B3%E8%AF%89%E6%88%90%E5%8A%9F.png" alt="radix申诉成功"><br>申诉成功后，域名恢复正常，可以正常解析。  </p>
 <h2 id="后续"><a href="#后续" class="headerlink" title="后续"></a>后续</h2><p>不是开源项目的错，决定尝试其他方式部署。<br>这次直接使用了推荐的vercel，在优秀、简单明了的指引下，很快就部署在了vercel上。<br>但发现vercel提供的域名解析出来是境外的ip，如果不用vpn的话无法正常访问。<br>为避免重蹈覆辙，用了一个成本更低的新域名专门解析了vercel。<br>事件至此告一段落。  </p>
 
+<div id="gitalk-container"></div>
+<script src="https://cdn.bootcss.com/blueimp-md5/2.12.0/js/md5.min.js"></script><link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css"><script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+
+		<script>
+		var gitalkConfig = {"clientID":"Ov23liFG19AhSmVEYtNI","clientSecret":"236b24cf5e0eaf843c4a766f2e458b3b85702a04","repo":"billy7x17.github.io","owner":"billy7x17","admin":["billy7x17"],"distractionFreeMode":true};
+	    gitalkConfig.id = md5(location.pathname);
+		var gitalk = new Gitalk(gitalkConfig);
+	    gitalk.render("gitalk-container");
+	    </script>
                 <hr>
                 
 
@@ -222,25 +231,6 @@
 
 
                 <!--加入新的评论系统-->
-                
-                <!-- 来必力City版安装代码 -->
-                <div id="lv-container" data-id="city" data-uid="MTAyMC82MDEwNC8zNjU3MA==">
-                    <script type="text/javascript">
-                        (function(d, s) {
-                            var j, e = d.getElementsByTagName(s)[0];
-
-                            if (typeof LivereTower === 'function') { return; }
-
-                            j = d.createElement(s);
-                            j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
-                            j.async = true;
-
-                            e.parentNode.insertBefore(j, e);
-                        })(document, 'script');
-                    </script>
-                    <noscript> 为正常使用来必力评论功能请激活JavaScript</noscript>
-                </div>
-                <!-- City版安装代码已完成 -->
                 
 
                 

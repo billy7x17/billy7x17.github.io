@@ -184,6 +184,15 @@
             <div class="col-lg-8 col-lg-offset-1 col-sm-9 post-container">
                 <h1 id="nginx-默认配置时带下划线的header被过滤掉"><a href="#nginx-默认配置时带下划线的header被过滤掉" class="headerlink" title="nginx 默认配置时带下划线的header被过滤掉"></a>nginx 默认配置时带下划线的header被过滤掉</h1><p>http请求header中带有下划线不向后端转发，必须添加underscores_in_headers on; 参数到 default server中</p>
 <figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">server &#123;</span><br><span class="line">    listen       443 ssl;</span><br><span class="line">    server_name  test.*******.com;</span><br><span class="line">    ssl_certificate /etc/letsencrypt/live/test.*******.com/fullchain.pem;</span><br><span class="line">    ssl_certificate_key /etc/letsencrypt/live/test.*******.com/privkey.pem;</span><br><span class="line">    ssl_protocols SSLv2 SSLv3 TLSv1 TLSv1.1 TLSv1.2 TLSv1.3;</span><br><span class="line">    ssl_ciphers HIGH:!aNULL:!MD5;</span><br><span class="line"></span><br><span class="line">    underscores_in_headers on;</span><br><span class="line"></span><br><span class="line">    #charset koi8-r;</span><br><span class="line"></span><br><span class="line">    #access_log  logs/host.access.log  main;</span><br><span class="line"></span><br><span class="line">    location / &#123;</span><br><span class="line">        proxy_set_header X-Real-IP $remote_addr;</span><br><span class="line">        proxy_pass http://127.0.0.1:9001/;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    location /chat &#123;</span><br><span class="line">      proxy_pass http://127.0.0.1:9001/chat;</span><br><span class="line">      proxy_http_version 1.1;</span><br><span class="line">              proxy_set_header Upgrade $http_upgrade;</span><br><span class="line">      proxy_set_header Connection $connection_upgrade;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<div id="gitalk-container"></div>
+<script src="https://cdn.bootcss.com/blueimp-md5/2.12.0/js/md5.min.js"></script><link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css"><script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+
+		<script>
+		var gitalkConfig = {"clientID":"Ov23liFG19AhSmVEYtNI","clientSecret":"236b24cf5e0eaf843c4a766f2e458b3b85702a04","repo":"billy7x17.github.io","owner":"billy7x17","admin":["billy7x17"],"distractionFreeMode":true};
+	    gitalkConfig.id = md5(location.pathname);
+		var gitalk = new Gitalk(gitalkConfig);
+	    gitalk.render("gitalk-container");
+	    </script>
                 <hr>
                 
 
@@ -208,25 +217,6 @@
 
 
                 <!--加入新的评论系统-->
-                
-                <!-- 来必力City版安装代码 -->
-                <div id="lv-container" data-id="city" data-uid="MTAyMC82MDEwNC8zNjU3MA==">
-                    <script type="text/javascript">
-                        (function(d, s) {
-                            var j, e = d.getElementsByTagName(s)[0];
-
-                            if (typeof LivereTower === 'function') { return; }
-
-                            j = d.createElement(s);
-                            j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
-                            j.async = true;
-
-                            e.parentNode.insertBefore(j, e);
-                        })(document, 'script');
-                    </script>
-                    <noscript> 为正常使用来必力评论功能请激活JavaScript</noscript>
-                </div>
-                <!-- City版安装代码已完成 -->
                 
 
                 
