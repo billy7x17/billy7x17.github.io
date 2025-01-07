@@ -1,0 +1,2199 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Head tag -->
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Billy119在 Github 上的个人博客">
+    <meta name="keyword" content="Billy119">
+    <meta name="theme-color" content="#600090">
+    <meta name="msapplication-navbutton-color" content="#600090">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="#600090">
+    <link rel="shortcut icon" href="https://billy7x17.github.io/pics/laughMan-icon.png">
+    <link rel="alternate" type="application/atom+xml" title="Billy" href="/atom.xml">
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css">
+    <link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.css">
+    <title>
+        
+        tags｜Billy&#39;s blog
+        
+    </title>
+
+    <link rel="canonical" href="https://billy7x17.github.io/tags/">
+
+    <!-- Bootstrap Core CSS -->
+    
+<link rel="stylesheet" href="/css/bootstrap.min.css">
+
+
+    <!-- Custom CSS -->
+    
+<link rel="stylesheet" href="/css/blog-style.css">
+
+
+    <!-- Pygments Github CSS -->
+    
+<link rel="stylesheet" href="/css/syntax.css">
+
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<style>
+
+    header.intro-header {
+        background-image: url('https://billy7x17.github.io/pics/head.jpg')
+    }
+</style>
+<!-- hack iOS CSS :active style -->
+<body ontouchstart="" class="animated fadeIn">
+<!-- Navigation -->
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top " id="nav-top" data-ispost = "false" data-istags="false
+" data-ishome = "false" >
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand animated pulse" href="/">
+                <span class="brand-logo">
+                    Billy
+                </span>
+                's Blog
+            </a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <!-- Known Issue, found by Hux:
+            <nav>'s height woule be hold on by its content.
+            so, when navbar scale out, the <nav> will cover tags.
+            also mask any touch event of tags, unfortunately.
+        -->
+        <!-- /.navbar-collapse -->
+        <div id="huxblog_navbar">
+            <div class="navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="/">Home</a>
+                    </li>
+					
+                    
+                        
+							
+                        <li>
+                            <a href="/tags/">tags</a>
+                        </li>
+							
+						
+                    
+					
+					
+                </ul>
+            </div>
+        </div>
+    </div>
+    <!-- /.container -->
+</nav>
+<script>
+    // Drop Bootstarp low-performance Navbar
+    // Use customize navbar with high-quality material design animation
+    // in high-perf jank-free CSS3 implementation
+//    var $body   = document.body;
+    var $toggle = document.querySelector('.navbar-toggle');
+    var $navbar = document.querySelector('#huxblog_navbar');
+    var $collapse = document.querySelector('.navbar-collapse');
+
+    $toggle.addEventListener('click', handleMagic)
+    function handleMagic(e){
+        if ($navbar.className.indexOf('in') > 0) {
+        // CLOSE
+            $navbar.className = " ";
+            // wait until animation end.
+            setTimeout(function(){
+                // prevent frequently toggle
+                if($navbar.className.indexOf('in') < 0) {
+                    $collapse.style.height = "0px"
+                }
+            },400)
+        }else{
+        // OPEN
+            $collapse.style.height = "auto"
+            $navbar.className += " in";
+        }
+    }
+</script>
+
+<!-- Main Content -->
+<style>
+    .intro-header .site-heading {
+        margin: 50px;
+    }
+    
+    header.intro-header {
+        background-image: url('/pics/head.jpg')
+    }
+    
+</style>
+
+<!-- Page Header -->
+<header class="intro-header">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 ">
+                <div class="site-heading text-center">
+                    <h1>tags</h1>
+                    <span class="subheading">Billy119</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+<!-- Main Content -->
+<div class="container">
+    <div class="row">
+        <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+            <!-- 标签云 -->
+            <div id='tag_cloud' class="tags">
+                
+                <a href="#Kafka" title="Kafka" rel="1">Kafka</a>
+                
+                <a href="#失效副本" title="失效副本" rel="1">失效副本</a>
+                
+                <a href="#under-replicated-partitions" title="under-replicated-partitions" rel="1">under-replicated-partitions</a>
+                
+                <a href="#openstack" title="openstack" rel="18">openstack</a>
+                
+                <a href="#mq" title="mq" rel="1">mq</a>
+                
+                <a href="#oslo.message" title="oslo.message" rel="1">oslo.message</a>
+                
+                <a href="#Pulsar" title="Pulsar" rel="1">Pulsar</a>
+                
+                <a href="#Schema" title="Schema" rel="1">Schema</a>
+                
+                <a href="#TCP" title="TCP" rel="2">TCP</a>
+                
+                <a href="#vim" title="vim" rel="2">vim</a>
+                
+                <a href="#xenserver" title="xenserver" rel="1">xenserver</a>
+                
+                <a href="#vhd" title="vhd" rel="1">vhd</a>
+                
+                <a href="#镜像" title="镜像" rel="2">镜像</a>
+                
+                <a href="#Xenserver" title="Xenserver" rel="1">Xenserver</a>
+                
+                <a href="#license" title="license" rel="1">license</a>
+                
+                <a href="#disk-image-builder" title="disk-image-builder" rel="1">disk-image-builder</a>
+                
+                <a href="#image" title="image" rel="2">image</a>
+                
+                <a href="#baremetal" title="baremetal" rel="2">baremetal</a>
+                
+                <a href="#ironic-python-agent" title="ironic-python-agent" rel="1">ironic-python-agent</a>
+                
+                <a href="#ipa" title="ipa" rel="1">ipa</a>
+                
+                <a href="#chatgpt" title="chatgpt" rel="1">chatgpt</a>
+                
+                <a href="#vercel" title="vercel" rel="1">vercel</a>
+                
+                <a href="#ironic" title="ironic" rel="8">ironic</a>
+                
+                <a href="#node" title="node" rel="1">node</a>
+                
+                <a href="#raid" title="raid" rel="2">raid</a>
+                
+                <a href="#instance" title="instance" rel="1">instance</a>
+                
+                <a href="#configdrive" title="configdrive" rel="1">configdrive</a>
+                
+                <a href="#neutron" title="neutron" rel="3">neutron</a>
+                
+                <a href="#多网卡" title="多网卡" rel="1">多网卡</a>
+                
+                <a href="#plugin" title="plugin" rel="1">plugin</a>
+                
+                <a href="#nginx" title="nginx" rel="1">nginx</a>
+                
+                <a href="#nova" title="nova" rel="1">nova</a>
+                
+                <a href="#vmware" title="vmware" rel="3">vmware</a>
+                
+                <a href="#最小镜像" title="最小镜像" rel="1">最小镜像</a>
+                
+                <a href="#cirros" title="cirros" rel="1">cirros</a>
+                
+                <a href="#cinder" title="cinder" rel="1">cinder</a>
+                
+                <a href="#cache" title="cache" rel="1">cache</a>
+                
+                <a href="#缓存" title="缓存" rel="1">缓存</a>
+                
+                <a href="#volume" title="volume" rel="1">volume</a>
+                
+                <a href="#命令行" title="命令行" rel="1">命令行</a>
+                
+                <a href="#性能测试" title="性能测试" rel="1">性能测试</a>
+                
+                <a href="#垃圾数据" title="垃圾数据" rel="1">垃圾数据</a>
+                
+                <a href="#controller" title="controller" rel="1">controller</a>
+                
+                <a href="#HA" title="HA" rel="1">HA</a>
+                
+                <a href="#部署" title="部署" rel="1">部署</a>
+                
+                <a href="#高可用" title="高可用" rel="1">高可用</a>
+                
+                <a href="#性能压力测试" title="性能压力测试" rel="1">性能压力测试</a>
+                
+                <a href="#rabbitmq" title="rabbitmq" rel="1">rabbitmq</a>
+                
+                <a href="#Clustering" title="Clustering" rel="1">Clustering</a>
+                
+                <a href="#Network Partitions" title="Network Partitions" rel="1">Network Partitions</a>
+                
+                <a href="#三次握手" title="三次握手" rel="1">三次握手</a>
+                
+                <a href="#计算机网络" title="计算机网络" rel="1">计算机网络</a>
+                
+                <a href="#vi" title="vi" rel="1">vi</a>
+                
+                <a href="#iptables" title="iptables" rel="1">iptables</a>
+                
+                <a href="#tftp" title="tftp" rel="2">tftp</a>
+                
+                <a href="#maven国内公共仓库" title="maven国内公共仓库" rel="1">maven国内公共仓库</a>
+                
+                <a href="#maven" title="maven" rel="1">maven</a>
+                
+                <a href="#公共仓库" title="公共仓库" rel="1">公共仓库</a>
+                
+                <a href="#国内" title="国内" rel="1">国内</a>
+                
+                <a href="#proxy" title="proxy" rel="1">proxy</a>
+                
+                <a href="#IDE" title="IDE" rel="1">IDE</a>
+                
+                <a href="#IDEA" title="IDEA" rel="1">IDEA</a>
+                
+                <a href="#eclipse" title="eclipse" rel="1">eclipse</a>
+                
+                <a href="#profile" title="profile" rel="1">profile</a>
+                
+                <a href="#spring" title="spring" rel="1">spring</a>
+                
+                <a href="#ovs" title="ovs" rel="1">ovs</a>
+                
+                <a href="#管理网" title="管理网" rel="1">管理网</a>
+                
+                <a href="#openvswitch bridge" title="openvswitch bridge" rel="1">openvswitch bridge</a>
+                
+                <a href="#block_device_mapping" title="block_device_mapping" rel="1">block_device_mapping</a>
+                
+                <a href="#bdm" title="bdm" rel="1">bdm</a>
+                
+                <a href="#nova-compute" title="nova-compute" rel="1">nova-compute</a>
+                
+                <a href="#spawn" title="spawn" rel="1">spawn</a>
+                
+                <a href="#Termux" title="Termux" rel="1">Termux</a>
+                
+                <a href="#zerotier" title="zerotier" rel="1">zerotier</a>
+                
+                <a href="#ngrok" title="ngrok" rel="1">ngrok</a>
+                
+                <a href="#cloud-init" title="cloud-init" rel="1">cloud-init</a>
+                
+                <a href="#console" title="console" rel="1">console</a>
+                
+                <a href="#shellinabox" title="shellinabox" rel="1">shellinabox</a>
+                
+                <a href="#namespace" title="namespace" rel="1">namespace</a>
+                
+                <a href="#命名空间" title="命名空间" rel="1">命名空间</a>
+                
+            </div>
+
+            <!-- 标签列表 -->
+            
+            <div class="one-tag-list">
+                <span class="fa fa-tag listing-seperator" id="Kafka">
+                    <span class="tag-text">Kafka</span>
+                </span>
+                
+                <div class="post-preview">
+                    <a href="/2023/10/31/Kafka出现失效副本/">
+                        <h2 class="post-title">
+                            Kafka出现失效副本
+                        </h2>
+                        
+                    </a>
+                </div>
+                <hr>
+                
+            </div>
+            
+            <div class="one-tag-list">
+                <span class="fa fa-tag listing-seperator" id="失效副本">
+                    <span class="tag-text">失效副本</span>
+                </span>
+                
+                <div class="post-preview">
+                    <a href="/2023/10/31/Kafka出现失效副本/">
+                        <h2 class="post-title">
+                            Kafka出现失效副本
+                        </h2>
+                        
+                    </a>
+                </div>
+                <hr>
+                
+            </div>
+            
+            <div class="one-tag-list">
+                <span class="fa fa-tag listing-seperator" id="under-replicated-partitions">
+                    <span class="tag-text">under-replicated-partitions</span>
+                </span>
+                
+                <div class="post-preview">
+                    <a href="/2023/10/31/Kafka出现失效副本/">
+                        <h2 class="post-title">
+                            Kafka出现失效副本
+                        </h2>
+                        
+                    </a>
+                </div>
+                <hr>
+                
+            </div>
+            
+            <div class="one-tag-list">
+                <span class="fa fa-tag listing-seperator" id="openstack">
+                    <span class="tag-text">openstack</span>
+                </span>
+                
+                <div class="post-preview">
+                    <a href="/2017/03/19/Openstack-MQ基本流程和消息样例/">
+                        <h2 class="post-title">
+                            Openstack MQ基本流程和消息样例
+                        </h2>
+                        
+                    </a>
+                </div>
+                <hr>
+                
+                <div class="post-preview">
+                    <a href="/2017/03/07/ironic-node生命周期有限状态机/">
+                        <h2 class="post-title">
+                            ironic-node生命周期有限状态机
+                        </h2>
+                        
+                    </a>
+                </div>
+                <hr>
+                
+                <div class="post-preview">
+                    <a href="/2017/07/29/ironic-raid-configuration/">
+                        <h2 class="post-title">
+                            ironic raid configuration
+                        </h2>
+                        
+                    </a>
+                </div>
+                <hr>
+                
+                <div class="post-preview">
+                    <a href="/2017/03/27/ironic创建云主机流程/">
+                        <h2 class="post-title">
+                            ironic创建云主机流程
+                        </h2>
+                        
+                    </a>
+                </div>
+                <hr>
+                
+                <div class="post-preview">
+                    <a href="/2017/04/20/ironic对configdrive的支持/">
+                        <h2 class="post-title">
+                            ironic对configdrive的支持
+                        </h2>
+                        
+                    </a>
+                </div>
+                <hr>
+                
+                <div class="post-preview">
+                    <a href="/2017/04/24/ironic对多网卡的支持/">
+                        <h2 class="post-title">
+                            ironic对多网卡的支持
+                        </h2>
+                        
+                    </a>
+                </div>
+                <hr>
+                
+                <div class="post-preview">
+                    <a href="/2017/09/06/neutron-plugin-开发/">
+                        <h2 class="post-title">
+                            neutron plugin 开发
+                        </h2>
+                        
+                    </a>
+                </div>
+                <hr>
+                
+                <div class="post-preview">
+                    <a href="/2017/05/27/openstack-nova镜像缓存机制-vmware/">
+                        <h2 class="post-title">
+                            openstack nova镜像缓存机制(vmware)
+                        </h2>
+                        
+                    </a>
+                </div>
+                <hr>
+                
+                <div class="post-preview">
+                    <a href="/2017/06/10/openstack使用cirros镜像创建vmware虚拟机/">
+                        <h2 class="post-title">
+                            openstack使用cirros镜像创建vmware虚拟机
+                        </h2>
+                        
+                    </a>
+                </div>
+                <hr>
+                
+                <div class="post-preview">
+                    <a href="/2017/05/16/openstack-cinder缓存机制/">
+                        <h2 class="post-title">
+                            openstack-cinder缓存机制
+                        </h2>
+                        
+                    </a>
+                </div>
+                <hr>
+                
+                <div class="post-preview">
+                    <a href="/2017/09/25/openstack命令行清除垃圾数据/">
+                        <h2 class="post-title">
+                            openstack命令行清除垃圾数据
+                        </h2>
+                        
+                    </a>
+                </div>
+                <hr>
+                
+                <div class="post-preview">
+                    <a href="/2017/06/06/openstack控制节点高可用/">
+                        <h2 class="post-title">
+                            openstack控制节点高可用
+                        </h2>
+                        
+                    </a>
+                </div>
+                <hr>
+                
+                <div class="post-preview">
+                    <a href="/2017/07/26/openstack部署经验/">
+                        <h2 class="post-title">
+                            openstack部署经验
+                        </h2>
+                        
+                    </a>
+                </div>
+                <hr>
+                
+                <div class="post-preview">
+                    <a href="/2017/06/13/rabbitmq之网络分区/">
+                        <h2 class="post-title">
+                            rabbitmq之网络分区
+                        </h2>
+                        
+                    </a>
+                </div>
+                <hr>
+                
+                <div class="post-preview">
+                    <a href="/2018/10/17/初访iptables及openstack虚拟网络/">
+                        <h2 class="post-title">
+                            初访iptables及openstack虚拟网络
+                        </h2>
+                        
+                    </a>
+                </div>
+                <hr>
+                
+                <div class="post-preview">
+                    <a href="/2017/06/29/给ovs网桥设置ip/">
+                        <h2 class="post-title">
+                            给ovs网桥设置ip
+                        </h2>
+                        
+                    </a>
+                </div>
+                <hr>
+                
+                <div class="post-preview">
+                    <a href="/2018/03/12/裸金属控制台访问/">
+                        <h2 class="post-title">
+                            裸金属控制台访问
+                        </h2>
+                        
+                    </a>
+                </div>
+                <hr>
+                
+                <div class="post-preview">
+                    <a href="/2018/10/17/跨命名空间tftp服务/">
+                        <h2 class="post-title">
+                            跨命名空间tftp服务
+                        </h2>
+                        
+                    </a>
+                </div>
+                <hr>
+                
+            </div>
+            
+            <div class="one-tag-list">
+                <span class="fa fa-tag listing-seperator" id="mq">
+                    <span class="tag-text">mq</span>
+                </span>
+                
+                <div class="post-preview">
+                    <a href="/2017/03/19/Openstack-MQ基本流程和消息样例/">
+                        <h2 class="post-title">
+                            Openstack MQ基本流程和消息样例
+                        </h2>
+                        
+                    </a>
+                </div>
+                <hr>
+                
+            </div>
+            
+            <div class="one-tag-list">
+                <span class="fa fa-tag listing-seperator" id="oslo.message">
+                    <span class="tag-text">oslo.message</span>
+                </span>
+                
+                <div class="post-preview">
+                    <a href="/2017/03/19/Openstack-MQ基本流程和消息样例/">
+                        <h2 class="post-title">
+                            Openstack MQ基本流程和消息样例
+                        </h2>
+                        
+                    </a>
+                </div>
+                <hr>
+                
+            </div>
+            
+            <div class="one-tag-list">
+                <span class="fa fa-tag listing-seperator" id="Pulsar">
+                    <span class="tag-text">Pulsar</span>
+                </span>
+                
+                <div class="post-preview">
+                    <a href="/2023/10/31/Pulsar-Schema简介/">
+                        <h2 class="post-title">
+                            Pulsar Schema简介
+                        </h2>
+                        
+                    </a>
+                </div>
+                <hr>
+                
+            </div>
+            
+            <div class="one-tag-list">
+                <span class="fa fa-tag listing-seperator" id="Schema">
+                    <span class="tag-text">Schema</span>
+                </span>
+                
+                <div class="post-preview">
+                    <a href="/2023/10/31/Pulsar-Schema简介/">
+                        <h2 class="post-title">
+                            Pulsar Schema简介
+                        </h2>
+                        
+                    </a>
+                </div>
+                <hr>
+                
+            </div>
+            
+            <div class="one-tag-list">
+                <span class="fa fa-tag listing-seperator" id="TCP">
+                    <span class="tag-text">TCP</span>
+                </span>
+                
+                <div class="post-preview">
+                    <a href="/2017/09/12/TCP重传/">
+                        <h2 class="post-title">
+                            TCP重传
+                        </h2>
+                        
+                    </a>
+                </div>
+                <hr>
+                
+                <div class="post-preview">
+                    <a href="/2023/11/04/tcp-connection-and-disconnection/">
+                        <h2 class="post-title">
+                            tcp connection and disconnection
+                        </h2>
+                        
+                    </a>
+                </div>
+                <hr>
+                
+            </div>
+            
+            <div class="one-tag-list">
+                <span class="fa fa-tag listing-seperator" id="vim">
+                    <span class="tag-text">vim</span>
+                </span>
+                
+                <div class="post-preview">
+                    <a href="/2025/01/07/VIM灵活切换/">
+                        <h2 class="post-title">
+                            VIM灵活切换
+                        </h2>
+                        
+                    </a>
+                </div>
+                <hr>
+                
+                <div class="post-preview">
+                    <a href="/2017/07/12/vim简明教程/">
+                        <h2 class="post-title">
+                            vim简明教程
+                        </h2>
+                        
+                    </a>
+                </div>
+                <hr>
+                
+            </div>
+            
+            <div class="one-tag-list">
+                <span class="fa fa-tag listing-seperator" id="xenserver">
+                    <span class="tag-text">xenserver</span>
+                </span>
+                
+                <div class="post-preview">
+                    <a href="/2018/06/11/VHD镜像制作/">
+                        <h2 class="post-title">
+                            VHD镜像制作
+                        </h2>
+                        
+                    </a>
+                </div>
+                <hr>
+                
+            </div>
+            
+            <div class="one-tag-list">
+                <span class="fa fa-tag listing-seperator" id="vhd">
+                    <span class="tag-text">vhd</span>
+                </span>
+                
+                <div class="post-preview">
+                    <a href="/2018/06/11/VHD镜像制作/">
+                        <h2 class="post-title">
+                            VHD镜像制作
+                        </h2>
+                        
+                    </a>
+                </div>
+                <hr>
+                
+            </div>
+            
+            <div class="one-tag-list">
+                <span class="fa fa-tag listing-seperator" id="镜像">
+                    <span class="tag-text">镜像</span>
+                </span>
+                
+                <div class="post-preview">
+                    <a href="/2018/06/11/VHD镜像制作/">
+                        <h2 class="post-title">
+                            VHD镜像制作
+                        </h2>
+                        
+                    </a>
+                </div>
+                <hr>
+                
+                <div class="post-preview">
+                    <a href="/2017/06/10/openstack使用cirros镜像创建vmware虚拟机/">
+                        <h2 class="post-title">
+                            openstack使用cirros镜像创建vmware虚拟机
+                        </h2>
+                        
+                    </a>
+                </div>
+                <hr>
+                
+            </div>
+            
+            <div class="one-tag-list">
+                <span class="fa fa-tag listing-seperator" id="Xenserver">
+                    <span class="tag-text">Xenserver</span>
+                </span>
+                
+                <div class="post-preview">
+                    <a href="/2016/09/14/XenServer申请免费许可证流程/">
+                        <h2 class="post-title">
+                            XenServer申请免费许可证流程
+                        </h2>
+                        
+                    </a>
+                </div>
+                <hr>
+                
+            </div>
+            
+            <div class="one-tag-list">
+                <span class="fa fa-tag listing-seperator" id="license">
+                    <span class="tag-text">license</span>
+                </span>
+                
+                <div class="post-preview">
+                    <a href="/2016/09/14/XenServer申请免费许可证流程/">
+                        <h2 class="post-title">
+                            XenServer申请免费许可证流程
+                        </h2>
+                        
+                    </a>
+                </div>
+                <hr>
+                
+            </div>
+            
+            <div class="one-tag-list">
+                <span class="fa fa-tag listing-seperator" id="disk-image-builder">
+                    <span class="tag-text">disk-image-builder</span>
+                </span>
+                
+                <div class="post-preview">
+                    <a href="/2018/02/28/disk-image-builder/">
+                        <h2 class="post-title">
+                            disk-image-builder
+                        </h2>
+                        
+                    </a>
+                </div>
+                <hr>
+                
+            </div>
+            
+            <div class="one-tag-list">
+                <span class="fa fa-tag listing-seperator" id="image">
+                    <span class="tag-text">image</span>
+                </span>
+                
+                <div class="post-preview">
+                    <a href="/2018/02/28/disk-image-builder/">
+                        <h2 class="post-title">
+                            disk-image-builder
+                        </h2>
+                        
+                    </a>
+                </div>
+                <hr>
+                
+                <div class="post-preview">
+                    <a href="/2017/05/27/openstack-nova镜像缓存机制-vmware/">
+                        <h2 class="post-title">
+                            openstack nova镜像缓存机制(vmware)
+                        </h2>
+                        
+                    </a>
+                </div>
+                <hr>
+                
+            </div>
+            
+            <div class="one-tag-list">
+                <span class="fa fa-tag listing-seperator" id="baremetal">
+                    <span class="tag-text">baremetal</span>
+                </span>
+                
+                <div class="post-preview">
+                    <a href="/2018/02/28/disk-image-builder/">
+                        <h2 class="post-title">
+                            disk-image-builder
+                        </h2>
+                        
+                    </a>
+                </div>
+                <hr>
+                
+                <div class="post-preview">
+                    <a href="/2017/10/24/裸金属ironic-conductor调研/">
+                        <h2 class="post-title">
+                            裸金属ironic-conductor调研
+                        </h2>
+                        
+                    </a>
+                </div>
+                <hr>
+                
+            </div>
+            
+            <div class="one-tag-list">
+                <span class="fa fa-tag listing-seperator" id="ironic-python-agent">
+                    <span class="tag-text">ironic-python-agent</span>
+                </span>
+                
+                <div class="post-preview">
+                    <a href="/2018/02/28/disk-image-builder/">
+                        <h2 class="post-title">
+                            disk-image-builder
+                        </h2>
+                        
+                    </a>
+                </div>
+                <hr>
+                
+            </div>
+            
+            <div class="one-tag-list">
+                <span class="fa fa-tag listing-seperator" id="ipa">
+                    <span class="tag-text">ipa</span>
+                </span>
+                
+                <div class="post-preview">
+                    <a href="/2018/02/28/disk-image-builder/">
+                        <h2 class="post-title">
+                            disk-image-builder
+                        </h2>
+                        
+                    </a>
+                </div>
+                <hr>
+                
+            </div>
+            
+            <div class="one-tag-list">
+                <span class="fa fa-tag listing-seperator" id="chatgpt">
+                    <span class="tag-text">chatgpt</span>
+                </span>
+                
+                <div class="post-preview">
+                    <a href="/2024/07/11/chatgpt-next-web部署/">
+                        <h2 class="post-title">
+                            chatgpt-next-web部署
+                        </h2>
+                        
+                    </a>
+                </div>
+                <hr>
+                
+            </div>
+            
+            <div class="one-tag-list">
+                <span class="fa fa-tag listing-seperator" id="vercel">
+                    <span class="tag-text">vercel</span>
+                </span>
+                
+                <div class="post-preview">
+                    <a href="/2024/07/11/chatgpt-next-web部署/">
+                        <h2 class="post-title">
+                            chatgpt-next-web部署
+                        </h2>
+                        
+                    </a>
+                </div>
+                <hr>
+                
+            </div>
+            
+            <div class="one-tag-list">
+                <span class="fa fa-tag listing-seperator" id="ironic">
+                    <span class="tag-text">ironic</span>
+                </span>
+                
+                <div class="post-preview">
+                    <a href="/2017/03/07/ironic-node生命周期有限状态机/">
+                        <h2 class="post-title">
+                            ironic-node生命周期有限状态机
+                        </h2>
+                        
+                    </a>
+                </div>
+                <hr>
+                
+                <div class="post-preview">
+                    <a href="/2017/07/29/ironic-raid-configuration/">
+                        <h2 class="post-title">
+                            ironic raid configuration
+                        </h2>
+                        
+                    </a>
+                </div>
+                <hr>
+                
+                <div class="post-preview">
+                    <a href="/2017/03/27/ironic创建云主机流程/">
+                        <h2 class="post-title">
+                            ironic创建云主机流程
+                        </h2>
+                        
+                    </a>
+                </div>
+                <hr>
+                
+                <div class="post-preview">
+                    <a href="/2017/04/20/ironic对configdrive的支持/">
+                        <h2 class="post-title">
+                            ironic对configdrive的支持
+                        </h2>
+                        
+                    </a>
+                </div>
+                <hr>
+                
+                <div class="post-preview">
+                    <a href="/2017/04/24/ironic对多网卡的支持/">
+                        <h2 class="post-title">
+                            ironic对多网卡的支持
+                        </h2>
+                        
+                    </a>
+                </div>
+                <hr>
+                
+                <div class="post-preview">
+                    <a href="/2017/10/24/裸金属ironic-conductor调研/">
+                        <h2 class="post-title">
+                            裸金属ironic-conductor调研
+                        </h2>
+                        
+                    </a>
+                </div>
+                <hr>
+                
+                <div class="post-preview">
+                    <a href="/2018/03/12/裸金属控制台访问/">
+                        <h2 class="post-title">
+                            裸金属控制台访问
+                        </h2>
+                        
+                    </a>
+                </div>
+                <hr>
+                
+                <div class="post-preview">
+                    <a href="/2018/10/17/跨命名空间tftp服务/">
+                        <h2 class="post-title">
+                            跨命名空间tftp服务
+                        </h2>
+                        
+                    </a>
+                </div>
+                <hr>
+                
+            </div>
+            
+            <div class="one-tag-list">
+                <span class="fa fa-tag listing-seperator" id="node">
+                    <span class="tag-text">node</span>
+                </span>
+                
+                <div class="post-preview">
+                    <a href="/2017/03/07/ironic-node生命周期有限状态机/">
+                        <h2 class="post-title">
+                            ironic-node生命周期有限状态机
+                        </h2>
+                        
+                    </a>
+                </div>
+                <hr>
+                
+            </div>
+            
+            <div class="one-tag-list">
+                <span class="fa fa-tag listing-seperator" id="raid">
+                    <span class="tag-text">raid</span>
+                </span>
+                
+                <div class="post-preview">
+                    <a href="/2017/07/29/ironic-raid-configuration/">
+                        <h2 class="post-title">
+                            ironic raid configuration
+                        </h2>
+                        
+                    </a>
+                </div>
+                <hr>
+                
+                <div class="post-preview">
+                    <a href="/2017/10/24/裸金属ironic-conductor调研/">
+                        <h2 class="post-title">
+                            裸金属ironic-conductor调研
+                        </h2>
+                        
+                    </a>
+                </div>
+                <hr>
+                
+            </div>
+            
+            <div class="one-tag-list">
+                <span class="fa fa-tag listing-seperator" id="instance">
+                    <span class="tag-text">instance</span>
+                </span>
+                
+                <div class="post-preview">
+                    <a href="/2017/03/27/ironic创建云主机流程/">
+                        <h2 class="post-title">
+                            ironic创建云主机流程
+                        </h2>
+                        
+                    </a>
+                </div>
+                <hr>
+                
+            </div>
+            
+            <div class="one-tag-list">
+                <span class="fa fa-tag listing-seperator" id="configdrive">
+                    <span class="tag-text">configdrive</span>
+                </span>
+                
+                <div class="post-preview">
+                    <a href="/2017/04/20/ironic对configdrive的支持/">
+                        <h2 class="post-title">
+                            ironic对configdrive的支持
+                        </h2>
+                        
+                    </a>
+                </div>
+                <hr>
+                
+            </div>
+            
+            <div class="one-tag-list">
+                <span class="fa fa-tag listing-seperator" id="neutron">
+                    <span class="tag-text">neutron</span>
+                </span>
+                
+                <div class="post-preview">
+                    <a href="/2017/04/24/ironic对多网卡的支持/">
+                        <h2 class="post-title">
+                            ironic对多网卡的支持
+                        </h2>
+                        
+                    </a>
+                </div>
+                <hr>
+                
+                <div class="post-preview">
+                    <a href="/2017/09/06/neutron-plugin-开发/">
+                        <h2 class="post-title">
+                            neutron plugin 开发
+                        </h2>
+                        
+                    </a>
+                </div>
+                <hr>
+                
+                <div class="post-preview">
+                    <a href="/2018/10/17/初访iptables及openstack虚拟网络/">
+                        <h2 class="post-title">
+                            初访iptables及openstack虚拟网络
+                        </h2>
+                        
+                    </a>
+                </div>
+                <hr>
+                
+            </div>
+            
+            <div class="one-tag-list">
+                <span class="fa fa-tag listing-seperator" id="多网卡">
+                    <span class="tag-text">多网卡</span>
+                </span>
+                
+                <div class="post-preview">
+                    <a href="/2017/04/24/ironic对多网卡的支持/">
+                        <h2 class="post-title">
+                            ironic对多网卡的支持
+                        </h2>
+                        
+                    </a>
+                </div>
+                <hr>
+                
+            </div>
+            
+            <div class="one-tag-list">
+                <span class="fa fa-tag listing-seperator" id="plugin">
+                    <span class="tag-text">plugin</span>
+                </span>
+                
+                <div class="post-preview">
+                    <a href="/2017/09/06/neutron-plugin-开发/">
+                        <h2 class="post-title">
+                            neutron plugin 开发
+                        </h2>
+                        
+                    </a>
+                </div>
+                <hr>
+                
+            </div>
+            
+            <div class="one-tag-list">
+                <span class="fa fa-tag listing-seperator" id="nginx">
+                    <span class="tag-text">nginx</span>
+                </span>
+                
+                <div class="post-preview">
+                    <a href="/2024/06/24/nginx 默认配置时带下划线的header被过滤掉/">
+                        <h2 class="post-title">
+                            nginx 默认配置时带下划线的header被过滤掉
+                        </h2>
+                        
+                    </a>
+                </div>
+                <hr>
+                
+            </div>
+            
+            <div class="one-tag-list">
+                <span class="fa fa-tag listing-seperator" id="nova">
+                    <span class="tag-text">nova</span>
+                </span>
+                
+                <div class="post-preview">
+                    <a href="/2017/05/27/openstack-nova镜像缓存机制-vmware/">
+                        <h2 class="post-title">
+                            openstack nova镜像缓存机制(vmware)
+                        </h2>
+                        
+                    </a>
+                </div>
+                <hr>
+                
+            </div>
+            
+            <div class="one-tag-list">
+                <span class="fa fa-tag listing-seperator" id="vmware">
+                    <span class="tag-text">vmware</span>
+                </span>
+                
+                <div class="post-preview">
+                    <a href="/2017/05/27/openstack-nova镜像缓存机制-vmware/">
+                        <h2 class="post-title">
+                            openstack nova镜像缓存机制(vmware)
+                        </h2>
+                        
+                    </a>
+                </div>
+                <hr>
+                
+                <div class="post-preview">
+                    <a href="/2017/06/10/openstack使用cirros镜像创建vmware虚拟机/">
+                        <h2 class="post-title">
+                            openstack使用cirros镜像创建vmware虚拟机
+                        </h2>
+                        
+                    </a>
+                </div>
+                <hr>
+                
+                <div class="post-preview">
+                    <a href="/2017/05/11/简述vmware对block-device-mapping的支持/">
+                        <h2 class="post-title">
+                            简述vmware对block_device_mapping的支持
+                        </h2>
+                        
+                    </a>
+                </div>
+                <hr>
+                
+            </div>
+            
+            <div class="one-tag-list">
+                <span class="fa fa-tag listing-seperator" id="最小镜像">
+                    <span class="tag-text">最小镜像</span>
+                </span>
+                
+                <div class="post-preview">
+                    <a href="/2017/06/10/openstack使用cirros镜像创建vmware虚拟机/">
+                        <h2 class="post-title">
+                            openstack使用cirros镜像创建vmware虚拟机
+                        </h2>
+                        
+                    </a>
+                </div>
+                <hr>
+                
+            </div>
+            
+            <div class="one-tag-list">
+                <span class="fa fa-tag listing-seperator" id="cirros">
+                    <span class="tag-text">cirros</span>
+                </span>
+                
+                <div class="post-preview">
+                    <a href="/2017/06/10/openstack使用cirros镜像创建vmware虚拟机/">
+                        <h2 class="post-title">
+                            openstack使用cirros镜像创建vmware虚拟机
+                        </h2>
+                        
+                    </a>
+                </div>
+                <hr>
+                
+            </div>
+            
+            <div class="one-tag-list">
+                <span class="fa fa-tag listing-seperator" id="cinder">
+                    <span class="tag-text">cinder</span>
+                </span>
+                
+                <div class="post-preview">
+                    <a href="/2017/05/16/openstack-cinder缓存机制/">
+                        <h2 class="post-title">
+                            openstack-cinder缓存机制
+                        </h2>
+                        
+                    </a>
+                </div>
+                <hr>
+                
+            </div>
+            
+            <div class="one-tag-list">
+                <span class="fa fa-tag listing-seperator" id="cache">
+                    <span class="tag-text">cache</span>
+                </span>
+                
+                <div class="post-preview">
+                    <a href="/2017/05/16/openstack-cinder缓存机制/">
+                        <h2 class="post-title">
+                            openstack-cinder缓存机制
+                        </h2>
+                        
+                    </a>
+                </div>
+                <hr>
+                
+            </div>
+            
+            <div class="one-tag-list">
+                <span class="fa fa-tag listing-seperator" id="缓存">
+                    <span class="tag-text">缓存</span>
+                </span>
+                
+                <div class="post-preview">
+                    <a href="/2017/05/16/openstack-cinder缓存机制/">
+                        <h2 class="post-title">
+                            openstack-cinder缓存机制
+                        </h2>
+                        
+                    </a>
+                </div>
+                <hr>
+                
+            </div>
+            
+            <div class="one-tag-list">
+                <span class="fa fa-tag listing-seperator" id="volume">
+                    <span class="tag-text">volume</span>
+                </span>
+                
+                <div class="post-preview">
+                    <a href="/2017/05/16/openstack-cinder缓存机制/">
+                        <h2 class="post-title">
+                            openstack-cinder缓存机制
+                        </h2>
+                        
+                    </a>
+                </div>
+                <hr>
+                
+            </div>
+            
+            <div class="one-tag-list">
+                <span class="fa fa-tag listing-seperator" id="命令行">
+                    <span class="tag-text">命令行</span>
+                </span>
+                
+                <div class="post-preview">
+                    <a href="/2017/09/25/openstack命令行清除垃圾数据/">
+                        <h2 class="post-title">
+                            openstack命令行清除垃圾数据
+                        </h2>
+                        
+                    </a>
+                </div>
+                <hr>
+                
+            </div>
+            
+            <div class="one-tag-list">
+                <span class="fa fa-tag listing-seperator" id="性能测试">
+                    <span class="tag-text">性能测试</span>
+                </span>
+                
+                <div class="post-preview">
+                    <a href="/2017/09/25/openstack命令行清除垃圾数据/">
+                        <h2 class="post-title">
+                            openstack命令行清除垃圾数据
+                        </h2>
+                        
+                    </a>
+                </div>
+                <hr>
+                
+            </div>
+            
+            <div class="one-tag-list">
+                <span class="fa fa-tag listing-seperator" id="垃圾数据">
+                    <span class="tag-text">垃圾数据</span>
+                </span>
+                
+                <div class="post-preview">
+                    <a href="/2017/09/25/openstack命令行清除垃圾数据/">
+                        <h2 class="post-title">
+                            openstack命令行清除垃圾数据
+                        </h2>
+                        
+                    </a>
+                </div>
+                <hr>
+                
+            </div>
+            
+            <div class="one-tag-list">
+                <span class="fa fa-tag listing-seperator" id="controller">
+                    <span class="tag-text">controller</span>
+                </span>
+                
+                <div class="post-preview">
+                    <a href="/2017/06/06/openstack控制节点高可用/">
+                        <h2 class="post-title">
+                            openstack控制节点高可用
+                        </h2>
+                        
+                    </a>
+                </div>
+                <hr>
+                
+            </div>
+            
+            <div class="one-tag-list">
+                <span class="fa fa-tag listing-seperator" id="HA">
+                    <span class="tag-text">HA</span>
+                </span>
+                
+                <div class="post-preview">
+                    <a href="/2017/06/06/openstack控制节点高可用/">
+                        <h2 class="post-title">
+                            openstack控制节点高可用
+                        </h2>
+                        
+                    </a>
+                </div>
+                <hr>
+                
+            </div>
+            
+            <div class="one-tag-list">
+                <span class="fa fa-tag listing-seperator" id="部署">
+                    <span class="tag-text">部署</span>
+                </span>
+                
+                <div class="post-preview">
+                    <a href="/2017/07/26/openstack部署经验/">
+                        <h2 class="post-title">
+                            openstack部署经验
+                        </h2>
+                        
+                    </a>
+                </div>
+                <hr>
+                
+            </div>
+            
+            <div class="one-tag-list">
+                <span class="fa fa-tag listing-seperator" id="高可用">
+                    <span class="tag-text">高可用</span>
+                </span>
+                
+                <div class="post-preview">
+                    <a href="/2017/07/26/openstack部署经验/">
+                        <h2 class="post-title">
+                            openstack部署经验
+                        </h2>
+                        
+                    </a>
+                </div>
+                <hr>
+                
+            </div>
+            
+            <div class="one-tag-list">
+                <span class="fa fa-tag listing-seperator" id="性能压力测试">
+                    <span class="tag-text">性能压力测试</span>
+                </span>
+                
+                <div class="post-preview">
+                    <a href="/2017/07/26/openstack部署经验/">
+                        <h2 class="post-title">
+                            openstack部署经验
+                        </h2>
+                        
+                    </a>
+                </div>
+                <hr>
+                
+            </div>
+            
+            <div class="one-tag-list">
+                <span class="fa fa-tag listing-seperator" id="rabbitmq">
+                    <span class="tag-text">rabbitmq</span>
+                </span>
+                
+                <div class="post-preview">
+                    <a href="/2017/06/13/rabbitmq之网络分区/">
+                        <h2 class="post-title">
+                            rabbitmq之网络分区
+                        </h2>
+                        
+                    </a>
+                </div>
+                <hr>
+                
+            </div>
+            
+            <div class="one-tag-list">
+                <span class="fa fa-tag listing-seperator" id="Clustering">
+                    <span class="tag-text">Clustering</span>
+                </span>
+                
+                <div class="post-preview">
+                    <a href="/2017/06/13/rabbitmq之网络分区/">
+                        <h2 class="post-title">
+                            rabbitmq之网络分区
+                        </h2>
+                        
+                    </a>
+                </div>
+                <hr>
+                
+            </div>
+            
+            <div class="one-tag-list">
+                <span class="fa fa-tag listing-seperator" id="Network Partitions">
+                    <span class="tag-text">Network Partitions</span>
+                </span>
+                
+                <div class="post-preview">
+                    <a href="/2017/06/13/rabbitmq之网络分区/">
+                        <h2 class="post-title">
+                            rabbitmq之网络分区
+                        </h2>
+                        
+                    </a>
+                </div>
+                <hr>
+                
+            </div>
+            
+            <div class="one-tag-list">
+                <span class="fa fa-tag listing-seperator" id="三次握手">
+                    <span class="tag-text">三次握手</span>
+                </span>
+                
+                <div class="post-preview">
+                    <a href="/2023/11/04/tcp-connection-and-disconnection/">
+                        <h2 class="post-title">
+                            tcp connection and disconnection
+                        </h2>
+                        
+                    </a>
+                </div>
+                <hr>
+                
+            </div>
+            
+            <div class="one-tag-list">
+                <span class="fa fa-tag listing-seperator" id="计算机网络">
+                    <span class="tag-text">计算机网络</span>
+                </span>
+                
+                <div class="post-preview">
+                    <a href="/2023/11/04/tcp-connection-and-disconnection/">
+                        <h2 class="post-title">
+                            tcp connection and disconnection
+                        </h2>
+                        
+                    </a>
+                </div>
+                <hr>
+                
+            </div>
+            
+            <div class="one-tag-list">
+                <span class="fa fa-tag listing-seperator" id="vi">
+                    <span class="tag-text">vi</span>
+                </span>
+                
+                <div class="post-preview">
+                    <a href="/2017/07/12/vim简明教程/">
+                        <h2 class="post-title">
+                            vim简明教程
+                        </h2>
+                        
+                    </a>
+                </div>
+                <hr>
+                
+            </div>
+            
+            <div class="one-tag-list">
+                <span class="fa fa-tag listing-seperator" id="iptables">
+                    <span class="tag-text">iptables</span>
+                </span>
+                
+                <div class="post-preview">
+                    <a href="/2018/10/17/初访iptables及openstack虚拟网络/">
+                        <h2 class="post-title">
+                            初访iptables及openstack虚拟网络
+                        </h2>
+                        
+                    </a>
+                </div>
+                <hr>
+                
+            </div>
+            
+            <div class="one-tag-list">
+                <span class="fa fa-tag listing-seperator" id="tftp">
+                    <span class="tag-text">tftp</span>
+                </span>
+                
+                <div class="post-preview">
+                    <a href="/2018/10/17/初访iptables及openstack虚拟网络/">
+                        <h2 class="post-title">
+                            初访iptables及openstack虚拟网络
+                        </h2>
+                        
+                    </a>
+                </div>
+                <hr>
+                
+                <div class="post-preview">
+                    <a href="/2018/10/17/跨命名空间tftp服务/">
+                        <h2 class="post-title">
+                            跨命名空间tftp服务
+                        </h2>
+                        
+                    </a>
+                </div>
+                <hr>
+                
+            </div>
+            
+            <div class="one-tag-list">
+                <span class="fa fa-tag listing-seperator" id="maven国内公共仓库">
+                    <span class="tag-text">maven国内公共仓库</span>
+                </span>
+                
+                <div class="post-preview">
+                    <a href="/2017/03/28/发现一个国内牛逼的maven仓库，速度真的太快了/">
+                        <h2 class="post-title">
+                            发现一个国内牛逼的maven仓库，速度真的太快了
+                        </h2>
+                        
+                    </a>
+                </div>
+                <hr>
+                
+            </div>
+            
+            <div class="one-tag-list">
+                <span class="fa fa-tag listing-seperator" id="maven">
+                    <span class="tag-text">maven</span>
+                </span>
+                
+                <div class="post-preview">
+                    <a href="/2017/03/28/发现一个国内牛逼的maven仓库，速度真的太快了/">
+                        <h2 class="post-title">
+                            发现一个国内牛逼的maven仓库，速度真的太快了
+                        </h2>
+                        
+                    </a>
+                </div>
+                <hr>
+                
+            </div>
+            
+            <div class="one-tag-list">
+                <span class="fa fa-tag listing-seperator" id="公共仓库">
+                    <span class="tag-text">公共仓库</span>
+                </span>
+                
+                <div class="post-preview">
+                    <a href="/2017/03/28/发现一个国内牛逼的maven仓库，速度真的太快了/">
+                        <h2 class="post-title">
+                            发现一个国内牛逼的maven仓库，速度真的太快了
+                        </h2>
+                        
+                    </a>
+                </div>
+                <hr>
+                
+            </div>
+            
+            <div class="one-tag-list">
+                <span class="fa fa-tag listing-seperator" id="国内">
+                    <span class="tag-text">国内</span>
+                </span>
+                
+                <div class="post-preview">
+                    <a href="/2017/03/28/发现一个国内牛逼的maven仓库，速度真的太快了/">
+                        <h2 class="post-title">
+                            发现一个国内牛逼的maven仓库，速度真的太快了
+                        </h2>
+                        
+                    </a>
+                </div>
+                <hr>
+                
+            </div>
+            
+            <div class="one-tag-list">
+                <span class="fa fa-tag listing-seperator" id="proxy">
+                    <span class="tag-text">proxy</span>
+                </span>
+                
+                <div class="post-preview">
+                    <a href="/2017/03/18/各种配置代理的方法/">
+                        <h2 class="post-title">
+                            各种配置代理的方法
+                        </h2>
+                        
+                    </a>
+                </div>
+                <hr>
+                
+            </div>
+            
+            <div class="one-tag-list">
+                <span class="fa fa-tag listing-seperator" id="IDE">
+                    <span class="tag-text">IDE</span>
+                </span>
+                
+                <div class="post-preview">
+                    <a href="/2018/07/19/在IDE中设置OS环境变量/">
+                        <h2 class="post-title">
+                            在IDE中设置OS环境变量
+                        </h2>
+                        
+                    </a>
+                </div>
+                <hr>
+                
+            </div>
+            
+            <div class="one-tag-list">
+                <span class="fa fa-tag listing-seperator" id="IDEA">
+                    <span class="tag-text">IDEA</span>
+                </span>
+                
+                <div class="post-preview">
+                    <a href="/2018/07/19/在IDE中设置OS环境变量/">
+                        <h2 class="post-title">
+                            在IDE中设置OS环境变量
+                        </h2>
+                        
+                    </a>
+                </div>
+                <hr>
+                
+            </div>
+            
+            <div class="one-tag-list">
+                <span class="fa fa-tag listing-seperator" id="eclipse">
+                    <span class="tag-text">eclipse</span>
+                </span>
+                
+                <div class="post-preview">
+                    <a href="/2018/07/19/在IDE中设置OS环境变量/">
+                        <h2 class="post-title">
+                            在IDE中设置OS环境变量
+                        </h2>
+                        
+                    </a>
+                </div>
+                <hr>
+                
+            </div>
+            
+            <div class="one-tag-list">
+                <span class="fa fa-tag listing-seperator" id="profile">
+                    <span class="tag-text">profile</span>
+                </span>
+                
+                <div class="post-preview">
+                    <a href="/2018/07/19/在IDE中设置OS环境变量/">
+                        <h2 class="post-title">
+                            在IDE中设置OS环境变量
+                        </h2>
+                        
+                    </a>
+                </div>
+                <hr>
+                
+            </div>
+            
+            <div class="one-tag-list">
+                <span class="fa fa-tag listing-seperator" id="spring">
+                    <span class="tag-text">spring</span>
+                </span>
+                
+                <div class="post-preview">
+                    <a href="/2018/07/19/在IDE中设置OS环境变量/">
+                        <h2 class="post-title">
+                            在IDE中设置OS环境变量
+                        </h2>
+                        
+                    </a>
+                </div>
+                <hr>
+                
+            </div>
+            
+            <div class="one-tag-list">
+                <span class="fa fa-tag listing-seperator" id="ovs">
+                    <span class="tag-text">ovs</span>
+                </span>
+                
+                <div class="post-preview">
+                    <a href="/2017/06/29/给ovs网桥设置ip/">
+                        <h2 class="post-title">
+                            给ovs网桥设置ip
+                        </h2>
+                        
+                    </a>
+                </div>
+                <hr>
+                
+            </div>
+            
+            <div class="one-tag-list">
+                <span class="fa fa-tag listing-seperator" id="管理网">
+                    <span class="tag-text">管理网</span>
+                </span>
+                
+                <div class="post-preview">
+                    <a href="/2017/06/29/给ovs网桥设置ip/">
+                        <h2 class="post-title">
+                            给ovs网桥设置ip
+                        </h2>
+                        
+                    </a>
+                </div>
+                <hr>
+                
+            </div>
+            
+            <div class="one-tag-list">
+                <span class="fa fa-tag listing-seperator" id="openvswitch bridge">
+                    <span class="tag-text">openvswitch bridge</span>
+                </span>
+                
+                <div class="post-preview">
+                    <a href="/2017/06/29/给ovs网桥设置ip/">
+                        <h2 class="post-title">
+                            给ovs网桥设置ip
+                        </h2>
+                        
+                    </a>
+                </div>
+                <hr>
+                
+            </div>
+            
+            <div class="one-tag-list">
+                <span class="fa fa-tag listing-seperator" id="block_device_mapping">
+                    <span class="tag-text">block_device_mapping</span>
+                </span>
+                
+                <div class="post-preview">
+                    <a href="/2017/05/11/简述vmware对block-device-mapping的支持/">
+                        <h2 class="post-title">
+                            简述vmware对block_device_mapping的支持
+                        </h2>
+                        
+                    </a>
+                </div>
+                <hr>
+                
+            </div>
+            
+            <div class="one-tag-list">
+                <span class="fa fa-tag listing-seperator" id="bdm">
+                    <span class="tag-text">bdm</span>
+                </span>
+                
+                <div class="post-preview">
+                    <a href="/2017/05/11/简述vmware对block-device-mapping的支持/">
+                        <h2 class="post-title">
+                            简述vmware对block_device_mapping的支持
+                        </h2>
+                        
+                    </a>
+                </div>
+                <hr>
+                
+            </div>
+            
+            <div class="one-tag-list">
+                <span class="fa fa-tag listing-seperator" id="nova-compute">
+                    <span class="tag-text">nova-compute</span>
+                </span>
+                
+                <div class="post-preview">
+                    <a href="/2017/05/11/简述vmware对block-device-mapping的支持/">
+                        <h2 class="post-title">
+                            简述vmware对block_device_mapping的支持
+                        </h2>
+                        
+                    </a>
+                </div>
+                <hr>
+                
+            </div>
+            
+            <div class="one-tag-list">
+                <span class="fa fa-tag listing-seperator" id="spawn">
+                    <span class="tag-text">spawn</span>
+                </span>
+                
+                <div class="post-preview">
+                    <a href="/2017/05/11/简述vmware对block-device-mapping的支持/">
+                        <h2 class="post-title">
+                            简述vmware对block_device_mapping的支持
+                        </h2>
+                        
+                    </a>
+                </div>
+                <hr>
+                
+            </div>
+            
+            <div class="one-tag-list">
+                <span class="fa fa-tag listing-seperator" id="Termux">
+                    <span class="tag-text">Termux</span>
+                </span>
+                
+                <div class="post-preview">
+                    <a href="/2024/09/02/老旧安卓机改装服务器/">
+                        <h2 class="post-title">
+                            老旧安卓机改装服务器
+                        </h2>
+                        
+                    </a>
+                </div>
+                <hr>
+                
+            </div>
+            
+            <div class="one-tag-list">
+                <span class="fa fa-tag listing-seperator" id="zerotier">
+                    <span class="tag-text">zerotier</span>
+                </span>
+                
+                <div class="post-preview">
+                    <a href="/2024/09/02/老旧安卓机改装服务器/">
+                        <h2 class="post-title">
+                            老旧安卓机改装服务器
+                        </h2>
+                        
+                    </a>
+                </div>
+                <hr>
+                
+            </div>
+            
+            <div class="one-tag-list">
+                <span class="fa fa-tag listing-seperator" id="ngrok">
+                    <span class="tag-text">ngrok</span>
+                </span>
+                
+                <div class="post-preview">
+                    <a href="/2024/09/02/老旧安卓机改装服务器/">
+                        <h2 class="post-title">
+                            老旧安卓机改装服务器
+                        </h2>
+                        
+                    </a>
+                </div>
+                <hr>
+                
+            </div>
+            
+            <div class="one-tag-list">
+                <span class="fa fa-tag listing-seperator" id="cloud-init">
+                    <span class="tag-text">cloud-init</span>
+                </span>
+                
+                <div class="post-preview">
+                    <a href="/2017/10/24/裸金属ironic-conductor调研/">
+                        <h2 class="post-title">
+                            裸金属ironic-conductor调研
+                        </h2>
+                        
+                    </a>
+                </div>
+                <hr>
+                
+            </div>
+            
+            <div class="one-tag-list">
+                <span class="fa fa-tag listing-seperator" id="console">
+                    <span class="tag-text">console</span>
+                </span>
+                
+                <div class="post-preview">
+                    <a href="/2018/03/12/裸金属控制台访问/">
+                        <h2 class="post-title">
+                            裸金属控制台访问
+                        </h2>
+                        
+                    </a>
+                </div>
+                <hr>
+                
+            </div>
+            
+            <div class="one-tag-list">
+                <span class="fa fa-tag listing-seperator" id="shellinabox">
+                    <span class="tag-text">shellinabox</span>
+                </span>
+                
+                <div class="post-preview">
+                    <a href="/2018/03/12/裸金属控制台访问/">
+                        <h2 class="post-title">
+                            裸金属控制台访问
+                        </h2>
+                        
+                    </a>
+                </div>
+                <hr>
+                
+            </div>
+            
+            <div class="one-tag-list">
+                <span class="fa fa-tag listing-seperator" id="namespace">
+                    <span class="tag-text">namespace</span>
+                </span>
+                
+                <div class="post-preview">
+                    <a href="/2018/10/17/跨命名空间tftp服务/">
+                        <h2 class="post-title">
+                            跨命名空间tftp服务
+                        </h2>
+                        
+                    </a>
+                </div>
+                <hr>
+                
+            </div>
+            
+            <div class="one-tag-list">
+                <span class="fa fa-tag listing-seperator" id="命名空间">
+                    <span class="tag-text">命名空间</span>
+                </span>
+                
+                <div class="post-preview">
+                    <a href="/2018/10/17/跨命名空间tftp服务/">
+                        <h2 class="post-title">
+                            跨命名空间tftp服务
+                        </h2>
+                        
+                    </a>
+                </div>
+                <hr>
+                
+            </div>
+            
+
+        </div>
+    </div>
+</div>
+
+<!-- Footer -->
+<!-- Footer -->
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 text-center">
+                <br>
+                <ul class="list-inline text-center">
+                
+                    <li>
+                        <a href="/atom.xml">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-rss fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+                
+                
+                    <li>
+                        <a target="_blank" href="https://www.zhihu.com/people/li-zong-rui-18">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa  fa-stack-1x fa-inverse">知</i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+                    <li>
+                        <a target="_blank" href="http://weibo.com/billy7x17">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-weibo fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+
+                
+                    <li>
+                        <a target="_blank"  href="https://github.com/billy7x17">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+
+                </ul>
+                <p class="copyright text-muted">
+                    Copyright &copy; Billy 2025
+                    <br>
+                    <span id="busuanzi_container_site_pv" style="font-size: 12px;">PV: <span id="busuanzi_value_site_pv"></span> Times</span>
+                    <br>
+                    Theme by <a target="_blank" rel="noopener" href="https://haojen.github.io/">Haojen Ma</a>
+                </p>
+
+            </div>
+        </div>
+    </div>
+</footer>
+
+<!-- jQuery -->
+
+<script src="/js/jquery.min.js"></script>
+
+
+<!-- Bootstrap Core JavaScript -->
+
+<script src="/js/bootstrap.min.js"></script>
+
+
+<!-- Custom Theme JavaScript -->
+
+<script src="/js/blog.js"></script>
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+
+<!-- jquery.tagcloud.js -->
+<script>
+    // only load tagcloud.js in tag.html
+    if($('#tag_cloud').length !== 0){
+        async("https://billy7x17.github.io/js/jquery.tagcloud.js",function(){
+            $.fn.tagcloud.defaults = {
+                //size: {start: 1, end: 1, unit: 'em'},
+                color: {start: '#bbbbee', end: '#0085a1'},
+            };
+            $('#tag_cloud a').tagcloud();
+        })
+    }
+</script>
+
+<!--fastClick.js -->
+<script>
+    async("//cdn.bootcss.com/fastclick/1.0.6/fastclick.min.js", function(){
+        var $nav = document.querySelector("nav");
+        if($nav) FastClick.attach($nav);
+    })
+</script>
+
+
+
+<!-- Google Analytics -->
+
+
+
+<!-- Baidu Tongji -->
+
+<script>
+    var _baId = 'd63b30f4b79f1151f194406afe5e9831';
+    // Originial
+    var _hmt = _hmt || [];
+    (function() {
+        var hm = document.createElement("script");
+        hm.src = "//hm.baidu.com/hm.js?" + _baId;
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(hm, s);
+    })();
+</script>
+
+
+<!-- swiftype -->
+<script type="text/javascript">
+  (function(w,d,t,u,n,s,e){w['SwiftypeObject']=n;w[n]=w[n]||function(){
+  (w[n].q=w[n].q||[]).push(arguments);};s=d.createElement(t);
+  e=d.getElementsByTagName(t)[0];s.async=1;s.src=u;e.parentNode.insertBefore(s,e);
+  })(window,document,'script','//s.swiftypecdn.com/install/v2/st.js','_st');
+
+  _st('install','','2.0.0');
+</script>
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+<!--wechat title img-->
+<img class="wechat-title-img" src="https://billy7x17.github.io/pics/laughMan.jpg">
+</body>
+
+</html>

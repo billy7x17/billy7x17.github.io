@@ -1,0 +1,486 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Head tag -->
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Billy119在 Github 上的个人博客">
+    <meta name="keyword" content="Billy119">
+    <meta name="theme-color" content="#600090">
+    <meta name="msapplication-navbutton-color" content="#600090">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="#600090">
+    <link rel="shortcut icon" href="https://billy7x17.github.io/pics/laughMan-icon.png">
+    <link rel="alternate" type="application/atom+xml" title="Billy" href="/atom.xml">
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css">
+    <link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.css">
+    <title>
+        
+        openstack部署经验｜Billy&#39;s blog
+        
+    </title>
+
+    <link rel="canonical" href="https://billy7x17.github.io/2017/07/26/openstack部署经验/">
+
+    <!-- Bootstrap Core CSS -->
+    
+<link rel="stylesheet" href="/css/bootstrap.min.css">
+
+
+    <!-- Custom CSS -->
+    
+<link rel="stylesheet" href="/css/blog-style.css">
+
+
+    <!-- Pygments Github CSS -->
+    
+<link rel="stylesheet" href="/css/syntax.css">
+
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<style>
+
+    header.intro-header {
+        background-image: url('https://billy7x17.github.io/pics/head.jpg')
+    }
+</style>
+<!-- hack iOS CSS :active style -->
+<body ontouchstart="" class="animated fadeIn">
+<!-- Navigation -->
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top " id="nav-top" data-ispost = "true" data-istags="false
+" data-ishome = "false" >
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand animated pulse" href="/">
+                <span class="brand-logo">
+                    Billy
+                </span>
+                's Blog
+            </a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <!-- Known Issue, found by Hux:
+            <nav>'s height woule be hold on by its content.
+            so, when navbar scale out, the <nav> will cover tags.
+            also mask any touch event of tags, unfortunately.
+        -->
+        <!-- /.navbar-collapse -->
+        <div id="huxblog_navbar">
+            <div class="navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="/">Home</a>
+                    </li>
+					
+                    
+                        
+							
+                        <li>
+                            <a href="/tags/">tags</a>
+                        </li>
+							
+						
+                    
+					
+					
+                </ul>
+            </div>
+        </div>
+    </div>
+    <!-- /.container -->
+</nav>
+<script>
+    // Drop Bootstarp low-performance Navbar
+    // Use customize navbar with high-quality material design animation
+    // in high-perf jank-free CSS3 implementation
+//    var $body   = document.body;
+    var $toggle = document.querySelector('.navbar-toggle');
+    var $navbar = document.querySelector('#huxblog_navbar');
+    var $collapse = document.querySelector('.navbar-collapse');
+
+    $toggle.addEventListener('click', handleMagic)
+    function handleMagic(e){
+        if ($navbar.className.indexOf('in') > 0) {
+        // CLOSE
+            $navbar.className = " ";
+            // wait until animation end.
+            setTimeout(function(){
+                // prevent frequently toggle
+                if($navbar.className.indexOf('in') < 0) {
+                    $collapse.style.height = "0px"
+                }
+            },400)
+        }else{
+        // OPEN
+            $collapse.style.height = "auto"
+            $navbar.className += " in";
+        }
+    }
+</script>
+
+<!-- Main Content -->
+
+<!--only post-->
+
+
+<img class="wechat-title-img"
+     src="https://billy7x17.github.io/pics/image/site/head.jpg">
+
+
+<style>
+    
+    header.intro-header {
+        background-image: url('https://billy7x17.github.io/pics/image/site/head.jpg?imageView2/1/w/1400/h/400/interlace/1/q/90')
+    }
+
+    
+</style>
+
+<header class="intro-header">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 text-center">
+                <div class="post-heading">
+                    <h1>openstack部署经验</h1>
+                    
+                    <span class="meta">
+                         作者 Billy
+                        <span>
+                          日期 2017-07-26
+                         </span>
+                    </span>
+                    <div class="tags text-center">
+                        
+                        <a class="tag" href="/tags/#openstack"
+                           title="openstack">openstack</a>
+                        
+                        <a class="tag" href="/tags/#部署"
+                           title="部署">部署</a>
+                        
+                        <a class="tag" href="/tags/#高可用"
+                           title="高可用">高可用</a>
+                        
+                        <a class="tag" href="/tags/#性能压力测试"
+                           title="性能压力测试">性能压力测试</a>
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="post-title-haojen">
+        <span>
+            openstack部署经验
+        </span>
+    </div>
+</header>
+
+<!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
+            <!-- Post Container -->
+            <div class="col-lg-8 col-lg-offset-1 col-sm-9 post-container">
+                <h1 id="openstack部署经验"><a href="#openstack部署经验" class="headerlink" title="openstack部署经验"></a>openstack部署经验</h1><h2 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h2><h3 id="使用kvm虚拟化"><a href="#使用kvm虚拟化" class="headerlink" title="使用kvm虚拟化"></a>使用kvm虚拟化</h3><p>与vmware不同的是，每台宿主机都是一个计算节点，计算节点使用其上的libvirt虚拟出若干虚拟机。因此计算节点数量规模庞大，需要批量部署，我们本次使用了ansible脚本进行批量操作。</p>
+<h3 id="高可用"><a href="#高可用" class="headerlink" title="高可用"></a>高可用</h3><p>在云计算产品日常使用中，服务器宕机的情况一定是要首先考虑的。我们对openstack采用的高可用方案进本与官网推荐无异，只不过提供负载均衡的软件采用的是keepalived + haproxy</p>
+<h3 id="性能测试要求"><a href="#性能测试要求" class="headerlink" title="性能测试要求"></a>性能测试要求</h3><p>测试区为性能测试的主要区域，每台机器配置DELL 730 CPU(2.4GHz&#x2F;6-core&#x2F;15MB&#x2F;85W)*2；内存16GB*8；SSD硬盘480GB*2,SATA硬盘4TB*16；万兆双口网卡*2，4*千兆网口。</p>
+<p>共有计算节点宿主机80台，控制节点2台，网络节点2台。（后续又增加了1个控制节点）</p>
+<p>压力要求：在第一秒内发送200台虚拟机创建请求，并一直保持200台虚拟机处于运行中状态，一直发送虚拟机创建、删除和查询接口，持续半小时，不允许有失败，每个控制节点cpu利用率不允许超过70%。</p>
+<h3 id="裸金属"><a href="#裸金属" class="headerlink" title="裸金属"></a>裸金属</h3><p>裸金属在测试区、核心区和DMZ区都有部署，但是DMZ区的机型和其他2区不同，是hp DL380。<br>给部署带来了极大的阻碍。ubuntu镜像在部署时也出现了问题，玉峰远程协助解决的，也花费了不少精力。</p>
+<h2 id="解决方案"><a href="#解决方案" class="headerlink" title="解决方案"></a>解决方案</h2><h3 id="kvm虚拟化功能测试"><a href="#kvm虚拟化功能测试" class="headerlink" title="kvm虚拟化功能测试"></a>kvm虚拟化功能测试</h3><ol>
+<li><p>kvm虚拟化，虚拟机冷迁移需要计算节点间nova用户做ssh互信。由于openstack默认安装nova组件时并没有开通nova用户的登录权限，因此步骤比较繁琐。况且计算节点众多，只好采用批量执行脚本的模式。</p>
+<ul>
+<li>选择一台不是计算节点但管理网络都通的机器</li>
+<li>使用root用户登录每一台计算节点，修改&#x2F;etc&#x2F;passwd文件，将nova用户设置为可以登录</li>
+<li>再切换到nova用户，生成互信公钥，将每个公钥拷到本机的互信文件中，这样本机就被所有计算节点信任了</li>
+<li>上述循环结束后，再次开启循环，将本机的互信文件拷贝到所有计算节点上，这样所有计算节点互相就是信任的了，必要的话可以删除对本机的信任再拷贝。</li>
+</ul>
+</li>
+<li><p>创建裸金属节点，配置过于繁琐，需要配置之处有：程序配置文件、数据库、ks模板，希望能简化配置，集中在程序配置中。</p>
+</li>
+<li><p>运营管理平台在获取token上的策略是始终使用token，直到发生未鉴权错误时再去重新获取token。这样是有问题的，尤其是本次测试要求极其严格，不允许有类似异常。在openstack的horizon项目中我们可以获取经验：管理系统不应该具有状态，所有请求都去调用底层的api，平台只做页面渲染和内容展示。如果做的足够好，可以极大缩短响应时间，并且平台性能压力基本上全部推给后台。</p>
+</li>
+</ol>
+<h3 id="高可用-1"><a href="#高可用-1" class="headerlink" title="高可用"></a>高可用</h3><ol>
+<li>从流程来讲，请求进入openstack第一个组件就是各种api，它们都在控制节点上，由于api组件就是做请求分发，没有状态，因此在多个控制节点上采用多活负载均衡来做高可用。由haproxy提供虚ip，使用rr算法均匀分配每个请求到各个控制节点上。</li>
+<li>其次就是调度组件，如nova-scheduler等，它们几乎都是无状态的，与api交互的方式都是mq消息传递，因此负载方式与api一样，使用多活模式。</li>
+<li>网络节点高可用也是采用多活，但它们提供服务高可用的模式不同：多个网络节点提供多个网络服务如dhcp，多个dhcp服务会同时收发广播报文分配ip，如果其中一个宕了，其他服务会继续提供相同的服务。但有个缺陷是dhcp服务越多，每个网段占用的ip个数就越多。</li>
+<li>计算节点高可用暂时无法提供，因为就连官方也没有一个确定的解决方案。</li>
+<li>rabbitmq的高可用使用rabbitmq提供的集群。每个集群需要至少存在一个存储节点，存储节点需要将消息写入磁盘，存在IO操作，非常有可能成为性能瓶颈，因此我们采用2个内存节点作为openstack各个组件连接的mq节点，另外存在一个存储节点放在其他位置。</li>
+<li>数据库高可用我们采用了mariadb galera集群，虽是多活多主，但haproxy在虚ip上做了主次之分，目前读写都只在3个节点中的其中一个上做。经过实际测试，压力瓶颈不是数据库。</li>
+<li>memcached本身也提供高可用，在每个组件上配置多个节点即可。在keystone组件上，使用memcached的几率最大。由于压力测试需要不断获取&#x2F;验证token，如果使用数据库作为后端，那么会给数据库带来巨大的压力，因此采用memcached池作为后端。这样就满足了memcached的高可用。</li>
+</ol>
+<h3 id="性能测试"><a href="#性能测试" class="headerlink" title="性能测试"></a>性能测试</h3><ol>
+<li>openstack各个组件默认识别cpu核数作为运行服务的进程数，非常智能，目前不需要再优化。只是keystone的进程数配置在httpd的组件里，默认为5，可以修改为cpu核数。</li>
+<li>高并发的请求最大瓶颈其实是token，因为所有请求都带着token，每次请求都会向keystone请求验证token。起初我们采用数据库作为keystone后端，后来发现数据库出现瓶颈，就换采用memcached池作为token后端。注意，一定要采用memcached池，否则多个keystone组件的token会对不上，出现鉴权几率性失败的现象。</li>
+<li>原规划中，rabbitmq和各种控制组件都在控制节点上，但在加压过程中，发现rabbitmqcpu使用率趋近400%，总cpu占用率在90%左右。然后我们就把rabbitmq迁到别的机器，后来发现控制节点cpu总利用率有波动，从10%+到80%+，原因不明。</li>
+<li>测试过程中，由于neutron的组件负载过高，出现了虚拟机由于没有分配到网络创建失败的现象。nova配置中修改一个参数Fail instance boot if vif plugging fails.改为false即可避免。</li>
+<li>rabbitmq在生产者生产消息速率远大于消费者消费速率时，性能会大幅下降。在openstack使用消息队列时，连接正确的情况下，绝大多数队列消息都会瞬间被消费。只有通知队列会有堆积，在加压时，虚拟机创建、删除速度极快，通知队列生产者速率很大，消费者也就是我们自己的程序却是单线程的，并且高可用采用AP模式，单点消费，消费速度小于生产速度，造成队列消息不减反增的现象。考虑到消费速度慢，尝试将2个节点的消费程序都启动，在加压过程中发现通知队列并不会无限增长下去，消费速率赶上了生产速率。</li>
+<li>openstack在生产通知消息时，有版本化的通知队列和非版本化的通知队列之分。目前二者消息数量基本一致，但我们消费程序只消费了其中一个，就会造成消息大量积压，影响rabbitmq性能。通知消息的格式或内容一成不变，是跟不上openstack版本的变迁的，老版本的通知消息已经满足不了系统。但openstack组件使用的通知版本也需要配置，因此出现了versioned_notifications.info等队列，官方推荐使用版本化队列。但由于我们消费程序在开发时并没有考虑此因素，我们关闭了版本化的通知消息，保留了非版本化消息。</li>
+</ol>
+<h3 id="出现问题"><a href="#出现问题" class="headerlink" title="出现问题"></a>出现问题</h3><ol>
+<li>由于网络不稳定的原因，rabbitmq集群出现了网络分区，之前一直认为网络分区是虚拟化环境才会出现，没有做应对的措施。以后环境都必须做应对网络分区的措施。</li>
+</ol>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>部署要求很高，可用时间很短，任务艰巨，期间趟过很多坑，需要一点一点记录。</p>
+<p>未完待续。</p>
+
+<div id="gitalk-container"></div>
+<script src="https://cdn.bootcss.com/blueimp-md5/2.12.0/js/md5.min.js"></script><link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css"><script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+
+		<script>
+		var gitalkConfig = {"clientID":"Ov23liFG19AhSmVEYtNI","clientSecret":"236b24cf5e0eaf843c4a766f2e458b3b85702a04","repo":"billy7x17.github.io","owner":"billy7x17","admin":["billy7x17"],"distractionFreeMode":true};
+	    gitalkConfig.id = md5(location.pathname);
+		var gitalk = new Gitalk(gitalkConfig);
+	    gitalk.render("gitalk-container");
+	    </script>
+                <hr>
+                
+
+                <ul class="pager">
+                    
+                    <li class="previous">
+                        <a href="/2017/07/29/ironic-raid-configuration/" data-toggle="tooltip" data-placement="top"
+                           title="ironic raid configuration">&larr; Previous Post</a>
+                    </li>
+                    
+                    
+                    <li class="next">
+                        <a href="/2017/07/12/vim简明教程/" data-toggle="tooltip" data-placement="top"
+                           title="vim简明教程">Next Post &rarr;</a>
+                    </li>
+                    
+                </ul>
+
+                
+
+                
+
+
+                <!--加入新的评论系统-->
+                
+
+                
+
+            </div>
+
+            <div class="hidden-xs col-sm-3 toc-col">
+                <div class="toc-wrap">
+                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#openstack%E9%83%A8%E7%BD%B2%E7%BB%8F%E9%AA%8C"><span class="toc-text">openstack部署经验</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%83%8C%E6%99%AF"><span class="toc-text">背景</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BD%BF%E7%94%A8kvm%E8%99%9A%E6%8B%9F%E5%8C%96"><span class="toc-text">使用kvm虚拟化</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%AB%98%E5%8F%AF%E7%94%A8"><span class="toc-text">高可用</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%80%A7%E8%83%BD%E6%B5%8B%E8%AF%95%E8%A6%81%E6%B1%82"><span class="toc-text">性能测试要求</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%A3%B8%E9%87%91%E5%B1%9E"><span class="toc-text">裸金属</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88"><span class="toc-text">解决方案</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#kvm%E8%99%9A%E6%8B%9F%E5%8C%96%E5%8A%9F%E8%83%BD%E6%B5%8B%E8%AF%95"><span class="toc-text">kvm虚拟化功能测试</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%AB%98%E5%8F%AF%E7%94%A8-1"><span class="toc-text">高可用</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%80%A7%E8%83%BD%E6%B5%8B%E8%AF%95"><span class="toc-text">性能测试</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%87%BA%E7%8E%B0%E9%97%AE%E9%A2%98"><span class="toc-text">出现问题</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%80%BB%E7%BB%93"><span class="toc-text">总结</span></a></li></ol></li></ol>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <!-- Sidebar Container -->
+
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                sidebar-container">
+
+                <!-- Featured Tags -->
+                
+                <section>
+                    <!-- no hr -->
+                    <h5 class="text-center">
+                        <a href="/tags/">FEATURED TAGS</a>
+                    </h5>
+                    <div class="tags">
+                        
+                        <a class="tag" href="/tags/#openstack"
+                           title="openstack">openstack</a>
+                        
+                        <a class="tag" href="/tags/#部署"
+                           title="部署">部署</a>
+                        
+                        <a class="tag" href="/tags/#高可用"
+                           title="高可用">高可用</a>
+                        
+                        <a class="tag" href="/tags/#性能压力测试"
+                           title="性能压力测试">性能压力测试</a>
+                        
+                    </div>
+                </section>
+                
+
+                <!-- Friends Blog -->
+                
+            </div>
+        </div>
+
+    </div>
+</article>
+
+
+
+
+
+
+
+<!-- Footer -->
+<!-- Footer -->
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 text-center">
+                <br>
+                <ul class="list-inline text-center">
+                
+                    <li>
+                        <a href="/atom.xml">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-rss fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+                
+                
+                    <li>
+                        <a target="_blank" href="https://www.zhihu.com/people/li-zong-rui-18">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa  fa-stack-1x fa-inverse">知</i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+                    <li>
+                        <a target="_blank" href="http://weibo.com/billy7x17">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-weibo fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+
+                
+                    <li>
+                        <a target="_blank"  href="https://github.com/billy7x17">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+
+                </ul>
+                <p class="copyright text-muted">
+                    Copyright &copy; Billy 2025
+                    <br>
+                    <span id="busuanzi_container_site_pv" style="font-size: 12px;">PV: <span id="busuanzi_value_site_pv"></span> Times</span>
+                    <br>
+                    Theme by <a target="_blank" rel="noopener" href="https://haojen.github.io/">Haojen Ma</a>
+                </p>
+
+            </div>
+        </div>
+    </div>
+</footer>
+
+<!-- jQuery -->
+
+<script src="/js/jquery.min.js"></script>
+
+
+<!-- Bootstrap Core JavaScript -->
+
+<script src="/js/bootstrap.min.js"></script>
+
+
+<!-- Custom Theme JavaScript -->
+
+<script src="/js/blog.js"></script>
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+
+<!-- jquery.tagcloud.js -->
+<script>
+    // only load tagcloud.js in tag.html
+    if($('#tag_cloud').length !== 0){
+        async("https://billy7x17.github.io/js/jquery.tagcloud.js",function(){
+            $.fn.tagcloud.defaults = {
+                //size: {start: 1, end: 1, unit: 'em'},
+                color: {start: '#bbbbee', end: '#0085a1'},
+            };
+            $('#tag_cloud a').tagcloud();
+        })
+    }
+</script>
+
+<!--fastClick.js -->
+<script>
+    async("//cdn.bootcss.com/fastclick/1.0.6/fastclick.min.js", function(){
+        var $nav = document.querySelector("nav");
+        if($nav) FastClick.attach($nav);
+    })
+</script>
+
+
+
+<!-- Google Analytics -->
+
+
+
+<!-- Baidu Tongji -->
+
+<script>
+    var _baId = 'd63b30f4b79f1151f194406afe5e9831';
+    // Originial
+    var _hmt = _hmt || [];
+    (function() {
+        var hm = document.createElement("script");
+        hm.src = "//hm.baidu.com/hm.js?" + _baId;
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(hm, s);
+    })();
+</script>
+
+
+<!-- swiftype -->
+<script type="text/javascript">
+  (function(w,d,t,u,n,s,e){w['SwiftypeObject']=n;w[n]=w[n]||function(){
+  (w[n].q=w[n].q||[]).push(arguments);};s=d.createElement(t);
+  e=d.getElementsByTagName(t)[0];s.async=1;s.src=u;e.parentNode.insertBefore(s,e);
+  })(window,document,'script','//s.swiftypecdn.com/install/v2/st.js','_st');
+
+  _st('install','','2.0.0');
+</script>
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+<!--wechat title img-->
+<img class="wechat-title-img" src="https://billy7x17.github.io/pics/laughMan.jpg">
+</body>
+
+</html>

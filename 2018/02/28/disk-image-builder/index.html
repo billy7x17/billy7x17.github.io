@@ -1,0 +1,671 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Head tag -->
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Billy119在 Github 上的个人博客">
+    <meta name="keyword" content="Billy119">
+    <meta name="theme-color" content="#600090">
+    <meta name="msapplication-navbutton-color" content="#600090">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="#600090">
+    <link rel="shortcut icon" href="https://billy7x17.github.io/pics/laughMan-icon.png">
+    <link rel="alternate" type="application/atom+xml" title="Billy" href="/atom.xml">
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css">
+    <link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.css">
+    <title>
+        
+        disk-image-builder｜Billy&#39;s blog
+        
+    </title>
+
+    <link rel="canonical" href="https://billy7x17.github.io/2018/02/28/disk-image-builder/">
+
+    <!-- Bootstrap Core CSS -->
+    
+<link rel="stylesheet" href="/css/bootstrap.min.css">
+
+
+    <!-- Custom CSS -->
+    
+<link rel="stylesheet" href="/css/blog-style.css">
+
+
+    <!-- Pygments Github CSS -->
+    
+<link rel="stylesheet" href="/css/syntax.css">
+
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<style>
+
+    header.intro-header {
+        background-image: url('https://billy7x17.github.io/pics/head.jpg')
+    }
+</style>
+<!-- hack iOS CSS :active style -->
+<body ontouchstart="" class="animated fadeIn">
+<!-- Navigation -->
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top " id="nav-top" data-ispost = "true" data-istags="false
+" data-ishome = "false" >
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand animated pulse" href="/">
+                <span class="brand-logo">
+                    Billy
+                </span>
+                's Blog
+            </a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <!-- Known Issue, found by Hux:
+            <nav>'s height woule be hold on by its content.
+            so, when navbar scale out, the <nav> will cover tags.
+            also mask any touch event of tags, unfortunately.
+        -->
+        <!-- /.navbar-collapse -->
+        <div id="huxblog_navbar">
+            <div class="navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="/">Home</a>
+                    </li>
+					
+                    
+                        
+							
+                        <li>
+                            <a href="/tags/">tags</a>
+                        </li>
+							
+						
+                    
+					
+					
+                </ul>
+            </div>
+        </div>
+    </div>
+    <!-- /.container -->
+</nav>
+<script>
+    // Drop Bootstarp low-performance Navbar
+    // Use customize navbar with high-quality material design animation
+    // in high-perf jank-free CSS3 implementation
+//    var $body   = document.body;
+    var $toggle = document.querySelector('.navbar-toggle');
+    var $navbar = document.querySelector('#huxblog_navbar');
+    var $collapse = document.querySelector('.navbar-collapse');
+
+    $toggle.addEventListener('click', handleMagic)
+    function handleMagic(e){
+        if ($navbar.className.indexOf('in') > 0) {
+        // CLOSE
+            $navbar.className = " ";
+            // wait until animation end.
+            setTimeout(function(){
+                // prevent frequently toggle
+                if($navbar.className.indexOf('in') < 0) {
+                    $collapse.style.height = "0px"
+                }
+            },400)
+        }else{
+        // OPEN
+            $collapse.style.height = "auto"
+            $navbar.className += " in";
+        }
+    }
+</script>
+
+<!-- Main Content -->
+
+<!--only post-->
+
+
+<img class="wechat-title-img"
+     src="https://billy7x17.github.io/pics/image/site/head.jpg">
+
+
+<style>
+    
+    header.intro-header {
+        background-image: url('https://billy7x17.github.io/pics/image/site/head.jpg?imageView2/1/w/1400/h/400/interlace/1/q/90')
+    }
+
+    
+</style>
+
+<header class="intro-header">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 text-center">
+                <div class="post-heading">
+                    <h1>disk-image-builder</h1>
+                    
+                    <span class="meta">
+                         作者 Billy
+                        <span>
+                          日期 2018-02-28
+                         </span>
+                    </span>
+                    <div class="tags text-center">
+                        
+                        <a class="tag" href="/tags/#disk-image-builder"
+                           title="disk-image-builder">disk-image-builder</a>
+                        
+                        <a class="tag" href="/tags/#image"
+                           title="image">image</a>
+                        
+                        <a class="tag" href="/tags/#baremetal"
+                           title="baremetal">baremetal</a>
+                        
+                        <a class="tag" href="/tags/#ironic-python-agent"
+                           title="ironic-python-agent">ironic-python-agent</a>
+                        
+                        <a class="tag" href="/tags/#ipa"
+                           title="ipa">ipa</a>
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="post-title-haojen">
+        <span>
+            disk-image-builder
+        </span>
+    </div>
+</header>
+
+<!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
+            <!-- Post Container -->
+            <div class="col-lg-8 col-lg-offset-1 col-sm-9 post-container">
+                <h1 id="disk-image-builder"><a href="#disk-image-builder" class="headerlink" title="disk-image-builder"></a>disk-image-builder</h1><h2 id="1-简介"><a href="#1-简介" class="headerlink" title="1. 简介"></a>1. 简介</h2><p>diskimage-builder是自动构建用于云和其他环境的自定义操作系统映像的工具。</p>
+<p>它支持基于许多主要版本的镜像，并可生成所有常见格式（qcow2，vhd，raw等），裸金属文件系统镜像和ram磁盘镜像。</p>
+<h2 id="2-元素-element-1"><a href="#2-元素-element-1" class="headerlink" title="2. 元素 element[1]"></a>2. 元素 element<a target="_blank" rel="noopener" href="https://docs.openstack.org/diskimage-builder/latest/user_guide/building_an_image.html#elements">[1]</a></h2><h3 id="2-1-介绍"><a href="#2-1-介绍" class="headerlink" title="2.1 介绍"></a>2.1 介绍</h3><p>需要注意的是，我们在命令中传递了一系列元素到disk-image-create。元素是我们如何决定进入我们镜像的内容以及将要进行的修改。</p>
+<p>一些元素提供了一个根文件系统，例如上面我们的示例中的ubuntu或者fedora元素，其他元素修改来创建我们的镜像。执行镜像构建时，必须至少指定其中一个“发布元素”。值得指出的是，有许多发行版元素（甚至可以创建自己的发行版），甚至可以为某些发行版添加倍数。这是因为通常有多种方式来安装非常不同的发行版。例如：一个发行版元素可能使用镜像，而另一个发行版使用包安装工具为同一发行版构建根文件系统。</p>
+<p>其他元素以某种方式修改我们的镜像。上例中的’vm’元素确保我们的映像具有正确安装的引导加载程序。这仅适用于某些使用情况和某些输出格式，因此不会默认执行。</p>
+<h3 id="2-2-元素构成-2"><a href="#2-2-元素构成-2" class="headerlink" title="2.2 元素构成[2]"></a>2.2 元素构成<a target="_blank" rel="noopener" href="https://docs.openstack.org/diskimage-builder/latest/developer/developing_elements.html">[2]</a></h3><h4 id="2-2-1-阶段子目录"><a href="#2-2-1-阶段子目录" class="headerlink" title="2.2.1 阶段子目录"></a>2.2.1 阶段子目录</h4><p>在构建镜像的指定元素时，元素中子目录按此处给出的顺序执行。 子目录中的脚本应使用两位数字前缀命名，并按数字顺序执行。</p>
+<blockquote>
+<p>The phases are:</p>
+<ol>
+<li>root.d</li>
+<li>extra-data.d</li>
+<li>pre-install.d</li>
+<li>install.d</li>
+<li>post-install.d</li>
+<li>block-device.d</li>
+<li>finalise.d</li>
+<li>cleanup.d</li>
+</ol>
+</blockquote>
+<h4 id="2-2-2-元素依赖"><a href="#2-2-2-元素依赖" class="headerlink" title="2.2.2 元素依赖"></a>2.2.2 元素依赖</h4><h5 id="2-2-2-1-element-deps"><a href="#2-2-2-1-element-deps" class="headerlink" title="2.2.2.1 element-deps"></a>2.2.2.1 element-deps</h5><p>纯文本，以换行符分隔的元素列表，这些列表将添加到创建镜像时在镜像中创建的元素列表中。、</p>
+<h5 id="2-2-2-2-element-provides"><a href="#2-2-2-2-element-provides" class="headerlink" title="2.2.2.2 element-provides"></a>2.2.2.2 element-provides</h5><p>由此元素提供的纯文本，换行符分隔的元素列表。 在创建镜像时，这些元素将从构建到镜像中的元素中排除。</p>
+<h4 id="2-2-3-元素结构"><a href="#2-2-3-元素结构" class="headerlink" title="2.2.3 元素结构"></a>2.2.3 元素结构</h4><p>上述全部内容可以进一步细分，鼓励组成元素和组件的可重用性。 一种可能的方法是将元素标记为“驱动程序”，“服务”或“配置”元素。 以下是一些例子。</p>
+<blockquote>
+<p>驱动程序特定的元素应该只包含该驱动程序的必要内容：</p>
+<pre><code>elements/
+ driver-mellanox/
+  init           - modprobe line
+  install.d/
+     10-mlx      - package installation
+</code></pre>
+</blockquote>
+<blockquote>
+<p>安装和配置Nova的元素可能会更复杂一些，包含几个阶段的几个脚本：</p>
+</blockquote>
+<blockquote>
+<pre><code>elements/
+   service-nova/
+      source-repository-nova - register a source repository
+      pre-install.d/
+         50-my-ppa           - add a PPA
+      install.d/
+         10-user             - common Nova user accts
+         50-my-pack          - install packages from my PPA
+         60-nova             - install nova and some dependencies
+</code></pre>
+</blockquote>
+<h4 id="2-2-4-元素变量"><a href="#2-2-4-元素变量" class="headerlink" title="2.2.4 元素变量"></a>2.2.4 元素变量</h4><p>部分元素需要设置参数，以执行命令时的环境变量形式传入：</p>
+<pre><code>declare -x DIB_CLOUD_INIT_ALLOW_SSH_PWAUTH=&quot;enabled&quot;
+declare -x DIB_DEV_USER_PASSWORD=&quot;123456&quot;
+declare -x DIB_DEV_USER_PWDLESS_SUDO=&quot;yes&quot;
+declare -x DIB_DEV_USER_USERNAME=&quot;admin&quot;
+declare -x DIB_PYTHON_EXEC=&quot;/usr/bin/python&quot;
+declare -x DIB_YUM_REPO_CONF=&quot;/etc/yum.repos.d/CentOS-Base.repo /etc/yum.repos.d/CentOS-OpenStack-ocata.repo&quot;
+declare -x DIB_LOCAL_IMAGE=&quot;CentOS-7-x86_64-GenericCloud-1708.qcow2&quot;
+</code></pre>
+<p>具体需要什么参数，参见各个元素及其依赖的README</p>
+<h3 id="2-3-常用元素"><a href="#2-3-常用元素" class="headerlink" title="2.3 常用元素"></a>2.3 常用元素</h3><h4 id="2-3-1-package-installs"><a href="#2-3-1-package-installs" class="headerlink" title="2.3.1 package-installs"></a>2.3.1 package-installs</h4><p><code>package-installs</code>元素允许为镜像构建安装和卸载软件包的声明性方法。 这是通过在元素目录中创建<code>package-installs.yaml</code>或<code>package-installs.json</code>文件来完成的。</p>
+<blockquote>
+<p>example package-installs.yaml</p>
+<pre><code>libxml2:
+grub2:
+  phase: pre-install.d
+networkmanager:
+  uninstall: True
+os-collect-config:
+  installtype: source
+linux-image-amd64:
+  arch: amd64
+dmidecode:
+  not-arch: ppc64, ppc64le
+lshw:
+  arch: ppc64, ppc64le
+python-dev:
+  dib_python_version: 2
+python3-dev:
+  dib_python_version: 3
+</code></pre>
+</blockquote>
+<h4 id="2-3-2-source-repositories"><a href="#2-3-2-source-repositories" class="headerlink" title="2.3.2 source-repositories"></a>2.3.2 source-repositories</h4><p>有了这个元素，其他元素可以通过将他们的详细信息放在文件<code>source-repository-*</code>中来注册他们的安装源。</p>
+<blockquote>
+<p>Example for ironic source from git:</p>
+<pre><code>ironic git /usr/local/ironic git://git.openstack.org/openstack/ironic.git
+</code></pre>
+</blockquote>
+<blockquote>
+<p>Example for nova configuration from local file:</p>
+<pre><code>nova file /etc/nova/ file://localhost/root/nova_test/nova.conf
+</code></pre>
+</blockquote>
+<h4 id="2-3-3-svc-map"><a href="#2-3-3-svc-map" class="headerlink" title="2.3.3 svc-map"></a>2.3.3 svc-map</h4><p>映射服务名称到具体操作系统中的指定服务。</p>
+<blockquote>
+<p>Example format for Nova:</p>
+</blockquote>
+<blockquote>
+<pre><code>nova-api:
+  default: openstack-nova-api
+  debian: nova-api
+  ubuntu: nova-api
+nova-cert:
+  default: openstack-nova-cert
+  debian:  nova-cert
+nova-compute:
+  default: openstack-nova-compute
+  debian: nova-compute
+nova-conductor:
+  default: openstack-nova-conductor
+  debian: nova-conductor
+nova-consoleauth:
+  default: openstack-nova-console
+  debian: nova-console
+</code></pre>
+</blockquote>
+<h4 id="2-3-4-yum"><a href="#2-3-4-yum" class="headerlink" title="2.3.4 yum"></a>2.3.4 yum</h4><p>在制作镜像时所使用的yum源设置。</p>
+<p>设置环境变量<code>DIB_YUM_REPO_CONF</code>，将repo文件的绝对路径以空格分割传入变量中：</p>
+<blockquote>
+<p> Example:</p>
+<pre><code> declare -x DIB_YUM_REPO_CONF=&quot;/etc/yum.repos.d/CentOS-Base.repo /etc/yum.repos.d/CentOS-OpenStack-ocata.repo&quot;
+</code></pre>
+</blockquote>
+<p>以这种方式能够规避设置网络代理的问题，直接使用公司搭建的yum源环境即可构建镜像。</p>
+<h4 id="2-3-5-centos7"><a href="#2-3-5-centos7" class="headerlink" title="2.3.5 centos7"></a>2.3.5 centos7</h4><p>使用centos7作为镜像的操作系统。</p>
+<p>依赖：</p>
+<pre><code>[root@localhost centos7]# cat element-deps 
+cache-url
+dib-run-parts
+redhat-common
+rpm-distro
+source-repositories
+yum
+</code></pre>
+<p>其中，redhat-common元素中可以使用变量来指定本地镜像文件：</p>
+<pre><code>Environment Variables
+---------------------
+
+DIB_LOCAL_IMAGE
+  :Required: No
+  :Default: None
+  :Description: Use the local path of a qcow2 cloud image. This is useful in
+   that you can use a customized or previously built cloud image from
+   diskimage-builder as input. The cloud image does not have to have been built
+   by diskimage-builder. It should be a full disk image, not just a filesystem
+   image.
+  :Example: ``DIB_LOCAL_IMAGE=rhel-guest-image-7.1-20150224.0.x86_64.qcow2``
+</code></pre>
+<blockquote>
+<p>Example:</p>
+<pre><code>declare -x DIB_LOCAL_IMAGE=&quot;CentOS-7-x86_64-GenericCloud-1708.qcow2&quot;
+</code></pre>
+</blockquote>
+<p>如果不指定本地文件，默认还需要去下载更新镜像，网速慢的环境下建议去官方镜像源下载好相应的qcow2格式镜像作为本地镜像。</p>
+<p>其他操作系统类似，不再赘述。</p>
+<h4 id="2-3-6-devuser"><a href="#2-3-6-devuser" class="headerlink" title="2.3.6 devuser"></a>2.3.6 devuser</h4><p>创建开发&#x2F;调试用的用户，以下环境变量可用于配置：</p>
+<blockquote>
+<pre><code>DIB_DEV_USER_USERNAME
+Required:	No
+Default:	devuser
+Description:	Username for the created user.
+
+DIB_DEV_USER_SHELL
+Required:	No
+Default:	System default (The useradd default is used)
+Description:	Full path for the shell of the user. This is passed to useradd using the -s parameter. Note that this does not install the (possibly) required shell package.
+
+DIB_DEV_USER_PWDLESS_SUDO
+Required:	No
+Default:	No
+Description:	Enable passwordless sudo for the user.
+
+DIB_DEV_USER_AUTHORIZED_KEYS
+Required:	No
+Default:	$HOME/.ssh/id_&#123;rsa,dsa&#125;.pub
+Description:	Path to a file to copy into this users’ .ssh/authorized_keys If this is not specified then an attempt is made to use a the building user’s public key. To disable this behavior specify an invalid path for this variable (such as /dev/null).
+
+DIB_DEV_USER_PASSWORD
+Required:	No
+Default:	Password is disabled
+Description:	Set the default password for this user. This is a fairly insecure method of setting the password and is not advised.
+</code></pre>
+</blockquote>
+<p>Example: </p>
+<pre><code>declare -x DIB_CLOUD_INIT_ALLOW_SSH_PWAUTH=&quot;enabled&quot;
+declare -x DIB_DEV_USER_PASSWORD=&quot;123456&quot;
+declare -x DIB_DEV_USER_PWDLESS_SUDO=&quot;yes&quot;
+declare -x DIB_DEV_USER_USERNAME=&quot;admin&quot;
+</code></pre>
+<h4 id="2-3-7-cloud-init"><a href="#2-3-7-cloud-init" class="headerlink" title="2.3.7 cloud-init"></a>2.3.7 cloud-init</h4><p>安装并自启动cloud-init，环境变量：</p>
+<blockquote>
+<pre><code>DIB_CLOUD_INIT_ALLOW_SSH_PWAUTH
+Required:	No
+Default:	password authentication disabled when cloud-init installed
+Description:	customize cloud-init to allow ssh password authentication.
+</code></pre>
+</blockquote>
+<h4 id="2-3-8-baremetal"><a href="#2-3-8-baremetal" class="headerlink" title="2.3.8 baremetal"></a>2.3.8 baremetal</h4><p>制作镜像同时，也会制作镜像对应的ramdisk和kernel镜像</p>
+<h4 id="2-3-9-ironic-agent"><a href="#2-3-9-ironic-agent" class="headerlink" title="2.3.9 ironic-agent"></a>2.3.9 ironic-agent</h4><p>在镜像中安装ironic-python-agent，一般在制作部署镜像时需要。详见<a target="_blank" rel="noopener" href="https://docs.openstack.org/diskimage-builder/latest/elements/ironic-agent/README.html">README</a></p>
+<h4 id="2-3-10-proliant-tools"><a href="#2-3-10-proliant-tools" class="headerlink" title="2.3.10 proliant-tools"></a>2.3.10 proliant-tools</h4><p>此元素只可以在创建包含ironic-agent的部署镜像中使用，可以对HP Proliant硬件做清理相关的带内操作。</p>
+<h4 id="2-3-11-dhcp-all-interfaces"><a href="#2-3-11-dhcp-all-interfaces" class="headerlink" title="2.3.11 dhcp-all-interfaces"></a>2.3.11 dhcp-all-interfaces</h4><p>启动时所有网络接口设置为dhcp启动</p>
+<h2 id="3-环境准备"><a href="#3-环境准备" class="headerlink" title="3. 环境准备"></a>3. 环境准备</h2><p>在代理环境下制作镜像，需要注意以下几点：</p>
+<ol>
+<li><p>代理  -  如果yum源不需要代理，请不要配置，否则制作镜像时会报错</p>
+<pre><code> export http_proxy=&quot;http://li-zr:***@192.168.2.49:8080/&quot;
+</code></pre>
+</li>
+<li><p>yaml - 制作镜像默认你已经安装了PyYAML，如果没有安装，需要提前安装好 </p>
+<pre><code> yum install PyYAML -y
+</code></pre>
+</li>
+<li><p>制作镜像的命令 - 当然，根据具体需求，命令和环境变量都会有所不同，下面只供参考</p>
+<pre><code> disk-image-create centos-minimal baremetal dhcp-all-interfaces grub2 devuser dynamic-login cloud-init disable-selinux nova yum -o nova_test
+
+
+ declare -x DIB_CLOUD_INIT_ALLOW_SSH_PWAUTH=&quot;enabled&quot;
+ declare -x DIB_DEV_USER_PASSWORD=&quot;123456&quot;
+ declare -x DIB_DEV_USER_PWDLESS_SUDO=&quot;yes&quot;
+ declare -x DIB_DEV_USER_USERNAME=&quot;admin&quot;
+ declare -x DIB_PYTHON_EXEC=&quot;/usr/bin/python&quot;
+ declare -x DIB_YUM_REPO_CONF=&quot;/etc/yum.repos.d/CentOS-Base.repo /etc/yum.repos.d/CentOS-OpenStack-ocata.repo&quot;
+ declare -x DIB_LOCAL_IMAGE=&quot;CentOS-7-x86_64-GenericCloud-1708.qcow2&quot;
+</code></pre>
+</li>
+</ol>
+
+<div id="gitalk-container"></div>
+<script src="https://cdn.bootcss.com/blueimp-md5/2.12.0/js/md5.min.js"></script><link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css"><script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+
+		<script>
+		var gitalkConfig = {"clientID":"Ov23liFG19AhSmVEYtNI","clientSecret":"236b24cf5e0eaf843c4a766f2e458b3b85702a04","repo":"billy7x17.github.io","owner":"billy7x17","admin":["billy7x17"],"distractionFreeMode":true};
+	    gitalkConfig.id = md5(location.pathname);
+		var gitalk = new Gitalk(gitalkConfig);
+	    gitalk.render("gitalk-container");
+	    </script>
+                <hr>
+                
+
+                <ul class="pager">
+                    
+                    <li class="previous">
+                        <a href="/2018/03/12/裸金属控制台访问/" data-toggle="tooltip" data-placement="top"
+                           title="裸金属控制台访问">&larr; Previous Post</a>
+                    </li>
+                    
+                    
+                    <li class="next">
+                        <a href="/2017/10/24/裸金属ironic-conductor调研/" data-toggle="tooltip" data-placement="top"
+                           title="裸金属ironic-conductor调研">Next Post &rarr;</a>
+                    </li>
+                    
+                </ul>
+
+                
+
+                
+
+
+                <!--加入新的评论系统-->
+                
+
+                
+
+            </div>
+
+            <div class="hidden-xs col-sm-3 toc-col">
+                <div class="toc-wrap">
+                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#disk-image-builder"><span class="toc-text">disk-image-builder</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-%E7%AE%80%E4%BB%8B"><span class="toc-text">1. 简介</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-%E5%85%83%E7%B4%A0-element-1"><span class="toc-text">2. 元素 element[1]</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#2-1-%E4%BB%8B%E7%BB%8D"><span class="toc-text">2.1 介绍</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-2-%E5%85%83%E7%B4%A0%E6%9E%84%E6%88%90-2"><span class="toc-text">2.2 元素构成[2]</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#2-2-1-%E9%98%B6%E6%AE%B5%E5%AD%90%E7%9B%AE%E5%BD%95"><span class="toc-text">2.2.1 阶段子目录</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-2-2-%E5%85%83%E7%B4%A0%E4%BE%9D%E8%B5%96"><span class="toc-text">2.2.2 元素依赖</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#2-2-2-1-element-deps"><span class="toc-text">2.2.2.1 element-deps</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#2-2-2-2-element-provides"><span class="toc-text">2.2.2.2 element-provides</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-2-3-%E5%85%83%E7%B4%A0%E7%BB%93%E6%9E%84"><span class="toc-text">2.2.3 元素结构</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-2-4-%E5%85%83%E7%B4%A0%E5%8F%98%E9%87%8F"><span class="toc-text">2.2.4 元素变量</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-3-%E5%B8%B8%E7%94%A8%E5%85%83%E7%B4%A0"><span class="toc-text">2.3 常用元素</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#2-3-1-package-installs"><span class="toc-text">2.3.1 package-installs</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-3-2-source-repositories"><span class="toc-text">2.3.2 source-repositories</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-3-3-svc-map"><span class="toc-text">2.3.3 svc-map</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-3-4-yum"><span class="toc-text">2.3.4 yum</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-3-5-centos7"><span class="toc-text">2.3.5 centos7</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-3-6-devuser"><span class="toc-text">2.3.6 devuser</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-3-7-cloud-init"><span class="toc-text">2.3.7 cloud-init</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-3-8-baremetal"><span class="toc-text">2.3.8 baremetal</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-3-9-ironic-agent"><span class="toc-text">2.3.9 ironic-agent</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-3-10-proliant-tools"><span class="toc-text">2.3.10 proliant-tools</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-3-11-dhcp-all-interfaces"><span class="toc-text">2.3.11 dhcp-all-interfaces</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-%E7%8E%AF%E5%A2%83%E5%87%86%E5%A4%87"><span class="toc-text">3. 环境准备</span></a></li></ol></li></ol>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <!-- Sidebar Container -->
+
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                sidebar-container">
+
+                <!-- Featured Tags -->
+                
+                <section>
+                    <!-- no hr -->
+                    <h5 class="text-center">
+                        <a href="/tags/">FEATURED TAGS</a>
+                    </h5>
+                    <div class="tags">
+                        
+                        <a class="tag" href="/tags/#disk-image-builder"
+                           title="disk-image-builder">disk-image-builder</a>
+                        
+                        <a class="tag" href="/tags/#image"
+                           title="image">image</a>
+                        
+                        <a class="tag" href="/tags/#baremetal"
+                           title="baremetal">baremetal</a>
+                        
+                        <a class="tag" href="/tags/#ironic-python-agent"
+                           title="ironic-python-agent">ironic-python-agent</a>
+                        
+                        <a class="tag" href="/tags/#ipa"
+                           title="ipa">ipa</a>
+                        
+                    </div>
+                </section>
+                
+
+                <!-- Friends Blog -->
+                
+            </div>
+        </div>
+
+    </div>
+</article>
+
+
+
+
+
+
+
+<!-- Footer -->
+<!-- Footer -->
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 text-center">
+                <br>
+                <ul class="list-inline text-center">
+                
+                    <li>
+                        <a href="/atom.xml">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-rss fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+                
+                
+                    <li>
+                        <a target="_blank" href="https://www.zhihu.com/people/li-zong-rui-18">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa  fa-stack-1x fa-inverse">知</i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+                    <li>
+                        <a target="_blank" href="http://weibo.com/billy7x17">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-weibo fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+
+                
+                    <li>
+                        <a target="_blank"  href="https://github.com/billy7x17">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+
+                </ul>
+                <p class="copyright text-muted">
+                    Copyright &copy; Billy 2025
+                    <br>
+                    <span id="busuanzi_container_site_pv" style="font-size: 12px;">PV: <span id="busuanzi_value_site_pv"></span> Times</span>
+                    <br>
+                    Theme by <a target="_blank" rel="noopener" href="https://haojen.github.io/">Haojen Ma</a>
+                </p>
+
+            </div>
+        </div>
+    </div>
+</footer>
+
+<!-- jQuery -->
+
+<script src="/js/jquery.min.js"></script>
+
+
+<!-- Bootstrap Core JavaScript -->
+
+<script src="/js/bootstrap.min.js"></script>
+
+
+<!-- Custom Theme JavaScript -->
+
+<script src="/js/blog.js"></script>
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+
+<!-- jquery.tagcloud.js -->
+<script>
+    // only load tagcloud.js in tag.html
+    if($('#tag_cloud').length !== 0){
+        async("https://billy7x17.github.io/js/jquery.tagcloud.js",function(){
+            $.fn.tagcloud.defaults = {
+                //size: {start: 1, end: 1, unit: 'em'},
+                color: {start: '#bbbbee', end: '#0085a1'},
+            };
+            $('#tag_cloud a').tagcloud();
+        })
+    }
+</script>
+
+<!--fastClick.js -->
+<script>
+    async("//cdn.bootcss.com/fastclick/1.0.6/fastclick.min.js", function(){
+        var $nav = document.querySelector("nav");
+        if($nav) FastClick.attach($nav);
+    })
+</script>
+
+
+
+<!-- Google Analytics -->
+
+
+
+<!-- Baidu Tongji -->
+
+<script>
+    var _baId = 'd63b30f4b79f1151f194406afe5e9831';
+    // Originial
+    var _hmt = _hmt || [];
+    (function() {
+        var hm = document.createElement("script");
+        hm.src = "//hm.baidu.com/hm.js?" + _baId;
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(hm, s);
+    })();
+</script>
+
+
+<!-- swiftype -->
+<script type="text/javascript">
+  (function(w,d,t,u,n,s,e){w['SwiftypeObject']=n;w[n]=w[n]||function(){
+  (w[n].q=w[n].q||[]).push(arguments);};s=d.createElement(t);
+  e=d.getElementsByTagName(t)[0];s.async=1;s.src=u;e.parentNode.insertBefore(s,e);
+  })(window,document,'script','//s.swiftypecdn.com/install/v2/st.js','_st');
+
+  _st('install','','2.0.0');
+</script>
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+<!--wechat title img-->
+<img class="wechat-title-img" src="https://billy7x17.github.io/pics/laughMan.jpg">
+</body>
+
+</html>

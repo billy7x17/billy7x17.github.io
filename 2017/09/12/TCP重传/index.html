@@ -1,0 +1,476 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Head tag -->
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Billy119在 Github 上的个人博客">
+    <meta name="keyword" content="Billy119">
+    <meta name="theme-color" content="#600090">
+    <meta name="msapplication-navbutton-color" content="#600090">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="#600090">
+    <link rel="shortcut icon" href="https://billy7x17.github.io/pics/laughMan-icon.png">
+    <link rel="alternate" type="application/atom+xml" title="Billy" href="/atom.xml">
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css">
+    <link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.css">
+    <title>
+        
+        TCP重传｜Billy&#39;s blog
+        
+    </title>
+
+    <link rel="canonical" href="https://billy7x17.github.io/2017/09/12/TCP重传/">
+
+    <!-- Bootstrap Core CSS -->
+    
+<link rel="stylesheet" href="/css/bootstrap.min.css">
+
+
+    <!-- Custom CSS -->
+    
+<link rel="stylesheet" href="/css/blog-style.css">
+
+
+    <!-- Pygments Github CSS -->
+    
+<link rel="stylesheet" href="/css/syntax.css">
+
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<style>
+
+    header.intro-header {
+        background-image: url('https://billy7x17.github.io/pics/head.jpg')
+    }
+</style>
+<!-- hack iOS CSS :active style -->
+<body ontouchstart="" class="animated fadeIn">
+<!-- Navigation -->
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top " id="nav-top" data-ispost = "true" data-istags="false
+" data-ishome = "false" >
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand animated pulse" href="/">
+                <span class="brand-logo">
+                    Billy
+                </span>
+                's Blog
+            </a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <!-- Known Issue, found by Hux:
+            <nav>'s height woule be hold on by its content.
+            so, when navbar scale out, the <nav> will cover tags.
+            also mask any touch event of tags, unfortunately.
+        -->
+        <!-- /.navbar-collapse -->
+        <div id="huxblog_navbar">
+            <div class="navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="/">Home</a>
+                    </li>
+					
+                    
+                        
+							
+                        <li>
+                            <a href="/tags/">tags</a>
+                        </li>
+							
+						
+                    
+					
+					
+                </ul>
+            </div>
+        </div>
+    </div>
+    <!-- /.container -->
+</nav>
+<script>
+    // Drop Bootstarp low-performance Navbar
+    // Use customize navbar with high-quality material design animation
+    // in high-perf jank-free CSS3 implementation
+//    var $body   = document.body;
+    var $toggle = document.querySelector('.navbar-toggle');
+    var $navbar = document.querySelector('#huxblog_navbar');
+    var $collapse = document.querySelector('.navbar-collapse');
+
+    $toggle.addEventListener('click', handleMagic)
+    function handleMagic(e){
+        if ($navbar.className.indexOf('in') > 0) {
+        // CLOSE
+            $navbar.className = " ";
+            // wait until animation end.
+            setTimeout(function(){
+                // prevent frequently toggle
+                if($navbar.className.indexOf('in') < 0) {
+                    $collapse.style.height = "0px"
+                }
+            },400)
+        }else{
+        // OPEN
+            $collapse.style.height = "auto"
+            $navbar.className += " in";
+        }
+    }
+</script>
+
+<!-- Main Content -->
+
+<!--only post-->
+
+
+<img class="wechat-title-img"
+     src="https://billy7x17.github.io/pics/image/site/head.jpg">
+
+
+<style>
+    
+    header.intro-header {
+        background-image: url('https://billy7x17.github.io/pics/image/site/head.jpg?imageView2/1/w/1400/h/400/interlace/1/q/90')
+    }
+
+    
+</style>
+
+<header class="intro-header">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 text-center">
+                <div class="post-heading">
+                    <h1>TCP重传</h1>
+                    
+                    <span class="meta">
+                         作者 Billy
+                        <span>
+                          日期 2017-09-12
+                         </span>
+                    </span>
+                    <div class="tags text-center">
+                        
+                        <a class="tag" href="/tags/#TCP"
+                           title="TCP">TCP</a>
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="post-title-haojen">
+        <span>
+            TCP重传
+        </span>
+    </div>
+</header>
+
+<!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
+            <!-- Post Container -->
+            <div class="col-lg-8 col-lg-offset-1 col-sm-9 post-container">
+                <h1 id="TCP重传"><a href="#TCP重传" class="headerlink" title="TCP重传"></a>TCP重传</h1><h3 id="TCP重传次数与操作系统有关，可配"><a href="#TCP重传次数与操作系统有关，可配" class="headerlink" title="TCP重传次数与操作系统有关，可配###"></a>TCP重传次数与操作系统有关，可配###</h3><p>linux：</p>
+<pre><code>/proc/sys/net/ipv4/tcp\_retries1 (integer; default: 3 建立连接重试次数)
+TCP尝试了3次（tcp\_retries1默认3）重传后，还没有收到ACK的话，则后续每次重传都需要network layer先更新路由。
+
+/proc/sys/net/ipv4/tcp\_retries2 (integer; default: 15 数据传输重试次数)
+TCP默认最多做15次重传。根据RTO(retransmission timeout)不同，最后一次重传间隔大概是13到30分钟左右。如果15次重传都做完了，TCP/IP就会告诉应用层说：“搞不定了，包怎么都传不过去！”
+</code></pre>
+<h3 id="RFC中如何计算RTO-Retransmission-Timeout"><a href="#RFC中如何计算RTO-Retransmission-Timeout" class="headerlink" title="RFC中如何计算RTO(Retransmission Timeout)"></a>RFC中如何计算RTO(Retransmission Timeout)</h3><ol start="3">
+<li><p>RFC-793如何计算RTO</p>
+<p> 详细计算：</p>
+<pre><code> SRTT = ( ALPHA * SRTT ) + ((1-ALPHA) * RTT)
+</code></pre>
+<p> 基于SRTT，我们再来计算RTO：RTO &#x3D; min[UBOUND,max[LBOUND,(BETA*SRTT)]]</p>
+<p> UBOUND是RTO上线，ALPHA是平滑因子（smoothing factor， e.g., .8 to .9），BETA是一个延迟方差因子（BETA is a delay variance factor (e.g., 1.3 to 2.0)）。</p>
+<p> 仔细看这两个公式大概就能理解了RTO的计算了。</p>
+<p> 这里对上面两个公式做一个简单的注释：公式1中计算SRTT，ALPHA越接近于0，则表示SRTT越相信这一次的RTT；越接近于1，则表示SRTT越相信上次统计的RTT。公式二给RTO分别设置了一个上限和下限。</p>
+</li>
+<li><p>RTO重传间隔是指数增加的<br>上面我们介绍的是初次重传时的RTO，如果重传后还没收到另一端的响应，下一次重传RTO则会指数增加，例如第一次重传RTO是1，之后分别2，4，8，16…。</p>
+</li>
+<li><p>RFC-2988和RFC-6298中的RTO计算<br>在RFC-2988和RFC-6298中又重新改进了RTO的计算方法，Linux中的实现即使参考RFC-2988。算法核心公式：</p>
+<pre><code> 初始：
+ SRTT &lt;- R
+ RTTVAR &lt;- R/2
+ RTO &lt;- SRTT + max (G, K*RTTVAR)
+ where K = 4.
+ 
+ 根据RTT计算SRTT：
+ RTTVAR &lt;- (1 - beta) * RTTVAR + beta * |SRTT - R&#39;|
+ SRTT &lt;- (1 - alpha) * SRTT + alpha * R&#39;
+
+ 最后RTO：
+ RTO &lt;- SRTT + max (G, K*RTTVAR)
+</code></pre>
+</li>
+<li><p>Linux中的RTO(Retransmission Timeout)</p>
+<p> 这里说的是RHEL5.4的2.6.18内核，RFC-2988实现参考net&#x2F;ipv4&#x2F;tcp_input.c中的tcp_rtt_estimator和tcp_set_rto。可以看到，在Linux中alpha&#x3D;1&#x2F;8，RTO最小为TCP_RTO_MIN。因为我们的系统中RTT总是很小，所以RTO取值总是能够取到TCP_RTO_MIN。</p>
+<p> 在看看TCP_RTO_MIN在Linux中的定义：</p>
+<pre><code> 123#define TCP\_RTO\_MAX     ((unsigned)(120*HZ))
+ 124#define TCP\_RTO\_MIN     ((unsigned)(HZ/5))
+ (这里简单的介绍介绍一下HZ，HZ可以理解为1s，所以120*HZ就是120秒，HZ/5就是200ms。详细的：HZ表示CPU一秒种发出多少次时间中断--IRQ-0，Linux中通常用HZ来做时间片的计算，参考)
+</code></pre>
+</li>
+<li><p>按照200ms计算linux系统15次重传时间：</p>
+<pre><code> 0.1 * (2 * 2 ^ 0 + 2 * 2 ^ 1 + ... + 2 * 2 ^ 15) = 0.2 * ( 2 ^ 16 - 1 ) = 6553.5s
+
+ 6553.5 / 60 = 109.225 min
+</code></pre>
+<p> 大约1小时40分钟</p>
+</li>
+</ol>
+
+<div id="gitalk-container"></div>
+<script src="https://cdn.bootcss.com/blueimp-md5/2.12.0/js/md5.min.js"></script><link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css"><script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+
+		<script>
+		var gitalkConfig = {"clientID":"Ov23liFG19AhSmVEYtNI","clientSecret":"236b24cf5e0eaf843c4a766f2e458b3b85702a04","repo":"billy7x17.github.io","owner":"billy7x17","admin":["billy7x17"],"distractionFreeMode":true};
+	    gitalkConfig.id = md5(location.pathname);
+		var gitalk = new Gitalk(gitalkConfig);
+	    gitalk.render("gitalk-container");
+	    </script>
+                <hr>
+                
+
+                <ul class="pager">
+                    
+                    <li class="previous">
+                        <a href="/2017/09/25/openstack命令行清除垃圾数据/" data-toggle="tooltip" data-placement="top"
+                           title="openstack命令行清除垃圾数据">&larr; Previous Post</a>
+                    </li>
+                    
+                    
+                    <li class="next">
+                        <a href="/2017/09/06/neutron-plugin-开发/" data-toggle="tooltip" data-placement="top"
+                           title="neutron plugin 开发">Next Post &rarr;</a>
+                    </li>
+                    
+                </ul>
+
+                
+
+                
+
+
+                <!--加入新的评论系统-->
+                
+
+                
+
+            </div>
+
+            <div class="hidden-xs col-sm-3 toc-col">
+                <div class="toc-wrap">
+                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#TCP%E9%87%8D%E4%BC%A0"><span class="toc-text">TCP重传</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#TCP%E9%87%8D%E4%BC%A0%E6%AC%A1%E6%95%B0%E4%B8%8E%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E6%9C%89%E5%85%B3%EF%BC%8C%E5%8F%AF%E9%85%8D"><span class="toc-text">TCP重传次数与操作系统有关，可配###</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#RFC%E4%B8%AD%E5%A6%82%E4%BD%95%E8%AE%A1%E7%AE%97RTO-Retransmission-Timeout"><span class="toc-text">RFC中如何计算RTO(Retransmission Timeout)</span></a></li></ol></li></ol></li></ol>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <!-- Sidebar Container -->
+
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                sidebar-container">
+
+                <!-- Featured Tags -->
+                
+                <section>
+                    <!-- no hr -->
+                    <h5 class="text-center">
+                        <a href="/tags/">FEATURED TAGS</a>
+                    </h5>
+                    <div class="tags">
+                        
+                        <a class="tag" href="/tags/#TCP"
+                           title="TCP">TCP</a>
+                        
+                    </div>
+                </section>
+                
+
+                <!-- Friends Blog -->
+                
+            </div>
+        </div>
+
+    </div>
+</article>
+
+
+
+
+
+
+
+<!-- Footer -->
+<!-- Footer -->
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 text-center">
+                <br>
+                <ul class="list-inline text-center">
+                
+                    <li>
+                        <a href="/atom.xml">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-rss fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+                
+                
+                    <li>
+                        <a target="_blank" href="https://www.zhihu.com/people/li-zong-rui-18">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa  fa-stack-1x fa-inverse">知</i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+                    <li>
+                        <a target="_blank" href="http://weibo.com/billy7x17">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-weibo fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+
+                
+                    <li>
+                        <a target="_blank"  href="https://github.com/billy7x17">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+
+                </ul>
+                <p class="copyright text-muted">
+                    Copyright &copy; Billy 2025
+                    <br>
+                    <span id="busuanzi_container_site_pv" style="font-size: 12px;">PV: <span id="busuanzi_value_site_pv"></span> Times</span>
+                    <br>
+                    Theme by <a target="_blank" rel="noopener" href="https://haojen.github.io/">Haojen Ma</a>
+                </p>
+
+            </div>
+        </div>
+    </div>
+</footer>
+
+<!-- jQuery -->
+
+<script src="/js/jquery.min.js"></script>
+
+
+<!-- Bootstrap Core JavaScript -->
+
+<script src="/js/bootstrap.min.js"></script>
+
+
+<!-- Custom Theme JavaScript -->
+
+<script src="/js/blog.js"></script>
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+
+<!-- jquery.tagcloud.js -->
+<script>
+    // only load tagcloud.js in tag.html
+    if($('#tag_cloud').length !== 0){
+        async("https://billy7x17.github.io/js/jquery.tagcloud.js",function(){
+            $.fn.tagcloud.defaults = {
+                //size: {start: 1, end: 1, unit: 'em'},
+                color: {start: '#bbbbee', end: '#0085a1'},
+            };
+            $('#tag_cloud a').tagcloud();
+        })
+    }
+</script>
+
+<!--fastClick.js -->
+<script>
+    async("//cdn.bootcss.com/fastclick/1.0.6/fastclick.min.js", function(){
+        var $nav = document.querySelector("nav");
+        if($nav) FastClick.attach($nav);
+    })
+</script>
+
+
+
+<!-- Google Analytics -->
+
+
+
+<!-- Baidu Tongji -->
+
+<script>
+    var _baId = 'd63b30f4b79f1151f194406afe5e9831';
+    // Originial
+    var _hmt = _hmt || [];
+    (function() {
+        var hm = document.createElement("script");
+        hm.src = "//hm.baidu.com/hm.js?" + _baId;
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(hm, s);
+    })();
+</script>
+
+
+<!-- swiftype -->
+<script type="text/javascript">
+  (function(w,d,t,u,n,s,e){w['SwiftypeObject']=n;w[n]=w[n]||function(){
+  (w[n].q=w[n].q||[]).push(arguments);};s=d.createElement(t);
+  e=d.getElementsByTagName(t)[0];s.async=1;s.src=u;e.parentNode.insertBefore(s,e);
+  })(window,document,'script','//s.swiftypecdn.com/install/v2/st.js','_st');
+
+  _st('install','','2.0.0');
+</script>
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+<!--wechat title img-->
+<img class="wechat-title-img" src="https://billy7x17.github.io/pics/laughMan.jpg">
+</body>
+
+</html>

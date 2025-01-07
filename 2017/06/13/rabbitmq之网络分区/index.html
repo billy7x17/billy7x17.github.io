@@ -1,0 +1,475 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Head tag -->
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Billy119在 Github 上的个人博客">
+    <meta name="keyword" content="Billy119">
+    <meta name="theme-color" content="#600090">
+    <meta name="msapplication-navbutton-color" content="#600090">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="#600090">
+    <link rel="shortcut icon" href="https://billy7x17.github.io/pics/laughMan-icon.png">
+    <link rel="alternate" type="application/atom+xml" title="Billy" href="/atom.xml">
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css">
+    <link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.css">
+    <title>
+        
+        rabbitmq之网络分区｜Billy&#39;s blog
+        
+    </title>
+
+    <link rel="canonical" href="https://billy7x17.github.io/2017/06/13/rabbitmq之网络分区/">
+
+    <!-- Bootstrap Core CSS -->
+    
+<link rel="stylesheet" href="/css/bootstrap.min.css">
+
+
+    <!-- Custom CSS -->
+    
+<link rel="stylesheet" href="/css/blog-style.css">
+
+
+    <!-- Pygments Github CSS -->
+    
+<link rel="stylesheet" href="/css/syntax.css">
+
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<style>
+
+    header.intro-header {
+        background-image: url('https://billy7x17.github.io/pics/head.jpg')
+    }
+</style>
+<!-- hack iOS CSS :active style -->
+<body ontouchstart="" class="animated fadeIn">
+<!-- Navigation -->
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top " id="nav-top" data-ispost = "true" data-istags="false
+" data-ishome = "false" >
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand animated pulse" href="/">
+                <span class="brand-logo">
+                    Billy
+                </span>
+                's Blog
+            </a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <!-- Known Issue, found by Hux:
+            <nav>'s height woule be hold on by its content.
+            so, when navbar scale out, the <nav> will cover tags.
+            also mask any touch event of tags, unfortunately.
+        -->
+        <!-- /.navbar-collapse -->
+        <div id="huxblog_navbar">
+            <div class="navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="/">Home</a>
+                    </li>
+					
+                    
+                        
+							
+                        <li>
+                            <a href="/tags/">tags</a>
+                        </li>
+							
+						
+                    
+					
+					
+                </ul>
+            </div>
+        </div>
+    </div>
+    <!-- /.container -->
+</nav>
+<script>
+    // Drop Bootstarp low-performance Navbar
+    // Use customize navbar with high-quality material design animation
+    // in high-perf jank-free CSS3 implementation
+//    var $body   = document.body;
+    var $toggle = document.querySelector('.navbar-toggle');
+    var $navbar = document.querySelector('#huxblog_navbar');
+    var $collapse = document.querySelector('.navbar-collapse');
+
+    $toggle.addEventListener('click', handleMagic)
+    function handleMagic(e){
+        if ($navbar.className.indexOf('in') > 0) {
+        // CLOSE
+            $navbar.className = " ";
+            // wait until animation end.
+            setTimeout(function(){
+                // prevent frequently toggle
+                if($navbar.className.indexOf('in') < 0) {
+                    $collapse.style.height = "0px"
+                }
+            },400)
+        }else{
+        // OPEN
+            $collapse.style.height = "auto"
+            $navbar.className += " in";
+        }
+    }
+</script>
+
+<!-- Main Content -->
+
+<!--only post-->
+
+
+<img class="wechat-title-img"
+     src="https://billy7x17.github.io/pics/image/site/head.jpg">
+
+
+<style>
+    
+    header.intro-header {
+        background-image: url('https://billy7x17.github.io/pics/image/site/head.jpg?imageView2/1/w/1400/h/400/interlace/1/q/90')
+    }
+
+    
+</style>
+
+<header class="intro-header">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 text-center">
+                <div class="post-heading">
+                    <h1>rabbitmq之网络分区</h1>
+                    
+                    <span class="meta">
+                         作者 Billy
+                        <span>
+                          日期 2017-06-13
+                         </span>
+                    </span>
+                    <div class="tags text-center">
+                        
+                        <a class="tag" href="/tags/#openstack"
+                           title="openstack">openstack</a>
+                        
+                        <a class="tag" href="/tags/#rabbitmq"
+                           title="rabbitmq">rabbitmq</a>
+                        
+                        <a class="tag" href="/tags/#Clustering"
+                           title="Clustering">Clustering</a>
+                        
+                        <a class="tag" href="/tags/#Network Partitions"
+                           title="Network Partitions">Network Partitions</a>
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="post-title-haojen">
+        <span>
+            rabbitmq之网络分区
+        </span>
+    </div>
+</header>
+
+<!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
+            <!-- Post Container -->
+            <div class="col-lg-8 col-lg-offset-1 col-sm-9 post-container">
+                <h1 id="rabbitmq之网络分区"><a href="#rabbitmq之网络分区" class="headerlink" title="rabbitmq之网络分区"></a>rabbitmq之网络分区</h1><p>在rabbitmq高可用测试过程中，由于对其中一节点所在虚拟机进行开关机等操作，导致rabbitmq集群不可访问，在管理页面中发现如下提示：</p>
+<p><img src="/rabbitmq%E5%87%BA%E7%8E%B0%E7%BD%91%E7%BB%9C%E5%88%86%E5%8C%BA.png" alt="rabbitmq网络分区"></p>
+<p>提示 “<strong>检测到网络分区</strong>“，经过对图片中<a target="_blank" rel="noopener" href="http://www.rabbitmq.com/partitions.html">超链接</a>的阅读，发现这是由于在虚拟机运行rabbitmq节点时，被执行挂起&#x2F;恢复操作导致的。</p>
+<h2 id="网络分区会影响什么"><a href="#网络分区会影响什么" class="headerlink" title="网络分区会影响什么"></a>网络分区会影响什么</h2><p>当网络分区存在于集群中时，被分区分开的节点会各自独立运行，彼此认为对方是异常的。队列、绑定、交换机都可以被分别创建、操作，互不影响。若连接到多个分区的连接没有中断的话，队列消息就会入到多个网络分区中的队列中，直到问题修复为止。</p>
+<h2 id="什么引起的网络分区"><a href="#什么引起的网络分区" class="headerlink" title="什么引起的网络分区"></a>什么引起的网络分区</h2><p>当我们说到“网络分区”，实际上是指集群中某个节点与异常节点访问中断造成的分区。网络异常、操作系统的暂停、恢复都会引起这种情形，换句话说异常节点并没有意识到自己是异常的，甚至是服务停止，但是集群中其他节点却认为它是异常的。</p>
+<h2 id="如何修复"><a href="#如何修复" class="headerlink" title="如何修复"></a>如何修复</h2><p>想要修复，多个网络分区中必须选择一个最值得信任的分区，修复过程中其他分区与之相异的部分都会被丢弃。</p>
+<p>重启所有不信任分区中的所有节点，当它们重新加入集群时(自动加入)，数据就会恢复。</p>
+<p>最后，应该重启所有节点，以清除由于网络分区引起的警告。</p>
+<h2 id="自动修复分区"><a href="#自动修复分区" class="headerlink" title="自动修复分区"></a>自动修复分区</h2><p>若无法避免虚拟机挂起&#x2F;恢复操作，就必须找到自动处理分区的方法。</p>
+<p>RabbitMQ提供了3种模式来自动处理网络分区：</p>
+<ul>
+<li>暂停最小值模式 - pause-minority mode</li>
+<li>指定节点优先保留模式 - pause-if-all-down mode </li>
+<li>自动治疗模式 - autoheal mode</li>
+</ul>
+<h3 id="pause-minority-mode"><a href="#pause-minority-mode" class="headerlink" title="pause-minority mode"></a>pause-minority mode</h3><p>采用暂停最小值模式，当网络分区出现时，rabbitmq会主动暂停节点个数少于或等于总节点数一半的分区。<br>这种模式当节点数为2:2时，会暂停所有的节点。</p>
+<h3 id="pause-if-all-down-mode"><a href="#pause-if-all-down-mode" class="headerlink" title="pause-if-all-down mode"></a>pause-if-all-down mode</h3><p>采用指定节点优先保留模式，需要指定保留的节点，与暂停最小值模式相近，rabbitmq主动暂停时会优先选择指定节点保留，其余分区的节点做暂停处理。</p>
+<p>当指定节点处于多个网络分区时，所在的分区没有节点会被暂停，这样就会出现问题。因此该模式选择还有一个参数，来表明出现这种情况是采用什么模式： 忽略 OR 自动治疗。</p>
+<h3 id="autoheal-mode"><a href="#autoheal-mode" class="headerlink" title="autoheal mode"></a>autoheal mode</h3><p>采用自动治疗模式，rabbitmq会自动重启一个分区以外的所有节点，从而自动恢复到原来状态。</p>
+<p>选择分区就成了决定数据存亡的重要决策，rabbitmq以分区内节点个数为依据，包含节点最多的分区会得以保留，其他分区的所有节点会被重启，其上的数据被同步。</p>
+<h3 id="ignore"><a href="#ignore" class="headerlink" title="ignore"></a>ignore</h3><p>当然，rabbitmq默认的忽略模式，若出现网络分区，那么系统就会逐步崩溃。</p>
+<h2 id="如何选择"><a href="#如何选择" class="headerlink" title="如何选择"></a>如何选择</h2><p>如果网络相当可靠，可以选择默认的忽略模式 ignore。<br>如果网络不是那么的可靠，但可以容忍集群里有1个或极少数节点不工作，这些节点在重返集群时不会影响数据，那么可以选择暂停最小值模式。<br>如果网络不可依赖，相比数据的完整性，你更加关心服务的持续性，那么可以选择自动治疗模式，并且集群中只有2个节点。</p>
+<h2 id="配置方法"><a href="#配置方法" class="headerlink" title="配置方法"></a>配置方法</h2><p>在<code>/etc/rabbitmq/rabbitmq.conf</code>配置文件里，查找关键字<code>cluster_partition_handling</code>：</p>
+<pre><code>%% &#123;cluster_partition_handling, ignore&#125;,
+</code></pre>
+<p>把前面注释去掉，将ignore更改为：</p>
+<pre><code>pause_minority
+&#123;pause_if_all_down, [nodes], ignore | autoheal&#125;
+autoheal
+</code></pre>
+<p>其中一个。</p>
+
+<div id="gitalk-container"></div>
+<script src="https://cdn.bootcss.com/blueimp-md5/2.12.0/js/md5.min.js"></script><link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css"><script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+
+		<script>
+		var gitalkConfig = {"clientID":"Ov23liFG19AhSmVEYtNI","clientSecret":"236b24cf5e0eaf843c4a766f2e458b3b85702a04","repo":"billy7x17.github.io","owner":"billy7x17","admin":["billy7x17"],"distractionFreeMode":true};
+	    gitalkConfig.id = md5(location.pathname);
+		var gitalk = new Gitalk(gitalkConfig);
+	    gitalk.render("gitalk-container");
+	    </script>
+                <hr>
+                
+
+                <ul class="pager">
+                    
+                    <li class="previous">
+                        <a href="/2017/06/29/给ovs网桥设置ip/" data-toggle="tooltip" data-placement="top"
+                           title="给ovs网桥设置ip">&larr; Previous Post</a>
+                    </li>
+                    
+                    
+                    <li class="next">
+                        <a href="/2017/06/10/openstack使用cirros镜像创建vmware虚拟机/" data-toggle="tooltip" data-placement="top"
+                           title="openstack使用cirros镜像创建vmware虚拟机">Next Post &rarr;</a>
+                    </li>
+                    
+                </ul>
+
+                
+
+                
+
+
+                <!--加入新的评论系统-->
+                
+
+                
+
+            </div>
+
+            <div class="hidden-xs col-sm-3 toc-col">
+                <div class="toc-wrap">
+                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#rabbitmq%E4%B9%8B%E7%BD%91%E7%BB%9C%E5%88%86%E5%8C%BA"><span class="toc-text">rabbitmq之网络分区</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%BD%91%E7%BB%9C%E5%88%86%E5%8C%BA%E4%BC%9A%E5%BD%B1%E5%93%8D%E4%BB%80%E4%B9%88"><span class="toc-text">网络分区会影响什么</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BB%80%E4%B9%88%E5%BC%95%E8%B5%B7%E7%9A%84%E7%BD%91%E7%BB%9C%E5%88%86%E5%8C%BA"><span class="toc-text">什么引起的网络分区</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%A6%82%E4%BD%95%E4%BF%AE%E5%A4%8D"><span class="toc-text">如何修复</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%87%AA%E5%8A%A8%E4%BF%AE%E5%A4%8D%E5%88%86%E5%8C%BA"><span class="toc-text">自动修复分区</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#pause-minority-mode"><span class="toc-text">pause-minority mode</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#pause-if-all-down-mode"><span class="toc-text">pause-if-all-down mode</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#autoheal-mode"><span class="toc-text">autoheal mode</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#ignore"><span class="toc-text">ignore</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%A6%82%E4%BD%95%E9%80%89%E6%8B%A9"><span class="toc-text">如何选择</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%85%8D%E7%BD%AE%E6%96%B9%E6%B3%95"><span class="toc-text">配置方法</span></a></li></ol></li></ol>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <!-- Sidebar Container -->
+
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                sidebar-container">
+
+                <!-- Featured Tags -->
+                
+                <section>
+                    <!-- no hr -->
+                    <h5 class="text-center">
+                        <a href="/tags/">FEATURED TAGS</a>
+                    </h5>
+                    <div class="tags">
+                        
+                        <a class="tag" href="/tags/#openstack"
+                           title="openstack">openstack</a>
+                        
+                        <a class="tag" href="/tags/#rabbitmq"
+                           title="rabbitmq">rabbitmq</a>
+                        
+                        <a class="tag" href="/tags/#Clustering"
+                           title="Clustering">Clustering</a>
+                        
+                        <a class="tag" href="/tags/#Network Partitions"
+                           title="Network Partitions">Network Partitions</a>
+                        
+                    </div>
+                </section>
+                
+
+                <!-- Friends Blog -->
+                
+            </div>
+        </div>
+
+    </div>
+</article>
+
+
+
+
+
+
+
+<!-- Footer -->
+<!-- Footer -->
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 text-center">
+                <br>
+                <ul class="list-inline text-center">
+                
+                    <li>
+                        <a href="/atom.xml">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-rss fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+                
+                
+                    <li>
+                        <a target="_blank" href="https://www.zhihu.com/people/li-zong-rui-18">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa  fa-stack-1x fa-inverse">知</i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+                    <li>
+                        <a target="_blank" href="http://weibo.com/billy7x17">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-weibo fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+
+                
+                    <li>
+                        <a target="_blank"  href="https://github.com/billy7x17">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+
+                </ul>
+                <p class="copyright text-muted">
+                    Copyright &copy; Billy 2025
+                    <br>
+                    <span id="busuanzi_container_site_pv" style="font-size: 12px;">PV: <span id="busuanzi_value_site_pv"></span> Times</span>
+                    <br>
+                    Theme by <a target="_blank" rel="noopener" href="https://haojen.github.io/">Haojen Ma</a>
+                </p>
+
+            </div>
+        </div>
+    </div>
+</footer>
+
+<!-- jQuery -->
+
+<script src="/js/jquery.min.js"></script>
+
+
+<!-- Bootstrap Core JavaScript -->
+
+<script src="/js/bootstrap.min.js"></script>
+
+
+<!-- Custom Theme JavaScript -->
+
+<script src="/js/blog.js"></script>
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+
+<!-- jquery.tagcloud.js -->
+<script>
+    // only load tagcloud.js in tag.html
+    if($('#tag_cloud').length !== 0){
+        async("https://billy7x17.github.io/js/jquery.tagcloud.js",function(){
+            $.fn.tagcloud.defaults = {
+                //size: {start: 1, end: 1, unit: 'em'},
+                color: {start: '#bbbbee', end: '#0085a1'},
+            };
+            $('#tag_cloud a').tagcloud();
+        })
+    }
+</script>
+
+<!--fastClick.js -->
+<script>
+    async("//cdn.bootcss.com/fastclick/1.0.6/fastclick.min.js", function(){
+        var $nav = document.querySelector("nav");
+        if($nav) FastClick.attach($nav);
+    })
+</script>
+
+
+
+<!-- Google Analytics -->
+
+
+
+<!-- Baidu Tongji -->
+
+<script>
+    var _baId = 'd63b30f4b79f1151f194406afe5e9831';
+    // Originial
+    var _hmt = _hmt || [];
+    (function() {
+        var hm = document.createElement("script");
+        hm.src = "//hm.baidu.com/hm.js?" + _baId;
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(hm, s);
+    })();
+</script>
+
+
+<!-- swiftype -->
+<script type="text/javascript">
+  (function(w,d,t,u,n,s,e){w['SwiftypeObject']=n;w[n]=w[n]||function(){
+  (w[n].q=w[n].q||[]).push(arguments);};s=d.createElement(t);
+  e=d.getElementsByTagName(t)[0];s.async=1;s.src=u;e.parentNode.insertBefore(s,e);
+  })(window,document,'script','//s.swiftypecdn.com/install/v2/st.js','_st');
+
+  _st('install','','2.0.0');
+</script>
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+<!--wechat title img-->
+<img class="wechat-title-img" src="https://billy7x17.github.io/pics/laughMan.jpg">
+</body>
+
+</html>

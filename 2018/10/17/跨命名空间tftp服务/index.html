@@ -1,0 +1,494 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Head tag -->
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Billy119在 Github 上的个人博客">
+    <meta name="keyword" content="Billy119">
+    <meta name="theme-color" content="#600090">
+    <meta name="msapplication-navbutton-color" content="#600090">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="#600090">
+    <link rel="shortcut icon" href="https://billy7x17.github.io/pics/laughMan-icon.png">
+    <link rel="alternate" type="application/atom+xml" title="Billy" href="/atom.xml">
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css">
+    <link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.css">
+    <title>
+        
+        跨命名空间tftp服务｜Billy&#39;s blog
+        
+    </title>
+
+    <link rel="canonical" href="https://billy7x17.github.io/2018/10/17/跨命名空间tftp服务/">
+
+    <!-- Bootstrap Core CSS -->
+    
+<link rel="stylesheet" href="/css/bootstrap.min.css">
+
+
+    <!-- Custom CSS -->
+    
+<link rel="stylesheet" href="/css/blog-style.css">
+
+
+    <!-- Pygments Github CSS -->
+    
+<link rel="stylesheet" href="/css/syntax.css">
+
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<style>
+
+    header.intro-header {
+        background-image: url('https://billy7x17.github.io/pics/head.jpg')
+    }
+</style>
+<!-- hack iOS CSS :active style -->
+<body ontouchstart="" class="animated fadeIn">
+<!-- Navigation -->
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top " id="nav-top" data-ispost = "true" data-istags="false
+" data-ishome = "false" >
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand animated pulse" href="/">
+                <span class="brand-logo">
+                    Billy
+                </span>
+                's Blog
+            </a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <!-- Known Issue, found by Hux:
+            <nav>'s height woule be hold on by its content.
+            so, when navbar scale out, the <nav> will cover tags.
+            also mask any touch event of tags, unfortunately.
+        -->
+        <!-- /.navbar-collapse -->
+        <div id="huxblog_navbar">
+            <div class="navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="/">Home</a>
+                    </li>
+					
+                    
+                        
+							
+                        <li>
+                            <a href="/tags/">tags</a>
+                        </li>
+							
+						
+                    
+					
+					
+                </ul>
+            </div>
+        </div>
+    </div>
+    <!-- /.container -->
+</nav>
+<script>
+    // Drop Bootstarp low-performance Navbar
+    // Use customize navbar with high-quality material design animation
+    // in high-perf jank-free CSS3 implementation
+//    var $body   = document.body;
+    var $toggle = document.querySelector('.navbar-toggle');
+    var $navbar = document.querySelector('#huxblog_navbar');
+    var $collapse = document.querySelector('.navbar-collapse');
+
+    $toggle.addEventListener('click', handleMagic)
+    function handleMagic(e){
+        if ($navbar.className.indexOf('in') > 0) {
+        // CLOSE
+            $navbar.className = " ";
+            // wait until animation end.
+            setTimeout(function(){
+                // prevent frequently toggle
+                if($navbar.className.indexOf('in') < 0) {
+                    $collapse.style.height = "0px"
+                }
+            },400)
+        }else{
+        // OPEN
+            $collapse.style.height = "auto"
+            $navbar.className += " in";
+        }
+    }
+</script>
+
+<!-- Main Content -->
+
+<!--only post-->
+
+
+<img class="wechat-title-img"
+     src="https://billy7x17.github.io/pics/image/site/head.jpg">
+
+
+<style>
+    
+    header.intro-header {
+        background-image: url('https://billy7x17.github.io/pics/image/site/head.jpg?imageView2/1/w/1400/h/400/interlace/1/q/90')
+    }
+
+    
+</style>
+
+<header class="intro-header">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 text-center">
+                <div class="post-heading">
+                    <h1>跨命名空间tftp服务</h1>
+                    
+                    <span class="meta">
+                         作者 Billy
+                        <span>
+                          日期 2018-10-17
+                         </span>
+                    </span>
+                    <div class="tags text-center">
+                        
+                        <a class="tag" href="/tags/#openstack"
+                           title="openstack">openstack</a>
+                        
+                        <a class="tag" href="/tags/#ironic"
+                           title="ironic">ironic</a>
+                        
+                        <a class="tag" href="/tags/#tftp"
+                           title="tftp">tftp</a>
+                        
+                        <a class="tag" href="/tags/#namespace"
+                           title="namespace">namespace</a>
+                        
+                        <a class="tag" href="/tags/#命名空间"
+                           title="命名空间">命名空间</a>
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="post-title-haojen">
+        <span>
+            跨命名空间tftp服务
+        </span>
+    </div>
+</header>
+
+<!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
+            <!-- Post Container -->
+            <div class="col-lg-8 col-lg-offset-1 col-sm-9 post-container">
+                <h1 id="跨命名空间tftp服务"><a href="#跨命名空间tftp服务" class="headerlink" title="跨命名空间tftp服务"></a>跨命名空间tftp服务</h1><h2 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h2><p>裸金属多租户网络对客户现有的网络结构有较高的要求，大多数客户并不能具备所有条件，比如提供上联交换机的控制权限。</p>
+<p>在几个试点协调资源过程中发现，大多数客户可以提供“半自动化”的裸金属多租户网络，即上联交换机已经将裸金属的<code>vlan</code>设置好，<code>openstack</code>使用相同<code>vlan</code>号的网络创建裸金属实例。网络节点的对应网卡做成<code>trunk</code>，以保证裸金属广播的<code>dhcp</code>报文能够到达。</p>
+<p>这样问题就来了，<code>ironic</code>中<code>tftp</code>服务器地址是以<code>ip</code>格式写在配置文件的方式配置的，这个<code>ip</code>大多是属于管理网的，并不是动态的。给裸金属分配不同<code>vlan</code>的<code>ip</code>，一定不能访问管理网的<code>tftp</code>服务。</p>
+<p>因此，有一个方法，就是将<code>tftp</code>服务部署到网络节点上，并在多个命名空间里启动服务，裸金属获取到<code>ip</code>后，可以直接访问网络节点的命名空间里的<code>tftp</code>来继续工作。</p>
+<h2 id="tftp服务"><a href="#tftp服务" class="headerlink" title="tftp服务"></a>tftp服务</h2><p><code>tftp</code>是一个<code>udp</code>服务，端口为<code>69</code>。</p>
+<p>目前<code>CentOS 7</code>里，已经将<code>tftp</code>服务纳入到<code>xinetd</code>中：</p>
+<pre><code># systemctl status xinetd
+● xinetd.service - Xinetd A Powerful Replacement For Inetd
+   Loaded: loaded (/usr/lib/systemd/system/xinetd.service; enabled; vendor preset: enabled)
+   Active: active (running) since Tue 2018-10-16 17:09:42 CST; 2s ago
+  Process: 20011 ExecStart=/usr/sbin/xinetd -stayalive -pidfile /var/run/xinetd.pid $EXTRAOPTIONS (code=exited, status=0/SUCCESS)
+ Main PID: 20012 (xinetd)
+   CGroup: /system.slice/xinetd.service
+           └─20012 /usr/sbin/xinetd -stayalive -pidfile /var/run/xinetd.pid
+
+Oct 16 17:09:42 Openstack-Controller01 xinetd[20012]: removing daytime
+Oct 16 17:09:42 Openstack-Controller01 xinetd[20012]: removing discard
+Oct 16 17:09:42 Openstack-Controller01 xinetd[20012]: removing discard
+Oct 16 17:09:42 Openstack-Controller01 xinetd[20012]: removing echo
+Oct 16 17:09:42 Openstack-Controller01 xinetd[20012]: removing echo
+Oct 16 17:09:42 Openstack-Controller01 xinetd[20012]: removing tcpmux
+Oct 16 17:09:42 Openstack-Controller01 xinetd[20012]: removing time
+Oct 16 17:09:42 Openstack-Controller01 xinetd[20012]: removing time
+Oct 16 17:09:42 Openstack-Controller01 xinetd[20012]: xinetd Version 2.3.15 started with libwrap loadavg labeled-networking options compiled in.
+Oct 16 17:09:42 Openstack-Controller01 xinetd[20012]: Started working: 1 available service
+</code></pre>
+<h2 id="命名空间"><a href="#命名空间" class="headerlink" title="命名空间"></a>命名空间</h2><p>我们这里的命名空间指的是网络命名空间<code>netns</code></p>
+<p>netns可以让一台机器上模拟多个网络设备，是网络虚拟化的重要组成，将不同类型的网络应用隔离。</p>
+<p>一个net namespace有自己独立的路由表，iptables策略，设备管理。说来说去，它就是用来隔离的。比如将eth0加入了netns 1，那么netns 2中的应用程序就找不到eth0了。netns 1中的iptables策略，不会去影响netns 2中的iptables策略。</p>
+<p><code>openstack</code>中的命名空间，在网络开启<code>dhcp</code>后，由程序在网络节点上创建，名称为<code>qdhcp-&lt; 网络uuid &gt;</code>。</p>
+<h2 id="命名空间内起tftp服务"><a href="#命名空间内起tftp服务" class="headerlink" title="命名空间内起tftp服务"></a>命名空间内起tftp服务</h2><p>从上面<code>systemctl</code>命令中可以看到，启动的<code>shell</code>命令是</p>
+<pre><code>/usr/sbin/xinetd -stayalive -pidfile /var/run/xinetd.pid
+</code></pre>
+<p>指定了进程文件<code>/var/run/xinetd.pid</code>，那么我们需要复制新的进程文件，再在命名空间里使用新的进程文件启动程序。</p>
+<pre><code># cp /var/run/xinetd.pid ~/
+
+# ip netns exec qdhcp-7b1fbda3-8615-4a55-8af5-aca76896d3d9 /usr/sbin/xinetd -stayalive -pidfile /root/xinetd.pid
+</code></pre>
+<p>再查询一下进程，发现有2个<code>xinetd</code>进程</p>
+<pre><code># ps -ef|grep xinetd
+root      20012      1  0 Oct16 ?        00:00:00 /usr/sbin/xinetd -stayalive -pidfile /var/run/xinetd.pid
+root     105828      1  0 09:03 ?        00:00:00 /usr/sbin/xinetd -stayalive -pidfile /root/xinetd.pid
+root     107701   1585  0 09:23 pts/0    00:00:00 grep --color=auto xinetd
+</code></pre>
+
+<div id="gitalk-container"></div>
+<script src="https://cdn.bootcss.com/blueimp-md5/2.12.0/js/md5.min.js"></script><link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css"><script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+
+		<script>
+		var gitalkConfig = {"clientID":"Ov23liFG19AhSmVEYtNI","clientSecret":"236b24cf5e0eaf843c4a766f2e458b3b85702a04","repo":"billy7x17.github.io","owner":"billy7x17","admin":["billy7x17"],"distractionFreeMode":true};
+	    gitalkConfig.id = md5(location.pathname);
+		var gitalk = new Gitalk(gitalkConfig);
+	    gitalk.render("gitalk-container");
+	    </script>
+                <hr>
+                
+
+                <ul class="pager">
+                    
+                    <li class="previous">
+                        <a href="/2018/10/17/初访iptables及openstack虚拟网络/" data-toggle="tooltip" data-placement="top"
+                           title="初访iptables及openstack虚拟网络">&larr; Previous Post</a>
+                    </li>
+                    
+                    
+                    <li class="next">
+                        <a href="/2018/07/19/在IDE中设置OS环境变量/" data-toggle="tooltip" data-placement="top"
+                           title="在IDE中设置OS环境变量">Next Post &rarr;</a>
+                    </li>
+                    
+                </ul>
+
+                
+
+                
+
+
+                <!--加入新的评论系统-->
+                
+
+                
+
+            </div>
+
+            <div class="hidden-xs col-sm-3 toc-col">
+                <div class="toc-wrap">
+                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E8%B7%A8%E5%91%BD%E5%90%8D%E7%A9%BA%E9%97%B4tftp%E6%9C%8D%E5%8A%A1"><span class="toc-text">跨命名空间tftp服务</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%83%8C%E6%99%AF"><span class="toc-text">背景</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#tftp%E6%9C%8D%E5%8A%A1"><span class="toc-text">tftp服务</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%91%BD%E5%90%8D%E7%A9%BA%E9%97%B4"><span class="toc-text">命名空间</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%91%BD%E5%90%8D%E7%A9%BA%E9%97%B4%E5%86%85%E8%B5%B7tftp%E6%9C%8D%E5%8A%A1"><span class="toc-text">命名空间内起tftp服务</span></a></li></ol></li></ol>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <!-- Sidebar Container -->
+
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                sidebar-container">
+
+                <!-- Featured Tags -->
+                
+                <section>
+                    <!-- no hr -->
+                    <h5 class="text-center">
+                        <a href="/tags/">FEATURED TAGS</a>
+                    </h5>
+                    <div class="tags">
+                        
+                        <a class="tag" href="/tags/#openstack"
+                           title="openstack">openstack</a>
+                        
+                        <a class="tag" href="/tags/#ironic"
+                           title="ironic">ironic</a>
+                        
+                        <a class="tag" href="/tags/#tftp"
+                           title="tftp">tftp</a>
+                        
+                        <a class="tag" href="/tags/#namespace"
+                           title="namespace">namespace</a>
+                        
+                        <a class="tag" href="/tags/#命名空间"
+                           title="命名空间">命名空间</a>
+                        
+                    </div>
+                </section>
+                
+
+                <!-- Friends Blog -->
+                
+            </div>
+        </div>
+
+    </div>
+</article>
+
+
+
+
+
+
+
+<!-- Footer -->
+<!-- Footer -->
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 text-center">
+                <br>
+                <ul class="list-inline text-center">
+                
+                    <li>
+                        <a href="/atom.xml">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-rss fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+                
+                
+                    <li>
+                        <a target="_blank" href="https://www.zhihu.com/people/li-zong-rui-18">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa  fa-stack-1x fa-inverse">知</i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+                    <li>
+                        <a target="_blank" href="http://weibo.com/billy7x17">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-weibo fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+
+                
+                    <li>
+                        <a target="_blank"  href="https://github.com/billy7x17">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+
+                </ul>
+                <p class="copyright text-muted">
+                    Copyright &copy; Billy 2025
+                    <br>
+                    <span id="busuanzi_container_site_pv" style="font-size: 12px;">PV: <span id="busuanzi_value_site_pv"></span> Times</span>
+                    <br>
+                    Theme by <a target="_blank" rel="noopener" href="https://haojen.github.io/">Haojen Ma</a>
+                </p>
+
+            </div>
+        </div>
+    </div>
+</footer>
+
+<!-- jQuery -->
+
+<script src="/js/jquery.min.js"></script>
+
+
+<!-- Bootstrap Core JavaScript -->
+
+<script src="/js/bootstrap.min.js"></script>
+
+
+<!-- Custom Theme JavaScript -->
+
+<script src="/js/blog.js"></script>
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+
+<!-- jquery.tagcloud.js -->
+<script>
+    // only load tagcloud.js in tag.html
+    if($('#tag_cloud').length !== 0){
+        async("https://billy7x17.github.io/js/jquery.tagcloud.js",function(){
+            $.fn.tagcloud.defaults = {
+                //size: {start: 1, end: 1, unit: 'em'},
+                color: {start: '#bbbbee', end: '#0085a1'},
+            };
+            $('#tag_cloud a').tagcloud();
+        })
+    }
+</script>
+
+<!--fastClick.js -->
+<script>
+    async("//cdn.bootcss.com/fastclick/1.0.6/fastclick.min.js", function(){
+        var $nav = document.querySelector("nav");
+        if($nav) FastClick.attach($nav);
+    })
+</script>
+
+
+
+<!-- Google Analytics -->
+
+
+
+<!-- Baidu Tongji -->
+
+<script>
+    var _baId = 'd63b30f4b79f1151f194406afe5e9831';
+    // Originial
+    var _hmt = _hmt || [];
+    (function() {
+        var hm = document.createElement("script");
+        hm.src = "//hm.baidu.com/hm.js?" + _baId;
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(hm, s);
+    })();
+</script>
+
+
+<!-- swiftype -->
+<script type="text/javascript">
+  (function(w,d,t,u,n,s,e){w['SwiftypeObject']=n;w[n]=w[n]||function(){
+  (w[n].q=w[n].q||[]).push(arguments);};s=d.createElement(t);
+  e=d.getElementsByTagName(t)[0];s.async=1;s.src=u;e.parentNode.insertBefore(s,e);
+  })(window,document,'script','//s.swiftypecdn.com/install/v2/st.js','_st');
+
+  _st('install','','2.0.0');
+</script>
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+<!--wechat title img-->
+<img class="wechat-title-img" src="https://billy7x17.github.io/pics/laughMan.jpg">
+</body>
+
+</html>

@@ -1,0 +1,898 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title>Billy</title>
+  <icon>https://www.gravatar.com/avatar/6863c414aed7d8a4273678f315bb9387</icon>
+  <subtitle>Billy119</subtitle>
+  <link href="https://billy7x17.github.io/atom.xml" rel="self"/>
+  
+  <link href="https://billy7x17.github.io/"/>
+  <updated>2025-01-07T12:41:20.432Z</updated>
+  <id>https://billy7x17.github.io/</id>
+  
+  <author>
+    <name>Billy</name>
+    <email>BillyMa@gmail.com</email>
+  </author>
+  
+  <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>VIM灵活切换</title>
+    <link href="https://billy7x17.github.io/2025/01/07/VIM%E7%81%B5%E6%B4%BB%E5%88%87%E6%8D%A2/"/>
+    <id>https://billy7x17.github.io/2025/01/07/VIM%E7%81%B5%E6%B4%BB%E5%88%87%E6%8D%A2/</id>
+    <published>2025-01-07T08:32:51.000Z</published>
+    <updated>2025-01-07T12:41:20.432Z</updated>
+    
+    
+      
+      
+    <summary type="html">&lt;h1 id=&quot;VIM灵活切换&quot;&gt;&lt;a href=&quot;#VIM灵活切换&quot; class=&quot;headerlink&quot; title=&quot;VIM灵活切换&quot;&gt;&lt;/a&gt;VIM灵活切换&lt;/h1&gt;&lt;h2 id=&quot;背景&quot;&gt;&lt;a href=&quot;#背景&quot; class=&quot;headerlink&quot; title=&quot;背</summary>
+      
+    
+    
+    
+    
+    <category term="vim" scheme="https://billy7x17.github.io/tags/vim/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>老旧安卓机改装服务器</title>
+    <link href="https://billy7x17.github.io/2024/09/02/%E8%80%81%E6%97%A7%E5%AE%89%E5%8D%93%E6%9C%BA%E6%94%B9%E8%A3%85%E6%9C%8D%E5%8A%A1%E5%99%A8/"/>
+    <id>https://billy7x17.github.io/2024/09/02/%E8%80%81%E6%97%A7%E5%AE%89%E5%8D%93%E6%9C%BA%E6%94%B9%E8%A3%85%E6%9C%8D%E5%8A%A1%E5%99%A8/</id>
+    <published>2024-09-02T11:32:51.000Z</published>
+    <updated>2024-09-15T02:31:10.201Z</updated>
+    
+    
+      
+      
+    <summary type="html">&lt;h1 id=&quot;老旧安卓机改装服务器&quot;&gt;&lt;a href=&quot;#老旧安卓机改装服务器&quot; class=&quot;headerlink&quot; title=&quot;老旧安卓机改装服务器&quot;&gt;&lt;/a&gt;老旧安卓机改装服务器&lt;/h1&gt;&lt;h2 id=&quot;背景&quot;&gt;&lt;a href=&quot;#背景&quot; class=&quot;headerli</summary>
+      
+    
+    
+    
+    
+    <category term="Termux" scheme="https://billy7x17.github.io/tags/Termux/"/>
+    
+    <category term="zerotier" scheme="https://billy7x17.github.io/tags/zerotier/"/>
+    
+    <category term="ngrok" scheme="https://billy7x17.github.io/tags/ngrok/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>chatgpt-next-web部署</title>
+    <link href="https://billy7x17.github.io/2024/07/11/chatgpt-next-web%E9%83%A8%E7%BD%B2/"/>
+    <id>https://billy7x17.github.io/2024/07/11/chatgpt-next-web%E9%83%A8%E7%BD%B2/</id>
+    <published>2024-07-11T02:20:51.000Z</published>
+    <updated>2024-07-19T07:41:58.498Z</updated>
+    
+    
+      
+      
+    <summary type="html">&lt;h1 id=&quot;chatgpt-next-web部署&quot;&gt;&lt;a href=&quot;#chatgpt-next-web部署&quot; class=&quot;headerlink&quot; title=&quot;chatgpt-next-web部署&quot;&gt;&lt;/a&gt;chatgpt-next-web部署&lt;/h1&gt;&lt;h2 id=&quot;搭</summary>
+      
+    
+    
+    
+    
+    <category term="chatgpt" scheme="https://billy7x17.github.io/tags/chatgpt/"/>
+    
+    <category term="vercel" scheme="https://billy7x17.github.io/tags/vercel/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>nginx 默认配置时带下划线的header被过滤掉</title>
+    <link href="https://billy7x17.github.io/2024/06/24/nginx%20%E9%BB%98%E8%AE%A4%E9%85%8D%E7%BD%AE%E6%97%B6%E5%B8%A6%E4%B8%8B%E5%88%92%E7%BA%BF%E7%9A%84header%E8%A2%AB%E8%BF%87%E6%BB%A4%E6%8E%89/"/>
+    <id>https://billy7x17.github.io/2024/06/24/nginx%20%E9%BB%98%E8%AE%A4%E9%85%8D%E7%BD%AE%E6%97%B6%E5%B8%A6%E4%B8%8B%E5%88%92%E7%BA%BF%E7%9A%84header%E8%A2%AB%E8%BF%87%E6%BB%A4%E6%8E%89/</id>
+    <published>2024-06-24T01:27:55.000Z</published>
+    <updated>2024-07-03T03:17:40.293Z</updated>
+    
+    
+      
+      
+    <summary type="html">&lt;h1 id=&quot;nginx-默认配置时带下划线的header被过滤掉&quot;&gt;&lt;a href=&quot;#nginx-默认配置时带下划线的header被过滤掉&quot; class=&quot;headerlink&quot; title=&quot;nginx 默认配置时带下划线的header被过滤掉&quot;&gt;&lt;/a&gt;nginx 默认</summary>
+      
+    
+    
+    
+    
+    <category term="nginx" scheme="https://billy7x17.github.io/tags/nginx/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>tcp connection and disconnection</title>
+    <link href="https://billy7x17.github.io/2023/11/04/tcp-connection-and-disconnection/"/>
+    <id>https://billy7x17.github.io/2023/11/04/tcp-connection-and-disconnection/</id>
+    <published>2023-11-04T15:03:33.000Z</published>
+    <updated>2023-11-15T02:27:10.771Z</updated>
+    
+    
+      
+      
+    <summary type="html">&lt;h2 id=&quot;建立连接-TCP-三次握手&quot;&gt;&lt;a href=&quot;#建立连接-TCP-三次握手&quot; class=&quot;headerlink&quot; title=&quot;建立连接-TCP 三次握手&quot;&gt;&lt;/a&gt;建立连接-TCP 三次握手&lt;/h2&gt;&lt;p&gt;&lt;img src=&quot;/2023/11/04/tcp-</summary>
+      
+    
+    
+    
+    
+    <category term="TCP" scheme="https://billy7x17.github.io/tags/TCP/"/>
+    
+    <category term="三次握手" scheme="https://billy7x17.github.io/tags/%E4%B8%89%E6%AC%A1%E6%8F%A1%E6%89%8B/"/>
+    
+    <category term="计算机网络" scheme="https://billy7x17.github.io/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Kafka出现失效副本</title>
+    <link href="https://billy7x17.github.io/2023/10/31/Kafka%E5%87%BA%E7%8E%B0%E5%A4%B1%E6%95%88%E5%89%AF%E6%9C%AC/"/>
+    <id>https://billy7x17.github.io/2023/10/31/Kafka%E5%87%BA%E7%8E%B0%E5%A4%B1%E6%95%88%E5%89%AF%E6%9C%AC/</id>
+    <published>2023-10-31T08:55:23.000Z</published>
+    <updated>2023-11-15T02:27:10.732Z</updated>
+    
+    
+      
+      
+    <summary type="html">&lt;h1 id=&quot;Kafka出现失效副本&quot;&gt;&lt;a href=&quot;#Kafka出现失效副本&quot; class=&quot;headerlink&quot; title=&quot;Kafka出现失效副本&quot;&gt;&lt;/a&gt;Kafka出现失效副本&lt;/h1&gt;&lt;h2 id=&quot;问题发现&quot;&gt;&lt;a href=&quot;#问题发现&quot; class=&quot;</summary>
+      
+    
+    
+    
+    
+    <category term="Kafka" scheme="https://billy7x17.github.io/tags/Kafka/"/>
+    
+    <category term="失效副本" scheme="https://billy7x17.github.io/tags/%E5%A4%B1%E6%95%88%E5%89%AF%E6%9C%AC/"/>
+    
+    <category term="under-replicated-partitions" scheme="https://billy7x17.github.io/tags/under-replicated-partitions/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Pulsar Schema简介</title>
+    <link href="https://billy7x17.github.io/2023/10/31/Pulsar-Schema%E7%AE%80%E4%BB%8B/"/>
+    <id>https://billy7x17.github.io/2023/10/31/Pulsar-Schema%E7%AE%80%E4%BB%8B/</id>
+    <published>2023-10-31T06:47:02.000Z</published>
+    <updated>2023-11-15T02:27:10.741Z</updated>
+    
+    
+      
+      
+    <summary type="html">&lt;h1 id=&quot;Pulsar-Schema简介&quot;&gt;&lt;a href=&quot;#Pulsar-Schema简介&quot; class=&quot;headerlink&quot; title=&quot;Pulsar Schema简介&quot;&gt;&lt;/a&gt;Pulsar Schema简介&lt;/h1&gt;&lt;p&gt;当前消息队列整体系统可用性趋于稳定，</summary>
+      
+    
+    
+    
+    
+    <category term="Pulsar" scheme="https://billy7x17.github.io/tags/Pulsar/"/>
+    
+    <category term="Schema" scheme="https://billy7x17.github.io/tags/Schema/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>初访iptables及openstack虚拟网络</title>
+    <link href="https://billy7x17.github.io/2018/10/17/%E5%88%9D%E8%AE%BFiptables%E5%8F%8Aopenstack%E8%99%9A%E6%8B%9F%E7%BD%91%E7%BB%9C/"/>
+    <id>https://billy7x17.github.io/2018/10/17/%E5%88%9D%E8%AE%BFiptables%E5%8F%8Aopenstack%E8%99%9A%E6%8B%9F%E7%BD%91%E7%BB%9C/</id>
+    <published>2018-10-17T06:28:06.000Z</published>
+    <updated>2023-11-15T02:27:10.771Z</updated>
+    
+    
+      
+      
+    <summary type="html">&lt;h1 id=&quot;初访iptables及openstack虚拟网络&quot;&gt;&lt;a href=&quot;#初访iptables及openstack虚拟网络&quot; class=&quot;headerlink&quot; title=&quot;初访iptables及openstack虚拟网络&quot;&gt;&lt;/a&gt;初访iptables及ope</summary>
+      
+    
+    
+    
+    
+    <category term="openstack" scheme="https://billy7x17.github.io/tags/openstack/"/>
+    
+    <category term="neutron" scheme="https://billy7x17.github.io/tags/neutron/"/>
+    
+    <category term="iptables" scheme="https://billy7x17.github.io/tags/iptables/"/>
+    
+    <category term="tftp" scheme="https://billy7x17.github.io/tags/tftp/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>跨命名空间tftp服务</title>
+    <link href="https://billy7x17.github.io/2018/10/17/%E8%B7%A8%E5%91%BD%E5%90%8D%E7%A9%BA%E9%97%B4tftp%E6%9C%8D%E5%8A%A1/"/>
+    <id>https://billy7x17.github.io/2018/10/17/%E8%B7%A8%E5%91%BD%E5%90%8D%E7%A9%BA%E9%97%B4tftp%E6%9C%8D%E5%8A%A1/</id>
+    <published>2018-10-17T02:07:08.000Z</published>
+    <updated>2023-11-15T02:27:10.779Z</updated>
+    
+    
+      
+      
+    <summary type="html">&lt;h1 id=&quot;跨命名空间tftp服务&quot;&gt;&lt;a href=&quot;#跨命名空间tftp服务&quot; class=&quot;headerlink&quot; title=&quot;跨命名空间tftp服务&quot;&gt;&lt;/a&gt;跨命名空间tftp服务&lt;/h1&gt;&lt;h2 id=&quot;背景&quot;&gt;&lt;a href=&quot;#背景&quot; class=&quot;head</summary>
+      
+    
+    
+    
+    
+    <category term="openstack" scheme="https://billy7x17.github.io/tags/openstack/"/>
+    
+    <category term="ironic" scheme="https://billy7x17.github.io/tags/ironic/"/>
+    
+    <category term="tftp" scheme="https://billy7x17.github.io/tags/tftp/"/>
+    
+    <category term="namespace" scheme="https://billy7x17.github.io/tags/namespace/"/>
+    
+    <category term="命名空间" scheme="https://billy7x17.github.io/tags/%E5%91%BD%E5%90%8D%E7%A9%BA%E9%97%B4/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>在IDE中设置OS环境变量</title>
+    <link href="https://billy7x17.github.io/2018/07/19/%E5%9C%A8IDE%E4%B8%AD%E8%AE%BE%E7%BD%AEOS%E7%8E%AF%E5%A2%83%E5%8F%98%E9%87%8F/"/>
+    <id>https://billy7x17.github.io/2018/07/19/%E5%9C%A8IDE%E4%B8%AD%E8%AE%BE%E7%BD%AEOS%E7%8E%AF%E5%A2%83%E5%8F%98%E9%87%8F/</id>
+    <published>2018-07-19T09:10:58.000Z</published>
+    <updated>2023-11-15T02:27:10.772Z</updated>
+    
+    
+      
+      
+    <summary type="html">&lt;h2 id=&quot;在IDE中设置OS环境变量&quot;&gt;&lt;a href=&quot;#在IDE中设置OS环境变量&quot; class=&quot;headerlink&quot; title=&quot;在IDE中设置OS环境变量&quot;&gt;&lt;/a&gt;在IDE中设置OS环境变量&lt;/h2&gt;&lt;h4 id=&quot;IDE中，由于一些中间件被内置，无法直接获</summary>
+      
+    
+    
+    
+    
+    <category term="IDE" scheme="https://billy7x17.github.io/tags/IDE/"/>
+    
+    <category term="IDEA" scheme="https://billy7x17.github.io/tags/IDEA/"/>
+    
+    <category term="eclipse" scheme="https://billy7x17.github.io/tags/eclipse/"/>
+    
+    <category term="profile" scheme="https://billy7x17.github.io/tags/profile/"/>
+    
+    <category term="spring" scheme="https://billy7x17.github.io/tags/spring/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>VHD镜像制作</title>
+    <link href="https://billy7x17.github.io/2018/06/11/VHD%E9%95%9C%E5%83%8F%E5%88%B6%E4%BD%9C/"/>
+    <id>https://billy7x17.github.io/2018/06/11/VHD%E9%95%9C%E5%83%8F%E5%88%B6%E4%BD%9C/</id>
+    <published>2018-06-11T02:23:20.000Z</published>
+    <updated>2023-11-15T02:27:10.751Z</updated>
+    
+    
+      
+      
+    <summary type="html">&lt;h1 id=&quot;VHD格式镜像制作&quot;&gt;&lt;a href=&quot;#VHD格式镜像制作&quot; class=&quot;headerlink&quot; title=&quot;VHD格式镜像制作&quot;&gt;&lt;/a&gt;VHD格式镜像制作&lt;/h1&gt;&lt;h2 id=&quot;背景&quot;&gt;&lt;a href=&quot;#背景&quot; class=&quot;headerlink&quot; </summary>
+      
+    
+    
+    
+    
+    <category term="xenserver" scheme="https://billy7x17.github.io/tags/xenserver/"/>
+    
+    <category term="vhd" scheme="https://billy7x17.github.io/tags/vhd/"/>
+    
+    <category term="镜像" scheme="https://billy7x17.github.io/tags/%E9%95%9C%E5%83%8F/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>裸金属控制台访问</title>
+    <link href="https://billy7x17.github.io/2018/03/12/%E8%A3%B8%E9%87%91%E5%B1%9E%E6%8E%A7%E5%88%B6%E5%8F%B0%E8%AE%BF%E9%97%AE/"/>
+    <id>https://billy7x17.github.io/2018/03/12/%E8%A3%B8%E9%87%91%E5%B1%9E%E6%8E%A7%E5%88%B6%E5%8F%B0%E8%AE%BF%E9%97%AE/</id>
+    <published>2018-03-12T06:17:35.000Z</published>
+    <updated>2023-11-15T02:27:10.778Z</updated>
+    
+    
+      
+      
+    <summary type="html">&lt;h1 id=&quot;裸金属控制台访问&quot;&gt;&lt;a href=&quot;#裸金属控制台访问&quot; class=&quot;headerlink&quot; title=&quot;裸金属控制台访问&quot;&gt;&lt;/a&gt;裸金属控制台访问&lt;/h1&gt;&lt;h2 id=&quot;背景&quot;&gt;&lt;a href=&quot;#背景&quot; class=&quot;headerlink&quot; titl</summary>
+      
+    
+    
+    
+    
+    <category term="openstack" scheme="https://billy7x17.github.io/tags/openstack/"/>
+    
+    <category term="ironic" scheme="https://billy7x17.github.io/tags/ironic/"/>
+    
+    <category term="console" scheme="https://billy7x17.github.io/tags/console/"/>
+    
+    <category term="shellinabox" scheme="https://billy7x17.github.io/tags/shellinabox/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>disk-image-builder</title>
+    <link href="https://billy7x17.github.io/2018/02/28/disk-image-builder/"/>
+    <id>https://billy7x17.github.io/2018/02/28/disk-image-builder/</id>
+    <published>2018-02-28T06:14:59.000Z</published>
+    <updated>2023-11-15T02:27:10.756Z</updated>
+    
+    
+      
+      
+    <summary type="html">&lt;h1 id=&quot;disk-image-builder&quot;&gt;&lt;a href=&quot;#disk-image-builder&quot; class=&quot;headerlink&quot; title=&quot;disk-image-builder&quot;&gt;&lt;/a&gt;disk-image-builder&lt;/h1&gt;&lt;h2 id=&quot;1</summary>
+      
+    
+    
+    
+    
+    <category term="disk-image-builder" scheme="https://billy7x17.github.io/tags/disk-image-builder/"/>
+    
+    <category term="image" scheme="https://billy7x17.github.io/tags/image/"/>
+    
+    <category term="baremetal" scheme="https://billy7x17.github.io/tags/baremetal/"/>
+    
+    <category term="ironic-python-agent" scheme="https://billy7x17.github.io/tags/ironic-python-agent/"/>
+    
+    <category term="ipa" scheme="https://billy7x17.github.io/tags/ipa/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>裸金属ironic-conductor调研</title>
+    <link href="https://billy7x17.github.io/2017/10/24/%E8%A3%B8%E9%87%91%E5%B1%9Eironic-conductor%E8%B0%83%E7%A0%94/"/>
+    <id>https://billy7x17.github.io/2017/10/24/%E8%A3%B8%E9%87%91%E5%B1%9Eironic-conductor%E8%B0%83%E7%A0%94/</id>
+    <published>2017-10-24T04:03:10.000Z</published>
+    <updated>2023-11-15T02:27:10.778Z</updated>
+    
+    
+      
+      
+    <summary type="html">&lt;h1 id=&quot;裸金属ironic-conductor调研&quot;&gt;&lt;a href=&quot;#裸金属ironic-conductor调研&quot; class=&quot;headerlink&quot; title=&quot;裸金属ironic-conductor调研&quot;&gt;&lt;/a&gt;裸金属ironic-conductor调研&lt;/</summary>
+      
+    
+    
+    
+    
+    <category term="baremetal" scheme="https://billy7x17.github.io/tags/baremetal/"/>
+    
+    <category term="ironic" scheme="https://billy7x17.github.io/tags/ironic/"/>
+    
+    <category term="raid" scheme="https://billy7x17.github.io/tags/raid/"/>
+    
+    <category term="cloud-init" scheme="https://billy7x17.github.io/tags/cloud-init/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>openstack命令行清除垃圾数据</title>
+    <link href="https://billy7x17.github.io/2017/09/25/openstack%E5%91%BD%E4%BB%A4%E8%A1%8C%E6%B8%85%E9%99%A4%E5%9E%83%E5%9C%BE%E6%95%B0%E6%8D%AE/"/>
+    <id>https://billy7x17.github.io/2017/09/25/openstack%E5%91%BD%E4%BB%A4%E8%A1%8C%E6%B8%85%E9%99%A4%E5%9E%83%E5%9C%BE%E6%95%B0%E6%8D%AE/</id>
+    <published>2017-09-25T01:11:42.000Z</published>
+    <updated>2023-11-15T02:27:10.768Z</updated>
+    
+    
+      
+      
+    <summary type="html">&lt;h1 id=&quot;openstack命令行清除垃圾数据&quot;&gt;&lt;a href=&quot;#openstack命令行清除垃圾数据&quot; class=&quot;headerlink&quot; title=&quot;openstack命令行清除垃圾数据&quot;&gt;&lt;/a&gt;openstack命令行清除垃圾数据&lt;/h1&gt;&lt;h2 id=&quot;背</summary>
+      
+    
+    
+    
+    
+    <category term="openstack" scheme="https://billy7x17.github.io/tags/openstack/"/>
+    
+    <category term="命令行" scheme="https://billy7x17.github.io/tags/%E5%91%BD%E4%BB%A4%E8%A1%8C/"/>
+    
+    <category term="性能测试" scheme="https://billy7x17.github.io/tags/%E6%80%A7%E8%83%BD%E6%B5%8B%E8%AF%95/"/>
+    
+    <category term="垃圾数据" scheme="https://billy7x17.github.io/tags/%E5%9E%83%E5%9C%BE%E6%95%B0%E6%8D%AE/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>TCP重传</title>
+    <link href="https://billy7x17.github.io/2017/09/12/TCP%E9%87%8D%E4%BC%A0/"/>
+    <id>https://billy7x17.github.io/2017/09/12/TCP%E9%87%8D%E4%BC%A0/</id>
+    <published>2017-09-12T01:52:06.000Z</published>
+    <updated>2023-11-15T02:27:10.751Z</updated>
+    
+    
+      
+      
+    <summary type="html">&lt;h1 id=&quot;TCP重传&quot;&gt;&lt;a href=&quot;#TCP重传&quot; class=&quot;headerlink&quot; title=&quot;TCP重传&quot;&gt;&lt;/a&gt;TCP重传&lt;/h1&gt;&lt;h3 id=&quot;TCP重传次数与操作系统有关，可配&quot;&gt;&lt;a href=&quot;#TCP重传次数与操作系统有关，可配&quot; class</summary>
+      
+    
+    
+    
+    
+    <category term="TCP" scheme="https://billy7x17.github.io/tags/TCP/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>neutron plugin 开发</title>
+    <link href="https://billy7x17.github.io/2017/09/06/neutron-plugin-%E5%BC%80%E5%8F%91/"/>
+    <id>https://billy7x17.github.io/2017/09/06/neutron-plugin-%E5%BC%80%E5%8F%91/</id>
+    <published>2017-09-06T03:25:36.000Z</published>
+    <updated>2023-11-15T02:27:10.766Z</updated>
+    
+    
+      
+      
+    <summary type="html">&lt;h1 id=&quot;neutron-plugin-开发&quot;&gt;&lt;a href=&quot;#neutron-plugin-开发&quot; class=&quot;headerlink&quot; title=&quot;neutron plugin 开发&quot;&gt;&lt;/a&gt;neutron plugin 开发&lt;/h1&gt;&lt;p&gt;根据ml2 plug</summary>
+      
+    
+    
+    
+    
+    <category term="openstack" scheme="https://billy7x17.github.io/tags/openstack/"/>
+    
+    <category term="neutron" scheme="https://billy7x17.github.io/tags/neutron/"/>
+    
+    <category term="plugin" scheme="https://billy7x17.github.io/tags/plugin/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>ironic raid configuration</title>
+    <link href="https://billy7x17.github.io/2017/07/29/ironic-raid-configuration/"/>
+    <id>https://billy7x17.github.io/2017/07/29/ironic-raid-configuration/</id>
+    <published>2017-07-29T11:54:41.000Z</published>
+    <updated>2023-11-15T02:27:10.756Z</updated>
+    
+    
+      
+      
+    <summary type="html">&lt;h1 id=&quot;ironic-raid-请求报文&quot;&gt;&lt;a href=&quot;#ironic-raid-请求报文&quot; class=&quot;headerlink&quot; title=&quot;ironic raid 请求报文&quot;&gt;&lt;/a&gt;ironic raid 请求报文&lt;/h1&gt;&lt;h3 id=&quot;url&quot;&gt;&lt;a h</summary>
+      
+    
+    
+    
+    
+    <category term="openstack" scheme="https://billy7x17.github.io/tags/openstack/"/>
+    
+    <category term="ironic" scheme="https://billy7x17.github.io/tags/ironic/"/>
+    
+    <category term="raid" scheme="https://billy7x17.github.io/tags/raid/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>openstack部署经验</title>
+    <link href="https://billy7x17.github.io/2017/07/26/openstack%E9%83%A8%E7%BD%B2%E7%BB%8F%E9%AA%8C/"/>
+    <id>https://billy7x17.github.io/2017/07/26/openstack%E9%83%A8%E7%BD%B2%E7%BB%8F%E9%AA%8C/</id>
+    <published>2017-07-26T06:53:18.000Z</published>
+    <updated>2023-11-15T02:27:10.770Z</updated>
+    
+    
+      
+      
+    <summary type="html">&lt;h1 id=&quot;openstack部署经验&quot;&gt;&lt;a href=&quot;#openstack部署经验&quot; class=&quot;headerlink&quot; title=&quot;openstack部署经验&quot;&gt;&lt;/a&gt;openstack部署经验&lt;/h1&gt;&lt;h2 id=&quot;背景&quot;&gt;&lt;a href=&quot;#背景&quot; cla</summary>
+      
+    
+    
+    
+    
+    <category term="openstack" scheme="https://billy7x17.github.io/tags/openstack/"/>
+    
+    <category term="部署" scheme="https://billy7x17.github.io/tags/%E9%83%A8%E7%BD%B2/"/>
+    
+    <category term="高可用" scheme="https://billy7x17.github.io/tags/%E9%AB%98%E5%8F%AF%E7%94%A8/"/>
+    
+    <category term="性能压力测试" scheme="https://billy7x17.github.io/tags/%E6%80%A7%E8%83%BD%E5%8E%8B%E5%8A%9B%E6%B5%8B%E8%AF%95/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>vim简明教程</title>
+    <link href="https://billy7x17.github.io/2017/07/12/vim%E7%AE%80%E6%98%8E%E6%95%99%E7%A8%8B/"/>
+    <id>https://billy7x17.github.io/2017/07/12/vim%E7%AE%80%E6%98%8E%E6%95%99%E7%A8%8B/</id>
+    <published>2017-07-12T02:36:59.000Z</published>
+    <updated>2023-11-15T02:27:10.771Z</updated>
+    
+    
+      
+      
+    <summary type="html">&lt;h1 id=&quot;vim简明教程&quot;&gt;&lt;a href=&quot;#vim简明教程&quot; class=&quot;headerlink&quot; title=&quot;vim简明教程&quot;&gt;&lt;/a&gt;vim简明教程&lt;/h1&gt;&lt;p&gt;vim的学习曲线相当的大（参看各种文本编辑器的学习曲线），所以，如果你一开始看到的是一大堆VIM的命</summary>
+      
+    
+    
+    
+    
+    <category term="vim" scheme="https://billy7x17.github.io/tags/vim/"/>
+    
+    <category term="vi" scheme="https://billy7x17.github.io/tags/vi/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>给ovs网桥设置ip</title>
+    <link href="https://billy7x17.github.io/2017/06/29/%E7%BB%99ovs%E7%BD%91%E6%A1%A5%E8%AE%BE%E7%BD%AEip/"/>
+    <id>https://billy7x17.github.io/2017/06/29/%E7%BB%99ovs%E7%BD%91%E6%A1%A5%E8%AE%BE%E7%BD%AEip/</id>
+    <published>2017-06-29T08:53:51.000Z</published>
+    <updated>2023-11-15T02:27:10.778Z</updated>
+    
+    
+      
+      
+    <summary type="html">&lt;h1 id=&quot;给ovs网桥设置ip&quot;&gt;&lt;a href=&quot;#给ovs网桥设置ip&quot; class=&quot;headerlink&quot; title=&quot;给ovs网桥设置ip&quot;&gt;&lt;/a&gt;给ovs网桥设置ip&lt;/h1&gt;&lt;h2 id=&quot;背景&quot;&gt;&lt;a href=&quot;#背景&quot; class=&quot;headerli</summary>
+      
+    
+    
+    
+    
+    <category term="openstack" scheme="https://billy7x17.github.io/tags/openstack/"/>
+    
+    <category term="ovs" scheme="https://billy7x17.github.io/tags/ovs/"/>
+    
+    <category term="管理网" scheme="https://billy7x17.github.io/tags/%E7%AE%A1%E7%90%86%E7%BD%91/"/>
+    
+    <category term="openvswitch bridge" scheme="https://billy7x17.github.io/tags/openvswitch-bridge/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>rabbitmq之网络分区</title>
+    <link href="https://billy7x17.github.io/2017/06/13/rabbitmq%E4%B9%8B%E7%BD%91%E7%BB%9C%E5%88%86%E5%8C%BA/"/>
+    <id>https://billy7x17.github.io/2017/06/13/rabbitmq%E4%B9%8B%E7%BD%91%E7%BB%9C%E5%88%86%E5%8C%BA/</id>
+    <published>2017-06-13T07:00:53.000Z</published>
+    <updated>2023-11-15T02:27:10.770Z</updated>
+    
+    
+      
+      
+    <summary type="html">&lt;h1 id=&quot;rabbitmq之网络分区&quot;&gt;&lt;a href=&quot;#rabbitmq之网络分区&quot; class=&quot;headerlink&quot; title=&quot;rabbitmq之网络分区&quot;&gt;&lt;/a&gt;rabbitmq之网络分区&lt;/h1&gt;&lt;p&gt;在rabbitmq高可用测试过程中，由于对其中一节点</summary>
+      
+    
+    
+    
+    
+    <category term="openstack" scheme="https://billy7x17.github.io/tags/openstack/"/>
+    
+    <category term="rabbitmq" scheme="https://billy7x17.github.io/tags/rabbitmq/"/>
+    
+    <category term="Clustering" scheme="https://billy7x17.github.io/tags/Clustering/"/>
+    
+    <category term="Network Partitions" scheme="https://billy7x17.github.io/tags/Network-Partitions/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>openstack使用cirros镜像创建vmware虚拟机</title>
+    <link href="https://billy7x17.github.io/2017/06/10/openstack%E4%BD%BF%E7%94%A8cirros%E9%95%9C%E5%83%8F%E5%88%9B%E5%BB%BAvmware%E8%99%9A%E6%8B%9F%E6%9C%BA/"/>
+    <id>https://billy7x17.github.io/2017/06/10/openstack%E4%BD%BF%E7%94%A8cirros%E9%95%9C%E5%83%8F%E5%88%9B%E5%BB%BAvmware%E8%99%9A%E6%8B%9F%E6%9C%BA/</id>
+    <published>2017-06-10T01:39:55.000Z</published>
+    <updated>2023-11-15T02:27:10.767Z</updated>
+    
+    
+      
+      
+    <summary type="html">&lt;h1 id=&quot;openstack使用cirros镜像创建vmware虚拟机&quot;&gt;&lt;a href=&quot;#openstack使用cirros镜像创建vmware虚拟机&quot; class=&quot;headerlink&quot; title=&quot;openstack使用cirros镜像创建vmware虚拟机&quot;&gt;</summary>
+      
+    
+    
+    
+    
+    <category term="openstack" scheme="https://billy7x17.github.io/tags/openstack/"/>
+    
+    <category term="镜像" scheme="https://billy7x17.github.io/tags/%E9%95%9C%E5%83%8F/"/>
+    
+    <category term="vmware" scheme="https://billy7x17.github.io/tags/vmware/"/>
+    
+    <category term="最小镜像" scheme="https://billy7x17.github.io/tags/%E6%9C%80%E5%B0%8F%E9%95%9C%E5%83%8F/"/>
+    
+    <category term="cirros" scheme="https://billy7x17.github.io/tags/cirros/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>openstack控制节点高可用</title>
+    <link href="https://billy7x17.github.io/2017/06/06/openstack%E6%8E%A7%E5%88%B6%E8%8A%82%E7%82%B9%E9%AB%98%E5%8F%AF%E7%94%A8/"/>
+    <id>https://billy7x17.github.io/2017/06/06/openstack%E6%8E%A7%E5%88%B6%E8%8A%82%E7%82%B9%E9%AB%98%E5%8F%AF%E7%94%A8/</id>
+    <published>2017-06-06T01:53:36.000Z</published>
+    <updated>2023-11-15T02:27:10.768Z</updated>
+    
+    
+      
+      
+    <summary type="html">&lt;h1 id=&quot;openstack控制节点高可用性调研&quot;&gt;&lt;a href=&quot;#openstack控制节点高可用性调研&quot; class=&quot;headerlink&quot; title=&quot;openstack控制节点高可用性调研&quot;&gt;&lt;/a&gt;openstack控制节点高可用性调研&lt;/h1&gt;&lt;p&gt;通常</summary>
+      
+    
+    
+    
+    
+    <category term="openstack" scheme="https://billy7x17.github.io/tags/openstack/"/>
+    
+    <category term="controller" scheme="https://billy7x17.github.io/tags/controller/"/>
+    
+    <category term="HA" scheme="https://billy7x17.github.io/tags/HA/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>openstack nova镜像缓存机制(vmware)</title>
+    <link href="https://billy7x17.github.io/2017/05/27/openstack-nova%E9%95%9C%E5%83%8F%E7%BC%93%E5%AD%98%E6%9C%BA%E5%88%B6-vmware/"/>
+    <id>https://billy7x17.github.io/2017/05/27/openstack-nova%E9%95%9C%E5%83%8F%E7%BC%93%E5%AD%98%E6%9C%BA%E5%88%B6-vmware/</id>
+    <published>2017-05-27T01:27:37.000Z</published>
+    <updated>2023-11-15T02:27:10.767Z</updated>
+    
+    
+      
+      
+    <summary type="html">&lt;h1 id=&quot;openstack-nova镜像缓存机制-vmware&quot;&gt;&lt;a href=&quot;#openstack-nova镜像缓存机制-vmware&quot; class=&quot;headerlink&quot; title=&quot;openstack nova镜像缓存机制-vmware&quot;&gt;&lt;/a&gt;opens</summary>
+      
+    
+    
+    
+    
+    <category term="openstack" scheme="https://billy7x17.github.io/tags/openstack/"/>
+    
+    <category term="image" scheme="https://billy7x17.github.io/tags/image/"/>
+    
+    <category term="nova" scheme="https://billy7x17.github.io/tags/nova/"/>
+    
+    <category term="vmware" scheme="https://billy7x17.github.io/tags/vmware/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>openstack-cinder缓存机制</title>
+    <link href="https://billy7x17.github.io/2017/05/16/openstack-cinder%E7%BC%93%E5%AD%98%E6%9C%BA%E5%88%B6/"/>
+    <id>https://billy7x17.github.io/2017/05/16/openstack-cinder%E7%BC%93%E5%AD%98%E6%9C%BA%E5%88%B6/</id>
+    <published>2017-05-16T11:03:42.000Z</published>
+    <updated>2023-11-15T02:27:10.767Z</updated>
+    
+    
+      
+      
+    <summary type="html">&lt;h1 id=&quot;openstack-cinder缓存机制&quot;&gt;&lt;a href=&quot;#openstack-cinder缓存机制&quot; class=&quot;headerlink&quot; title=&quot;openstack-cinder缓存机制&quot;&gt;&lt;/a&gt;openstack-cinder缓存机制&lt;/h1&gt;&lt;</summary>
+      
+    
+    
+    
+    
+    <category term="openstack" scheme="https://billy7x17.github.io/tags/openstack/"/>
+    
+    <category term="cinder" scheme="https://billy7x17.github.io/tags/cinder/"/>
+    
+    <category term="cache" scheme="https://billy7x17.github.io/tags/cache/"/>
+    
+    <category term="缓存" scheme="https://billy7x17.github.io/tags/%E7%BC%93%E5%AD%98/"/>
+    
+    <category term="volume" scheme="https://billy7x17.github.io/tags/volume/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>简述vmware对block_device_mapping的支持</title>
+    <link href="https://billy7x17.github.io/2017/05/11/%E7%AE%80%E8%BF%B0vmware%E5%AF%B9block-device-mapping%E7%9A%84%E6%94%AF%E6%8C%81/"/>
+    <id>https://billy7x17.github.io/2017/05/11/%E7%AE%80%E8%BF%B0vmware%E5%AF%B9block-device-mapping%E7%9A%84%E6%94%AF%E6%8C%81/</id>
+    <published>2017-05-11T12:01:36.000Z</published>
+    <updated>2023-11-15T02:27:10.774Z</updated>
+    
+    
+      
+      
+    <summary type="html">&lt;h1 id=&quot;简述vmware对block-device-mapping的支持&quot;&gt;&lt;a href=&quot;#简述vmware对block-device-mapping的支持&quot; class=&quot;headerlink&quot; title=&quot;简述vmware对block device mappin</summary>
+      
+    
+    
+    
+    
+    <category term="vmware" scheme="https://billy7x17.github.io/tags/vmware/"/>
+    
+    <category term="block_device_mapping" scheme="https://billy7x17.github.io/tags/block-device-mapping/"/>
+    
+    <category term="bdm" scheme="https://billy7x17.github.io/tags/bdm/"/>
+    
+    <category term="nova-compute" scheme="https://billy7x17.github.io/tags/nova-compute/"/>
+    
+    <category term="spawn" scheme="https://billy7x17.github.io/tags/spawn/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>ironic对多网卡的支持</title>
+    <link href="https://billy7x17.github.io/2017/04/24/ironic%E5%AF%B9%E5%A4%9A%E7%BD%91%E5%8D%A1%E7%9A%84%E6%94%AF%E6%8C%81/"/>
+    <id>https://billy7x17.github.io/2017/04/24/ironic%E5%AF%B9%E5%A4%9A%E7%BD%91%E5%8D%A1%E7%9A%84%E6%94%AF%E6%8C%81/</id>
+    <published>2017-04-24T01:15:25.000Z</published>
+    <updated>2023-11-15T02:27:10.766Z</updated>
+    
+    
+      
+      
+    <summary type="html">&lt;h1 id=&quot;ironic对多网卡的支持&quot;&gt;&lt;a href=&quot;#ironic对多网卡的支持&quot; class=&quot;headerlink&quot; title=&quot;ironic对多网卡的支持&quot;&gt;&lt;/a&gt;ironic对多网卡的支持&lt;/h1&gt;&lt;p&gt;在实际生产环境中，标准的物理机一般会有4个或以上的网</summary>
+      
+    
+    
+    
+    
+    <category term="openstack" scheme="https://billy7x17.github.io/tags/openstack/"/>
+    
+    <category term="ironic" scheme="https://billy7x17.github.io/tags/ironic/"/>
+    
+    <category term="neutron" scheme="https://billy7x17.github.io/tags/neutron/"/>
+    
+    <category term="多网卡" scheme="https://billy7x17.github.io/tags/%E5%A4%9A%E7%BD%91%E5%8D%A1/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>ironic对configdrive的支持</title>
+    <link href="https://billy7x17.github.io/2017/04/20/ironic%E5%AF%B9configdrive%E7%9A%84%E6%94%AF%E6%8C%81/"/>
+    <id>https://billy7x17.github.io/2017/04/20/ironic%E5%AF%B9configdrive%E7%9A%84%E6%94%AF%E6%8C%81/</id>
+    <published>2017-04-20T11:27:55.000Z</published>
+    <updated>2023-11-15T02:27:10.761Z</updated>
+    
+    
+      
+      
+    <summary type="html">&lt;h1 id=&quot;ironic对configdrive的支持&quot;&gt;&lt;a href=&quot;#ironic对configdrive的支持&quot; class=&quot;headerlink&quot; title=&quot;ironic对configdrive的支持&quot;&gt;&lt;/a&gt;ironic对configdrive的支持&lt;/</summary>
+      
+    
+    
+    
+    
+    <category term="openstack" scheme="https://billy7x17.github.io/tags/openstack/"/>
+    
+    <category term="ironic" scheme="https://billy7x17.github.io/tags/ironic/"/>
+    
+    <category term="configdrive" scheme="https://billy7x17.github.io/tags/configdrive/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>spring aop对各作用域的支持</title>
+    <link href="https://billy7x17.github.io/2017/04/04/spring-aop%E5%AF%B9%E5%90%84%E4%BD%9C%E7%94%A8%E5%9F%9F%E7%9A%84%E6%94%AF%E6%8C%81/"/>
+    <id>https://billy7x17.github.io/2017/04/04/spring-aop%E5%AF%B9%E5%90%84%E4%BD%9C%E7%94%A8%E5%9F%9F%E7%9A%84%E6%94%AF%E6%8C%81/</id>
+    <published>2017-04-04T04:25:44.000Z</published>
+    <updated>2023-11-15T02:27:10.770Z</updated>
+    
+    
+      
+      
+    <summary type="html">&lt;h1 id=&quot;Spring-AOP对各作用域的支持&quot;&gt;&lt;a href=&quot;#Spring-AOP对各作用域的支持&quot; class=&quot;headerlink&quot; title=&quot;Spring AOP对各作用域的支持&quot;&gt;&lt;/a&gt;Spring AOP对各作用域的支持&lt;/h1&gt;&lt;p&gt;写这篇文章的</summary>
+      
+    
+    
+    
+    
+  </entry>
+  
+  <entry>
+    <title>发现一个国内牛逼的maven仓库，速度真的太快了</title>
+    <link href="https://billy7x17.github.io/2017/03/28/%E5%8F%91%E7%8E%B0%E4%B8%80%E4%B8%AA%E5%9B%BD%E5%86%85%E7%89%9B%E9%80%BC%E7%9A%84maven%E4%BB%93%E5%BA%93%EF%BC%8C%E9%80%9F%E5%BA%A6%E7%9C%9F%E7%9A%84%E5%A4%AA%E5%BF%AB%E4%BA%86/"/>
+    <id>https://billy7x17.github.io/2017/03/28/%E5%8F%91%E7%8E%B0%E4%B8%80%E4%B8%AA%E5%9B%BD%E5%86%85%E7%89%9B%E9%80%BC%E7%9A%84maven%E4%BB%93%E5%BA%93%EF%BC%8C%E9%80%9F%E5%BA%A6%E7%9C%9F%E7%9A%84%E5%A4%AA%E5%BF%AB%E4%BA%86/</id>
+    <published>2017-03-28T04:30:55.000Z</published>
+    <updated>2023-11-15T02:27:10.772Z</updated>
+    
+    
+      
+      
+    <summary type="html">&lt;h1 id=&quot;发现一个国内牛逼的maven仓库，速度真的太快了&quot;&gt;&lt;a href=&quot;#发现一个国内牛逼的maven仓库，速度真的太快了&quot; class=&quot;headerlink&quot; title=&quot;发现一个国内牛逼的maven仓库，速度真的太快了&quot;&gt;&lt;/a&gt;发现一个国内牛逼的maven</summary>
+      
+    
+    
+    
+    
+    <category term="maven国内公共仓库" scheme="https://billy7x17.github.io/tags/maven%E5%9B%BD%E5%86%85%E5%85%AC%E5%85%B1%E4%BB%93%E5%BA%93/"/>
+    
+    <category term="maven" scheme="https://billy7x17.github.io/tags/maven/"/>
+    
+    <category term="公共仓库" scheme="https://billy7x17.github.io/tags/%E5%85%AC%E5%85%B1%E4%BB%93%E5%BA%93/"/>
+    
+    <category term="国内" scheme="https://billy7x17.github.io/tags/%E5%9B%BD%E5%86%85/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>ironic创建云主机流程</title>
+    <link href="https://billy7x17.github.io/2017/03/27/ironic%E5%88%9B%E5%BB%BA%E4%BA%91%E4%B8%BB%E6%9C%BA%E6%B5%81%E7%A8%8B/"/>
+    <id>https://billy7x17.github.io/2017/03/27/ironic%E5%88%9B%E5%BB%BA%E4%BA%91%E4%B8%BB%E6%9C%BA%E6%B5%81%E7%A8%8B/</id>
+    <published>2017-03-27T13:18:30.000Z</published>
+    <updated>2023-11-15T02:27:10.756Z</updated>
+    
+    
+      
+      
+    <summary type="html">&lt;h1 id=&quot;ironic创建主机流程&quot;&gt;&lt;a href=&quot;#ironic创建主机流程&quot; class=&quot;headerlink&quot; title=&quot;ironic创建主机流程&quot;&gt;&lt;/a&gt;ironic创建主机流程&lt;/h1&gt;&lt;p&gt;&lt;img src=&quot;/2017/03/27/ironic%E</summary>
+      
+    
+    
+    
+    
+    <category term="openstack" scheme="https://billy7x17.github.io/tags/openstack/"/>
+    
+    <category term="ironic" scheme="https://billy7x17.github.io/tags/ironic/"/>
+    
+    <category term="instance" scheme="https://billy7x17.github.io/tags/instance/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Openstack MQ基本流程和消息样例</title>
+    <link href="https://billy7x17.github.io/2017/03/19/Openstack-MQ%E5%9F%BA%E6%9C%AC%E6%B5%81%E7%A8%8B%E5%92%8C%E6%B6%88%E6%81%AF%E6%A0%B7%E4%BE%8B/"/>
+    <id>https://billy7x17.github.io/2017/03/19/Openstack-MQ%E5%9F%BA%E6%9C%AC%E6%B5%81%E7%A8%8B%E5%92%8C%E6%B6%88%E6%81%AF%E6%A0%B7%E4%BE%8B/</id>
+    <published>2017-03-19T10:13:56.000Z</published>
+    <updated>2023-11-15T02:27:10.741Z</updated>
+    
+    
+      
+      
+    <summary type="html">&lt;h1 id=&quot;Openstack-MQ基本流程和消息样例&quot;&gt;&lt;a href=&quot;#Openstack-MQ基本流程和消息样例&quot; class=&quot;headerlink&quot; title=&quot;Openstack MQ基本流程和消息样例&quot;&gt;&lt;/a&gt;Openstack MQ基本流程和消息样例&lt;/</summary>
+      
+    
+    
+    
+    
+    <category term="openstack" scheme="https://billy7x17.github.io/tags/openstack/"/>
+    
+    <category term="mq" scheme="https://billy7x17.github.io/tags/mq/"/>
+    
+    <category term="oslo.message" scheme="https://billy7x17.github.io/tags/oslo-message/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>各种配置代理的方法</title>
+    <link href="https://billy7x17.github.io/2017/03/18/%E5%90%84%E7%A7%8D%E9%85%8D%E7%BD%AE%E4%BB%A3%E7%90%86%E7%9A%84%E6%96%B9%E6%B3%95/"/>
+    <id>https://billy7x17.github.io/2017/03/18/%E5%90%84%E7%A7%8D%E9%85%8D%E7%BD%AE%E4%BB%A3%E7%90%86%E7%9A%84%E6%96%B9%E6%B3%95/</id>
+    <published>2017-03-18T05:26:59.000Z</published>
+    <updated>2023-11-15T02:27:10.772Z</updated>
+    
+    
+      
+      
+    <summary type="html">&lt;h1 id=&quot;各种配置代理的方法&quot;&gt;&lt;a href=&quot;#各种配置代理的方法&quot; class=&quot;headerlink&quot; title=&quot;各种配置代理的方法&quot;&gt;&lt;/a&gt;各种配置代理的方法&lt;/h1&gt;&lt;h2 id=&quot;yum&quot;&gt;&lt;a href=&quot;#yum&quot; class=&quot;headerlink</summary>
+      
+    
+    
+    
+    
+    <category term="proxy" scheme="https://billy7x17.github.io/tags/proxy/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>ironic-node生命周期有限状态机</title>
+    <link href="https://billy7x17.github.io/2017/03/07/ironic-node%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F%E6%9C%89%E9%99%90%E7%8A%B6%E6%80%81%E6%9C%BA/"/>
+    <id>https://billy7x17.github.io/2017/03/07/ironic-node%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F%E6%9C%89%E9%99%90%E7%8A%B6%E6%80%81%E6%9C%BA/</id>
+    <published>2017-03-07T10:08:35.000Z</published>
+    <updated>2023-11-15T02:27:10.756Z</updated>
+    
+    
+      
+      
+    <summary type="html">&lt;h1 id=&quot;ironic-node生命周期有限状态机&quot;&gt;&lt;a href=&quot;#ironic-node生命周期有限状态机&quot; class=&quot;headerlink&quot; title=&quot;ironic-node生命周期有限状态机&quot;&gt;&lt;/a&gt;ironic-node生命周期有限状态机&lt;/h1&gt;&lt;</summary>
+      
+    
+    
+    
+    
+    <category term="openstack" scheme="https://billy7x17.github.io/tags/openstack/"/>
+    
+    <category term="ironic" scheme="https://billy7x17.github.io/tags/ironic/"/>
+    
+    <category term="node" scheme="https://billy7x17.github.io/tags/node/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>XenServer申请免费许可证流程</title>
+    <link href="https://billy7x17.github.io/2016/09/14/XenServer%E7%94%B3%E8%AF%B7%E5%85%8D%E8%B4%B9%E8%AE%B8%E5%8F%AF%E8%AF%81%E6%B5%81%E7%A8%8B/"/>
+    <id>https://billy7x17.github.io/2016/09/14/XenServer%E7%94%B3%E8%AF%B7%E5%85%8D%E8%B4%B9%E8%AE%B8%E5%8F%AF%E8%AF%81%E6%B5%81%E7%A8%8B/</id>
+    <published>2016-09-14T08:28:07.000Z</published>
+    <updated>2023-11-15T02:27:10.751Z</updated>
+    
+    
+      
+      
+    <summary type="html">&lt;h1 id=&quot;XenServer申请免费许可证流程&quot;&gt;&lt;a href=&quot;#XenServer申请免费许可证流程&quot; class=&quot;headerlink&quot; title=&quot;XenServer申请免费许可证流程&quot;&gt;&lt;/a&gt;XenServer申请免费许可证流程&lt;/h1&gt;&lt;ol&gt;
+&lt;li&gt;</summary>
+      
+    
+    
+    
+    
+    <category term="Xenserver" scheme="https://billy7x17.github.io/tags/Xenserver/"/>
+    
+    <category term="license" scheme="https://billy7x17.github.io/tags/license/"/>
+    
+  </entry>
+  
+</feed>
