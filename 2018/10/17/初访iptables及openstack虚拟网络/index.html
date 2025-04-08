@@ -1,0 +1,584 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Head tag -->
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Billy119在 Github 上的个人博客">
+    <meta name="keyword" content="Billy119">
+    <meta name="theme-color" content="#600090">
+    <meta name="msapplication-navbutton-color" content="#600090">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="#600090">
+    <link rel="shortcut icon" href="https://billy7x17.github.io/pics/laughMan-icon.png">
+    <link rel="alternate" type="application/atom+xml" title="Billy" href="/atom.xml">
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css">
+    <link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.css">
+    <title>
+        
+        初访iptables及openstack虚拟网络｜Billy&#39;s blog
+        
+    </title>
+
+    <link rel="canonical" href="https://billy7x17.github.io/2018/10/17/初访iptables及openstack虚拟网络/">
+
+    <!-- Bootstrap Core CSS -->
+    
+<link rel="stylesheet" href="/css/bootstrap.min.css">
+
+
+    <!-- Custom CSS -->
+    
+<link rel="stylesheet" href="/css/blog-style.css">
+
+
+    <!-- Pygments Github CSS -->
+    
+<link rel="stylesheet" href="/css/syntax.css">
+
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<style>
+
+    header.intro-header {
+        background-image: url('https://billy7x17.github.io/pics/head.jpg')
+    }
+</style>
+<!-- hack iOS CSS :active style -->
+<body ontouchstart="" class="animated fadeIn">
+<!-- Navigation -->
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top " id="nav-top" data-ispost = "true" data-istags="false
+" data-ishome = "false" >
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand animated pulse" href="/">
+                <span class="brand-logo">
+                    Billy
+                </span>
+                's Blog
+            </a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <!-- Known Issue, found by Hux:
+            <nav>'s height woule be hold on by its content.
+            so, when navbar scale out, the <nav> will cover tags.
+            also mask any touch event of tags, unfortunately.
+        -->
+        <!-- /.navbar-collapse -->
+        <div id="huxblog_navbar">
+            <div class="navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="/">Home</a>
+                    </li>
+					
+                    
+                        
+							
+                        <li>
+                            <a href="/tags/">tags</a>
+                        </li>
+							
+						
+                    
+					
+					
+                </ul>
+            </div>
+        </div>
+    </div>
+    <!-- /.container -->
+</nav>
+<script>
+    // Drop Bootstarp low-performance Navbar
+    // Use customize navbar with high-quality material design animation
+    // in high-perf jank-free CSS3 implementation
+//    var $body   = document.body;
+    var $toggle = document.querySelector('.navbar-toggle');
+    var $navbar = document.querySelector('#huxblog_navbar');
+    var $collapse = document.querySelector('.navbar-collapse');
+
+    $toggle.addEventListener('click', handleMagic)
+    function handleMagic(e){
+        if ($navbar.className.indexOf('in') > 0) {
+        // CLOSE
+            $navbar.className = " ";
+            // wait until animation end.
+            setTimeout(function(){
+                // prevent frequently toggle
+                if($navbar.className.indexOf('in') < 0) {
+                    $collapse.style.height = "0px"
+                }
+            },400)
+        }else{
+        // OPEN
+            $collapse.style.height = "auto"
+            $navbar.className += " in";
+        }
+    }
+</script>
+
+<!-- Main Content -->
+
+<!--only post-->
+
+
+<img class="wechat-title-img"
+     src="https://billy7x17.github.io/pics/image/site/head.jpg">
+
+
+<style>
+    
+    header.intro-header {
+        background-image: url('https://billy7x17.github.io/pics/image/site/head.jpg?imageView2/1/w/1400/h/400/interlace/1/q/90')
+    }
+
+    
+</style>
+
+<header class="intro-header">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 text-center">
+                <div class="post-heading">
+                    <h1>初访iptables及openstack虚拟网络</h1>
+                    
+                    <span class="meta">
+                         作者 Billy
+                        <span>
+                          日期 2018-10-17
+                         </span>
+                    </span>
+                    <div class="tags text-center">
+                        
+                        <a class="tag" href="/tags/#openstack"
+                           title="openstack">openstack</a>
+                        
+                        <a class="tag" href="/tags/#neutron"
+                           title="neutron">neutron</a>
+                        
+                        <a class="tag" href="/tags/#iptables"
+                           title="iptables">iptables</a>
+                        
+                        <a class="tag" href="/tags/#tftp"
+                           title="tftp">tftp</a>
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="post-title-haojen">
+        <span>
+            初访iptables及openstack虚拟网络
+        </span>
+    </div>
+</header>
+
+<!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
+            <!-- Post Container -->
+            <div class="col-lg-8 col-lg-offset-1 col-sm-9 post-container">
+                <h1 id="初访iptables及openstack虚拟网络"><a href="#初访iptables及openstack虚拟网络" class="headerlink" title="初访iptables及openstack虚拟网络"></a>初访iptables及openstack虚拟网络</h1><h2 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h2><p>上篇文章中，跨命名空间启动<code>tftp</code>服务后，需要进行验证，由于环境所限，使用<code>kvm</code>虚拟机进行验证。</p>
+<p><code>kvm</code>是<code>openstack</code>原生支持的虚拟化，在计算节点上通过<code>iptables</code>增加了许多规则以保证网络安全。</p>
+<p>从而导致由虚拟机访问网络节点<code>tftp</code>服务总是失败，因此需要调查是哪条规则使然。</p>
+<p>通过抓包<code>tap</code>卡发现，从虚拟机发送到网络节点的包可以通过，但由网络节点返回的包到达不了虚拟机，可以确认是网络包通过计算节点上<code>linuxbridge</code>时被丢弃，因此着手查<code>iptables</code>规则</p>
+<h2 id="概念"><a href="#概念" class="headerlink" title="概念"></a>概念</h2><blockquote>
+<p>TAP&#x2F;TUN是Linux内核实现的一对虚拟网络设备，TAP工作在二层，TUN工作在三层，Linux内核通过TAP&#x2F;TUN设备向绑定该设备的用户空间程序发送数据，反之，用户空间程序也可以像操作硬件网络设备那样，通过TAP&#x2F;TUN设备发送数据。<br>基于TAP驱动，即可以实现虚拟网卡的功能，虚拟机的每个vNIC都与hypervisor中的一个TAP设备相连。当一个TAP设备被创建时，在Linux设备文件目录下生会生成一个对应的字符设备文件，用户程序可以打开普通文件一样打开这个文件进行读写。</p>
+<p>当对这个TAP设备文件执行write()操作时，对于Linux网络子系统来说，相对于TAP设备收到了数据，并请求内核接受他，Linux内核收到此数据后将根据网络配置进行后续处理，处理过程类似于普通的物理网卡从外界收到数据。（VM向外发数据）。</p>
+<p>当用户程序执行read()请求时，相对于向内核查询TAP设备上是否有数据需要被发送，有的话则取出到用户程序里，从而完成TAP设备发送数据的功能。（VM接收数据）。</p>
+<p>在这个过程中，TAP设备可以被当做本机的一个网卡，而操作TAP设备应用程序相对于另外一台VM，它通过read&#x2F;write系统调用，和本机进行网络通信。</p>
+<p>VETH设备总是成对出现，送到一端请求发送的数据总是从另一端以请求接收的形式出现。创建并配置正确后，向其一端输入数据，VETH会改变数据的方向并将其送入内核网络子系统，完成数据的注入，而在另一端则能读到此数据。</p>
+</blockquote>
+<p><img src="https://img-blog.csdn.net/20180407115022374"></p>
+<blockquote>
+<p>tun：点对点的设备，tun设备模拟网络层设备，处理三层报文，如IP报文。tun设备完全不需要物理地址的。它收到和发出的包不需要arp，也不需要有数据链路层的头。</p>
+<p>tap：是一个普通的以太网设备，tap设备模拟链路层设备，处理二层报文，比如以太网帧。tap设备需要有完整的物理地址和完整的以太网帧</p>
+<p>TUN用于路由，而TAP用于创建网桥。</p>
+</blockquote>
+<p>引用：<a target="_blank" rel="noopener" href="https://blog.csdn.net/chengqiuming/article/details/79840092?utm_source=blogxgwz8">https://blog.csdn.net/chengqiuming/article/details/79840092?utm_source&#x3D;blogxgwz8</a></p>
+<h2 id="iptables概念"><a href="#iptables概念" class="headerlink" title="iptables概念"></a>iptables概念</h2><p><code>openstack</code>在创建<code>kvm</code>虚拟机过程中，创建了很多<code>iptables</code>的自定义链，以保证网络安全：</p>
+<pre><code># iptables -L -vn --line-number
+Chain INPUT (policy ACCEPT 125K packets, 18M bytes)
+num   pkts bytes target     prot opt in     out     source               destination         
+1     550K   80M neutron-openvswi-INPUT  all  --  *      *       0.0.0.0/0            0.0.0.0/0           
+
+Chain FORWARD (policy ACCEPT 0 packets, 0 bytes)
+num   pkts bytes target     prot opt in     out     source               destination         
+1     1574  111K neutron-filter-top  all  --  *      *       0.0.0.0/0            0.0.0.0/0           
+2     1574  111K neutron-openvswi-FORWARD  all  --  *      *       0.0.0.0/0            0.0.0.0/0           
+
+Chain OUTPUT (policy ACCEPT 131K packets, 19M bytes)
+num   pkts bytes target     prot opt in     out     source               destination         
+1     556K   78M neutron-filter-top  all  --  *      *       0.0.0.0/0            0.0.0.0/0           
+2     556K   78M neutron-openvswi-OUTPUT  all  --  *      *       0.0.0.0/0            0.0.0.0/0           
+
+Chain neutron-filter-top (2 references)
+num   pkts bytes target     prot opt in     out     source               destination         
+1     558K   79M neutron-openvswi-local  all  --  *      *       0.0.0.0/0            0.0.0.0/0           
+
+Chain neutron-openvswi-FORWARD (1 references)
+num   pkts bytes target     prot opt in     out     source               destination         
+1       11  1904 neutron-openvswi-sg-chain  all  --  *      *       0.0.0.0/0            0.0.0.0/0            PHYSDEV match --physdev-out tap2c6951d5-e6 --physdev-is-bridged /* Direct traffic from the VM interface to the security group chain. */
+2        0     0 neutron-openvswi-sg-chain  all  --  *      *       0.0.0.0/0            0.0.0.0/0            PHYSDEV match --physdev-in tap2c6951d5-e6 --physdev-is-bridged /* Direct traffic from the VM interface to the security group chain. */
+3      865 37140 neutron-openvswi-sg-chain  all  --  *      *       0.0.0.0/0            0.0.0.0/0            PHYSDEV match --physdev-out tap6746373c-01 --physdev-is-bridged /* Direct traffic from the VM interface to the security group chain. */
+4      179 12312 neutron-openvswi-sg-chain  all  --  *      *       0.0.0.0/0            0.0.0.0/0            PHYSDEV match --physdev-in tap6746373c-01 --physdev-is-bridged /* Direct traffic from the VM interface to the security group chain. */
+
+Chain neutron-openvswi-INPUT (1 references)
+num   pkts bytes target     prot opt in     out     source               destination         
+1        0     0 neutron-openvswi-o2c6951d5-e  all  --  *      *       0.0.0.0/0            0.0.0.0/0            PHYSDEV match --physdev-in tap2c6951d5-e6 --physdev-is-bridged /* Direct incoming traffic from VM to the security group chain. */
+2        0     0 neutron-openvswi-o6746373c-0  all  --  *      *       0.0.0.0/0            0.0.0.0/0            PHYSDEV match --physdev-in tap6746373c-01 --physdev-is-bridged /* Direct incoming traffic from VM to the security group chain. */
+
+Chain neutron-openvswi-OUTPUT (1 references)
+num   pkts bytes target     prot opt in     out     source               destination         
+
+Chain neutron-openvswi-i2c6951d5-e (1 references)
+num   pkts bytes target     prot opt in     out     source               destination         
+1        0     0 RETURN     all  --  *      *       0.0.0.0/0            0.0.0.0/0            state RELATED,ESTABLISHED /* Direct packets associated with a known session to the RETURN chain. */
+2        0     0 RETURN     udp  --  *      *       14.52.45.2           0.0.0.0/0            udp spt:67 udp dpt:68
+3        6   312 RETURN     all  --  *      *       0.0.0.0/0            0.0.0.0/0            match-set NIPv4b3a1256e-07fe-4e6b-bfc5- src
+4        0     0 DROP       all  --  *      *       0.0.0.0/0            0.0.0.0/0            state INVALID /* Drop packets that appear related to an existing connection (e.g. TCP ACK/FIN) but do not have an entry in conntrack. */
+5        5  1592 neutron-openvswi-sg-fallback  all  --  *      *       0.0.0.0/0            0.0.0.0/0            /* Send unmatched traffic to the fallback chain. */
+
+Chain neutron-openvswi-i6746373c-0 (1 references)
+num   pkts bytes target     prot opt in     out     source               destination         
+1       29  2248 RETURN     all  --  *      *       0.0.0.0/0            0.0.0.0/0            state RELATED,ESTABLISHED /* Direct packets associated with a known session to the RETURN chain. */
+2        2   698 RETURN     udp  --  *      *       14.52.45.2           0.0.0.0/0            udp spt:67 udp dpt:68
+3        0     0 RETURN     all  --  *      *       0.0.0.0/0            0.0.0.0/0            match-set NIPv4b3a1256e-07fe-4e6b-bfc5- src
+4        0     0 DROP       all  --  *      *       0.0.0.0/0            0.0.0.0/0            state INVALID /* Drop packets that appear related to an existing connection (e.g. TCP ACK/FIN) but do not have an entry in conntrack. */
+5      834 34194 neutron-openvswi-sg-fallback  all  --  *      *       0.0.0.0/0            0.0.0.0/0            /* Send unmatched traffic to the fallback chain. */
+
+Chain neutron-openvswi-local (1 references)
+num   pkts bytes target     prot opt in     out     source               destination         
+
+Chain neutron-openvswi-o2c6951d5-e (2 references)
+num   pkts bytes target     prot opt in     out     source               destination         
+1        0     0 RETURN     udp  --  *      *       0.0.0.0              255.255.255.255      udp spt:68 dpt:67 /* Allow DHCP client traffic. */
+
+2        0     0 neutron-openvswi-s2c6951d5-e  all  --  *      *       0.0.0.0/0            0.0.0.0/0           
+3        0     0 RETURN     udp  --  *      *       0.0.0.0/0            0.0.0.0/0            udp spt:68 dpt:67 /* Allow DHCP client traffic. */
+4        0     0 DROP       udp  --  *      *       0.0.0.0/0            0.0.0.0/0            udp spt:67 udp dpt:68 /* Prevent DHCP Spoofing by VM. */
+5        0     0 RETURN     all  --  *      *       0.0.0.0/0            0.0.0.0/0            state RELATED,ESTABLISHED /* Direct packets associated with a known session to the RETURN chain. */
+6        0     0 RETURN     all  --  *      *       0.0.0.0/0            0.0.0.0/0           
+7        0     0 DROP       all  --  *      *       0.0.0.0/0            0.0.0.0/0            state INVALID /* Drop packets that appear related to an existing connection (e.g. TCP ACK/FIN) but do not have an entry in conntrack. */
+8        0     0 neutron-openvswi-sg-fallback  all  --  *      *       0.0.0.0/0            0.0.0.0/0            /* Send unmatched traffic to the fallback chain. */
+
+Chain neutron-openvswi-o6746373c-0 (2 references)
+num   pkts bytes target     prot opt in     out     source               destination         
+1       11  3488 RETURN     udp  --  *      *       0.0.0.0              255.255.255.255      udp spt:68 dpt:67 /* Allow DHCP client traffic. */
+2      168  8824 neutron-openvswi-s6746373c-0  all  --  *      *       0.0.0.0/0            0.0.0.0/0           
+3        0     0 RETURN     udp  --  *      *       0.0.0.0/0            0.0.0.0/0            udp spt:68 dpt:67 /* Allow DHCP client traffic. */
+4        0     0 DROP       udp  --  *      *       0.0.0.0/0            0.0.0.0/0            udp spt:67 udp dpt:68 /* Prevent DHCP Spoofing by VM. */
+5        2   168 RETURN     all  --  *      *       0.0.0.0/0            0.0.0.0/0            state RELATED,ESTABLISHED /* Direct packets associated with a known session to the RETURN chain. */
+6      166  8656 RETURN     all  --  *      *       0.0.0.0/0            0.0.0.0/0           
+7        0     0 DROP       all  --  *      *       0.0.0.0/0            0.0.0.0/0            state INVALID /* Drop packets that appear related to an existing connection (e.g. TCP ACK/FIN) but do not have an entry in conntrack. */
+8        0     0 neutron-openvswi-sg-fallback  all  --  *      *       0.0.0.0/0            0.0.0.0/0            /* Send unmatched traffic to the fallback chain. */
+
+Chain neutron-openvswi-s2c6951d5-e (1 references)
+num   pkts bytes target     prot opt in     out     source               destination         
+1        0     0 RETURN     all  --  *      *       14.52.45.12          0.0.0.0/0            MAC FA:16:3E:CB:06:23 /* Allow traffic from defined IP/MAC pairs. */
+2        0     0 DROP       all  --  *      *       0.0.0.0/0            0.0.0.0/0            /* Drop traffic without an IP/MAC allow rule. */
+
+Chain neutron-openvswi-s6746373c-0 (1 references)
+num   pkts bytes target     prot opt in     out     source               destination         
+1      168  8824 RETURN     all  --  *      *       14.52.45.10          0.0.0.0/0            MAC FA:16:3E:A8:97:6F /* Allow traffic from defined IP/MAC pairs. */
+2        0     0 DROP       all  --  *      *       0.0.0.0/0            0.0.0.0/0            /* Drop traffic without an IP/MAC allow rule. */
+
+Chain neutron-openvswi-sg-chain (4 references)
+num   pkts bytes target     prot opt in     out     source               destination         
+1       11  1904 neutron-openvswi-i2c6951d5-e  all  --  *      *       0.0.0.0/0            0.0.0.0/0            PHYSDEV match --physdev-out tap2c6951d5-e6 --physdev-is-bridged /* Jump to the VM specific chain. */
+2        0     0 neutron-openvswi-o2c6951d5-e  all  --  *      *       0.0.0.0/0            0.0.0.0/0            PHYSDEV match --physdev-in tap2c6951d5-e6 --physdev-is-bridged /* Jump to the VM specific chain. */
+3      865 37140 neutron-openvswi-i6746373c-0  all  --  *      *       0.0.0.0/0            0.0.0.0/0            PHYSDEV match --physdev-out tap6746373c-01 --physdev-is-bridged /* Jump to the VM specific chain. */
+4      179 12312 neutron-openvswi-o6746373c-0  all  --  *      *       0.0.0.0/0            0.0.0.0/0            PHYSDEV match --physdev-in tap6746373c-01 --physdev-is-bridged /* Jump to the VM specific chain. */
+5      709 67190 ACCEPT     all  --  *      *       0.0.0.0/0            0.0.0.0/0           
+
+Chain neutron-openvswi-sg-fallback (4 references)
+num   pkts bytes target     prot opt in     out     source               destination         
+1      865 44002 DROP       all  --  *      *       0.0.0.0/0            0.0.0.0/0            /* Default drop rule for unmatched traffic. */
+</code></pre>
+<p>内容过多，不适合阅读。</p>
+<h1 id="排查过程"><a href="#排查过程" class="headerlink" title="排查过程"></a>排查过程</h1><p>我们的目标是找出不让虚拟机访问网关地址上的<code>tftp</code>服务的规则。 虚拟机<code>ip</code>是<code>14.52.45.10</code>，网关是<code>14.52.45.2</code>。</p>
+<p>可以看到，有3个默认链：<code>INPUT</code>、<code>FORWARD</code>、<code>OUTPUT</code>，默认链中均有<code>neutron</code>开头的自定义链。<a href="#%E8%83%8C%E6%99%AF">背景</a>中提到是网络包无法到达虚拟机，因此从<code>FORWARD</code>链中查找。</p>
+<p>层层检索，发现源为网关的包只允许通过<code>67``68</code>端口<code>udp</code>报文(<code>dhcp</code>报文)</p>
+<pre><code>Chain neutron-openvswi-i6746373c-0 (1 references)
+num   pkts bytes target     prot opt in     out     source               destination         
+1       29  2248 RETURN     all  --  *      *       0.0.0.0/0            0.0.0.0/0            state RELATED,ESTABLISHED /* Direct packets associated with a known session to the RETURN chain. */
+2        2   698 RETURN     udp  --  *      *       14.52.45.2           0.0.0.0/0            udp spt:67 udp dpt:68
+3        0     0 RETURN     all  --  *      *       0.0.0.0/0            0.0.0.0/0            match-set NIPv4b3a1256e-07fe-4e6b-bfc5- src
+4        0     0 DROP       all  --  *      *       0.0.0.0/0            0.0.0.0/0            state INVALID /* Drop packets that appear related to an existing connection (e.g. TCP ACK/FIN) but do not have an entry in conntrack. */
+5      834 34194 neutron-openvswi-sg-fallback  all  --  *      *       0.0.0.0/0            0.0.0.0/0            /* Send unmatched traffic to the fallback chain. */
+</code></pre>
+<p>其他端口均作丢弃处理。</p>
+<pre><code>Chain neutron-openvswi-sg-fallback (4 references)
+num   pkts bytes target     prot opt in     out     source               destination         
+1      865 44002 DROP       all  --  *      *       0.0.0.0/0            0.0.0.0/0            /* Default drop rule for unmatched traffic. */
+</code></pre>
+<p>由于<code>tftp</code>服务器返回数据用的是随机端口，因此我们需要开通网关到虚拟机的<code>udp</code>协议的所有端口</p>
+<pre><code>#iptables -I FORWARD 1 -s 14.52.45.2 -d 14.52.45.10 -p udp -j ACCEPT
+num   pkts bytes target     prot opt in     out     source               destination         
+1        0     0 ACCEPT     udp  --  *      *       14.52.45.2           14.52.45.10
+</code></pre>
+<p>再次从虚拟机发送<code>tftp</code>请求，报文就能通过了。</p>
+
+<div id="gitalk-container"></div>
+<script src="https://cdn.bootcss.com/blueimp-md5/2.12.0/js/md5.min.js"></script><link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css"><script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+
+		<script>
+		var gitalkConfig = {"clientID":"Ov23liFG19AhSmVEYtNI","clientSecret":"236b24cf5e0eaf843c4a766f2e458b3b85702a04","repo":"billy7x17.github.io","owner":"billy7x17","admin":["billy7x17"],"distractionFreeMode":true};
+	    gitalkConfig.id = md5(location.pathname);
+		var gitalk = new Gitalk(gitalkConfig);
+	    gitalk.render("gitalk-container");
+	    </script>
+                <hr>
+                
+
+                <ul class="pager">
+                    
+                    <li class="previous">
+                        <a href="/2023/10/31/Pulsar-Schema简介/" data-toggle="tooltip" data-placement="top"
+                           title="Pulsar Schema简介">&larr; Previous Post</a>
+                    </li>
+                    
+                    
+                    <li class="next">
+                        <a href="/2018/10/17/跨命名空间tftp服务/" data-toggle="tooltip" data-placement="top"
+                           title="跨命名空间tftp服务">Next Post &rarr;</a>
+                    </li>
+                    
+                </ul>
+
+                
+
+                
+
+
+                <!--加入新的评论系统-->
+                
+
+                
+
+            </div>
+
+            <div class="hidden-xs col-sm-3 toc-col">
+                <div class="toc-wrap">
+                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%88%9D%E8%AE%BFiptables%E5%8F%8Aopenstack%E8%99%9A%E6%8B%9F%E7%BD%91%E7%BB%9C"><span class="toc-text">初访iptables及openstack虚拟网络</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%83%8C%E6%99%AF"><span class="toc-text">背景</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%A6%82%E5%BF%B5"><span class="toc-text">概念</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#iptables%E6%A6%82%E5%BF%B5"><span class="toc-text">iptables概念</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%8E%92%E6%9F%A5%E8%BF%87%E7%A8%8B"><span class="toc-text">排查过程</span></a></li></ol>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <!-- Sidebar Container -->
+
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                sidebar-container">
+
+                <!-- Featured Tags -->
+                
+                <section>
+                    <!-- no hr -->
+                    <h5 class="text-center">
+                        <a href="/tags/">FEATURED TAGS</a>
+                    </h5>
+                    <div class="tags">
+                        
+                        <a class="tag" href="/tags/#openstack"
+                           title="openstack">openstack</a>
+                        
+                        <a class="tag" href="/tags/#neutron"
+                           title="neutron">neutron</a>
+                        
+                        <a class="tag" href="/tags/#iptables"
+                           title="iptables">iptables</a>
+                        
+                        <a class="tag" href="/tags/#tftp"
+                           title="tftp">tftp</a>
+                        
+                    </div>
+                </section>
+                
+
+                <!-- Friends Blog -->
+                
+            </div>
+        </div>
+
+    </div>
+</article>
+
+
+
+
+
+
+
+<!-- Footer -->
+<!-- Footer -->
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 text-center">
+                <br>
+                <ul class="list-inline text-center">
+                
+                    <li>
+                        <a href="/atom.xml">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-rss fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+                
+                
+                    <li>
+                        <a target="_blank" href="https://www.zhihu.com/people/li-zong-rui-18">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa  fa-stack-1x fa-inverse">知</i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+                    <li>
+                        <a target="_blank" href="http://weibo.com/billy7x17">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-weibo fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+
+                
+                    <li>
+                        <a target="_blank"  href="https://github.com/billy7x17">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+
+                </ul>
+                <p class="copyright text-muted">
+                    Copyright &copy; Billy 2025
+                    <br>
+                    <span id="busuanzi_container_site_pv" style="font-size: 12px;">PV: <span id="busuanzi_value_site_pv"></span> Times</span>
+                    <br>
+                    Theme by <a target="_blank" rel="noopener" href="https://haojen.github.io/">Haojen Ma</a>
+                </p>
+
+            </div>
+        </div>
+    </div>
+</footer>
+
+<!-- jQuery -->
+
+<script src="/js/jquery.min.js"></script>
+
+
+<!-- Bootstrap Core JavaScript -->
+
+<script src="/js/bootstrap.min.js"></script>
+
+
+<!-- Custom Theme JavaScript -->
+
+<script src="/js/blog.js"></script>
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+
+<!-- jquery.tagcloud.js -->
+<script>
+    // only load tagcloud.js in tag.html
+    if($('#tag_cloud').length !== 0){
+        async("https://billy7x17.github.io/js/jquery.tagcloud.js",function(){
+            $.fn.tagcloud.defaults = {
+                //size: {start: 1, end: 1, unit: 'em'},
+                color: {start: '#bbbbee', end: '#0085a1'},
+            };
+            $('#tag_cloud a').tagcloud();
+        })
+    }
+</script>
+
+<!--fastClick.js -->
+<script>
+    async("//cdn.bootcss.com/fastclick/1.0.6/fastclick.min.js", function(){
+        var $nav = document.querySelector("nav");
+        if($nav) FastClick.attach($nav);
+    })
+</script>
+
+
+
+<!-- Google Analytics -->
+
+
+
+<!-- Baidu Tongji -->
+
+<script>
+    var _baId = 'd63b30f4b79f1151f194406afe5e9831';
+    // Originial
+    var _hmt = _hmt || [];
+    (function() {
+        var hm = document.createElement("script");
+        hm.src = "//hm.baidu.com/hm.js?" + _baId;
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(hm, s);
+    })();
+</script>
+
+
+<!-- swiftype -->
+<script type="text/javascript">
+  (function(w,d,t,u,n,s,e){w['SwiftypeObject']=n;w[n]=w[n]||function(){
+  (w[n].q=w[n].q||[]).push(arguments);};s=d.createElement(t);
+  e=d.getElementsByTagName(t)[0];s.async=1;s.src=u;e.parentNode.insertBefore(s,e);
+  })(window,document,'script','//s.swiftypecdn.com/install/v2/st.js','_st');
+
+  _st('install','','2.0.0');
+</script>
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+<!--wechat title img-->
+<img class="wechat-title-img" src="https://billy7x17.github.io/pics/laughMan.jpg">
+</body>
+
+</html>

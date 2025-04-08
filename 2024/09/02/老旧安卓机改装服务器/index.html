@@ -1,0 +1,469 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Head tag -->
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Billy119在 Github 上的个人博客">
+    <meta name="keyword" content="Billy119">
+    <meta name="theme-color" content="#600090">
+    <meta name="msapplication-navbutton-color" content="#600090">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="#600090">
+    <link rel="shortcut icon" href="https://billy7x17.github.io/pics/laughMan-icon.png">
+    <link rel="alternate" type="application/atom+xml" title="Billy" href="/atom.xml">
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css">
+    <link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.css">
+    <title>
+        
+        老旧安卓机改装服务器｜Billy&#39;s blog
+        
+    </title>
+
+    <link rel="canonical" href="https://billy7x17.github.io/2024/09/02/老旧安卓机改装服务器/">
+
+    <!-- Bootstrap Core CSS -->
+    
+<link rel="stylesheet" href="/css/bootstrap.min.css">
+
+
+    <!-- Custom CSS -->
+    
+<link rel="stylesheet" href="/css/blog-style.css">
+
+
+    <!-- Pygments Github CSS -->
+    
+<link rel="stylesheet" href="/css/syntax.css">
+
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<style>
+
+    header.intro-header {
+        background-image: url('https://billy7x17.github.io/pics/head.jpg')
+    }
+</style>
+<!-- hack iOS CSS :active style -->
+<body ontouchstart="" class="animated fadeIn">
+<!-- Navigation -->
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top " id="nav-top" data-ispost = "true" data-istags="false
+" data-ishome = "false" >
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand animated pulse" href="/">
+                <span class="brand-logo">
+                    Billy
+                </span>
+                's Blog
+            </a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <!-- Known Issue, found by Hux:
+            <nav>'s height woule be hold on by its content.
+            so, when navbar scale out, the <nav> will cover tags.
+            also mask any touch event of tags, unfortunately.
+        -->
+        <!-- /.navbar-collapse -->
+        <div id="huxblog_navbar">
+            <div class="navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="/">Home</a>
+                    </li>
+					
+                    
+                        
+							
+                        <li>
+                            <a href="/tags/">tags</a>
+                        </li>
+							
+						
+                    
+					
+					
+                </ul>
+            </div>
+        </div>
+    </div>
+    <!-- /.container -->
+</nav>
+<script>
+    // Drop Bootstarp low-performance Navbar
+    // Use customize navbar with high-quality material design animation
+    // in high-perf jank-free CSS3 implementation
+//    var $body   = document.body;
+    var $toggle = document.querySelector('.navbar-toggle');
+    var $navbar = document.querySelector('#huxblog_navbar');
+    var $collapse = document.querySelector('.navbar-collapse');
+
+    $toggle.addEventListener('click', handleMagic)
+    function handleMagic(e){
+        if ($navbar.className.indexOf('in') > 0) {
+        // CLOSE
+            $navbar.className = " ";
+            // wait until animation end.
+            setTimeout(function(){
+                // prevent frequently toggle
+                if($navbar.className.indexOf('in') < 0) {
+                    $collapse.style.height = "0px"
+                }
+            },400)
+        }else{
+        // OPEN
+            $collapse.style.height = "auto"
+            $navbar.className += " in";
+        }
+    }
+</script>
+
+<!-- Main Content -->
+
+<!--only post-->
+
+
+<img class="wechat-title-img"
+     src="https://billy7x17.github.io/pics/image/site/head.jpg">
+
+
+<style>
+    
+    header.intro-header {
+        background-image: url('https://billy7x17.github.io/pics/image/site/head.jpg?imageView2/1/w/1400/h/400/interlace/1/q/90')
+    }
+
+    
+</style>
+
+<header class="intro-header">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 text-center">
+                <div class="post-heading">
+                    <h1>老旧安卓机改装服务器</h1>
+                    
+                    <span class="meta">
+                         作者 Billy
+                        <span>
+                          日期 2024-09-02
+                         </span>
+                    </span>
+                    <div class="tags text-center">
+                        
+                        <a class="tag" href="/tags/#Termux"
+                           title="Termux">Termux</a>
+                        
+                        <a class="tag" href="/tags/#zerotier"
+                           title="zerotier">zerotier</a>
+                        
+                        <a class="tag" href="/tags/#ngrok"
+                           title="ngrok">ngrok</a>
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="post-title-haojen">
+        <span>
+            老旧安卓机改装服务器
+        </span>
+    </div>
+</header>
+
+<!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
+            <!-- Post Container -->
+            <div class="col-lg-8 col-lg-offset-1 col-sm-9 post-container">
+                <h1 id="老旧安卓机改装服务器"><a href="#老旧安卓机改装服务器" class="headerlink" title="老旧安卓机改装服务器"></a>老旧安卓机改装服务器</h1><h2 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h2><p>看阮一峰的周刊，有<a target="_blank" rel="noopener" href="https://lbrito.ca/blog/2020/02/repurposing-android.html">一篇文章</a>，激起了自己折腾的想法。<br>谁家没有老旧安卓机呢？<br>不妨拿出来试试。  </p>
+<h2 id="准备"><a href="#准备" class="headerlink" title="准备"></a>准备</h2><p>文章里讲的是用<a target="_blank" rel="noopener" href="https://termux.dev/en/">Termux</a>，一款安卓模拟器，提供了linux环境，无需root权限。<br>但本人还是想用原生的linux以及root权限，初始方案是root手机然后安装ubuntu。  </p>
+<ol>
+<li>老旧手机测试<br>共有5台旧安卓设备，经过测试，有3台无法进行充电及开机操作，电池老化严重。<br>剩下2台，vivo x5m(Android 5) 以及 Honor 6x(Android 7)，经过长时间充电后可以正常开机，触屏功能正常。  </li>
+<li>查询root方案<br>在2024年的今天，root操作已经是非常常见的了，逛了2家的论坛和一些帖子，发现现在都是卡在解锁<a target="_blank" rel="noopener" href="https://baike.baidu.com/item/Bootloader/8733520">bootloader</a>(简称bl)。<br>一些老旧的帖子还有通过官方链接申请解锁bl，但很久前入口就关闭了。<br>尽管如此，还有一些视频教程，点开后发现都是需要硬件拆机，遂放弃。  </li>
+<li>无法root，只能选择Termux</li>
+</ol>
+<h2 id="实施"><a href="#实施" class="headerlink" title="实施"></a>实施</h2><h3 id="Termux安装"><a href="#Termux安装" class="headerlink" title="Termux安装"></a>Termux安装</h3><p>文章里写的是通过Google Play，显然国内的老旧型号手机是没有条件的。在(F-Droid)[<a target="_blank" rel="noopener" href="https://f-droid.org/zh_Hans/packages/com.termux/]%E4%B8%AD%E6%89%BE%E5%88%B0%E5%AF%B9%E5%BA%94%E7%9A%84%E9%A2%9Dapk%E5%8C%85%EF%BC%8C%E4%B8%80%E4%B8%AAandroid7">https://f-droid.org/zh_Hans/packages/com.termux/]中找到对应的额apk包，一个android7</a> 一个android5，导入手机上进行安装。<br>完成后直接运行即可进入一个命令行环境。<br>一通把玩。。<br>不仅没有root权限，只要涉及到设备的路径全都访问不了，这给常年运维的人带来了不小的麻烦，总之就是不顺手～<br>安装一些必要的软件：nginx、git等都没有问题，运行时可能会缺少一些环境变量，想办法设置一下就可以搞定。<br>接下来就是网络了，如果网络能跟我自己的虚拟局域网搞通，那就非常耐斯了。  </p>
+<h3 id="zerotier安装"><a href="#zerotier安装" class="headerlink" title="zerotier安装"></a>zerotier安装</h3><p>Termux里的软件包是自己维护的，里面的包都是需求比较高的，zerotier还真没有。<br>用<a target="_blank" rel="noopener" href="https://www.zerotier.com/download/#entry-5">zerotier官网方式</a>)尝试安装。</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">~ $ curl -s https://install.zerotier.com | sudo bash</span><br><span class="line">No superuser binary detected.</span><br><span class="line">Are you rooted?</span><br><span class="line">~ $ curl -s https://install.zerotier.com |  bash</span><br><span class="line"></span><br><span class="line">*** ZeroTier Service Quick Install for Unix-like Systems</span><br><span class="line"></span><br><span class="line">*** Tested OSes / distributions:</span><br><span class="line"></span><br><span class="line">***   MacOS (10.13+) (just installs ZeroTier One.pkg)</span><br><span class="line">***   Debian Linux (7+)</span><br><span class="line">***   RedHat/CentOS Linux (6+)</span><br><span class="line">***   Fedora Linux (16+)</span><br><span class="line">***   SuSE Linux (12+)</span><br><span class="line">***   Mint Linux (20+)</span><br><span class="line">***   Kali Linux (2024.1+)</span><br><span class="line"></span><br><span class="line">*** Supported architectures vary by OS / distribution. We try to support</span><br><span class="line">*** every system architecture supported by the target.</span><br><span class="line"></span><br><span class="line">*** Please report problems by opening a GitHub issue or Pull Request at:</span><br><span class="line">*** https://github.com/zerotier/install.zerotier.com</span><br><span class="line">*** Please include the content of `/etc/os-release` for your distribution.</span><br><span class="line"></span><br><span class="line">*** This quick installer script requires root privileges.</span><br><span class="line">~ $</span><br></pre></td></tr></table></figure>
+
+<p>果然是不行的，一般来讲涉及网络的服务，都会要求root权限。  </p>
+<p>尝试用安卓app的形式给手机设置vpn，这样底层(Termux)的网络也会直接通的。<br>仍然去(F-Droid)找，找不到。。<br>官网下载链接中，找到<a target="_blank" rel="noopener" href="https://download.zerotier.com/RELEASES">旧版本</a>，可以看到版本最新的是1.14.0，依次点击进入，在1.12.2版本找到了.apk包，下载上传到手机上安装。<br>结果发现，官方的app无法更换planet文件，这样就只能连接官方维护的虚拟局域网了，与最终目标是有一定距离的  </p>
+<p>继续探索！  </p>
+<p>最终在自建planet的仓库中找到了! <img src="/2024/09/02/%E8%80%81%E6%97%A7%E5%AE%89%E5%8D%93%E6%9C%BA%E6%94%B9%E8%A3%85%E6%9C%8D%E5%8A%A1%E5%99%A8/%E9%9D%9E%E5%AE%98%E6%96%B9%E5%AE%89%E5%8D%93%E5%AE%A2%E6%88%B7%E7%AB%AF.png" alt="非官方安卓客户端"><br>仓库地址：<a target="_blank" rel="noopener" href="https://github.com/kaaass/ZerotierFix">https://github.com/kaaass/ZerotierFix</a><br>找到下载链接后发现最新的版本是1.0.10，与官方的版本还是有一定差距的，不过能满足需求就需要去尝试一下！<br>下载到手机上安装。  </p>
+<p>这个时候，android 5的vivo x5m 掉队了，在替换planet文件时，app闪退了。  </p>
+<p>Honor 6x设备在加入网络后成功连接上了，网络设备列表里也出现了，ip也成功分配到了。  </p>
+<h3 id="zerotier-配置"><a href="#zerotier-配置" class="headerlink" title="zerotier 配置"></a>zerotier 配置</h3><p>经过重重困难，只有1台设备走到了配置阶段。珍惜最后的实验机会。<br>虚拟局域网内的各设备互ping<br>发现planet节点与Honor 6x节点互相ping不通，同公网ip下的设备节点与Honor 6x可以互通。<br>‘结点列表’中有很多不知名的中转设备，这个是不符合预期的。</p>
+<p>遂使用自己手机安装相同版本的软件ZerotierFix进行测试，未发现类似问题，结点列表里都是正常的节点，与zerotier-cli peers命令执行结果相符。  </p>
+<p>ZerotierFix的代码已有1年没有更新、维护，作为一个开源安卓项目，能够使用自定义planet和moon已经非常友好了，我们不做奢求，毕竟个人的要求是“既要又要”的，无法完全满足。  </p>
+<h3 id="ngrok安装"><a href="#ngrok安装" class="headerlink" title="ngrok安装"></a>ngrok安装</h3><p>zerotier有他的优势，但并不是没有替代品。<br>ngrok就是本人在研究ddns时第一个瞄上的工具，但由于免费限制过多，就暂时弃用了，不过现在看来刚好合适，毕竟类似的设备只有1台。<br>打开官网，找到对应的安装方法：<a target="_blank" rel="noopener" href="https://dashboard.ngrok.com/get-started/setup/linux">https://dashboard.ngrok.com/get-started/setup/linux</a>  </p>
+<h3 id="ngrok-配置"><a href="#ngrok-配置" class="headerlink" title="ngrok 配置"></a>ngrok 配置</h3><p>是离线包下载的形式，安装还算比较顺利。<br>配置鉴权时，有警告：  </p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">~ $ ./ngrok config add-authtoken 2k0************************************************ao</span><br><span class="line">WARN[09-02|10:57:52] failed to get home directory, using $HOME instead err=&quot;user: Current requires cgo or $USER set in environment&quot; $HOME=/data/data/com.termux/files/home</span><br><span class="line">Authtoken saved to configuration file: /data/data/com.termux/files/home/.config/ngrok/ngrok.yml</span><br><span class="line">~ $</span><br></pre></td></tr></table></figure>
+<p>emm，比较明显是环境变量的问题。暂时无视  </p>
+<p>运行时报错了：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">ngrok                                                                                                                             (Ctrl+C to quit)</span><br><span class="line"></span><br><span class="line">Session Status                reconnecting (failed to dial ngrok server with address &quot;connect.ngrok-agent.com:443&quot;: dial tcp: lookup connect.ngrok</span><br><span class="line">Version                       3.15.1</span><br><span class="line">Web Interface                 http://127.0.0.1:4040</span><br><span class="line"></span><br><span class="line">Connections                   ttl     opn     rt1     rt5     p50     p90</span><br><span class="line">                              0       0       0.00    0.00    0.00    0.00</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>看起来是网络的原因，但本地是可以解析那个域名的，而且端口都是通的。<br>恐怕跟域名解析有关，毕竟没有root权限，遂在官方渠道和github中检索。<br>发现有不少用Termux的兄弟也遇到了这个问题～  大家都是一样的<br>直到我看到了这个<a target="_blank" rel="noopener" href="https://github.com/termux/termux-packages/discussions/7485">issue</a>，里面指出了按照<a target="_blank" rel="noopener" href="https://wiki.termux.com/wiki/Bypassing_NAT#Ngrok">这个文章</a>的步骤使用ssh公钥的形式登录，以隧道的形式提供ngrok的服务。<br>只要避免了执行ngrok命令，就有机会出现不一样的结果。操作后是可以的。  </p>
+<p>顺带一提，注册ngrok后，会免费提供一个随机但固定的域名，通过域名能够访问这台改装的服务器就成功了。</p>
+<p>这样的话，通过老旧安卓机改装服务器的问题就得到解决了。</p>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>整个流程(从有想法到完成)，共计2天。<br>功劳最大的应该就是gpt吧哈哈，简单的命令、软件选择上都给出了非常明智的建议，少走了不少弯路。<br>当然，像zerotier的安装配置、ngrok的使用，都是以往的经验积累的，软件也非常的实用，易安装易配置。  </p>
+
+<div id="gitalk-container"></div>
+<script src="https://cdn.bootcss.com/blueimp-md5/2.12.0/js/md5.min.js"></script><link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css"><script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+
+		<script>
+		var gitalkConfig = {"clientID":"Ov23liFG19AhSmVEYtNI","clientSecret":"236b24cf5e0eaf843c4a766f2e458b3b85702a04","repo":"billy7x17.github.io","owner":"billy7x17","admin":["billy7x17"],"distractionFreeMode":true};
+	    gitalkConfig.id = md5(location.pathname);
+		var gitalk = new Gitalk(gitalkConfig);
+	    gitalk.render("gitalk-container");
+	    </script>
+                <hr>
+                
+
+                <ul class="pager">
+                    
+                    <li class="previous">
+                        <a href="/2025/01/07/VIM灵活切换/" data-toggle="tooltip" data-placement="top"
+                           title="VIM灵活切换">&larr; Previous Post</a>
+                    </li>
+                    
+                    
+                    <li class="next">
+                        <a href="/2024/07/11/chatgpt-next-web部署/" data-toggle="tooltip" data-placement="top"
+                           title="chatgpt-next-web部署">Next Post &rarr;</a>
+                    </li>
+                    
+                </ul>
+
+                
+
+                
+
+
+                <!--加入新的评论系统-->
+                
+
+                
+
+            </div>
+
+            <div class="hidden-xs col-sm-3 toc-col">
+                <div class="toc-wrap">
+                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E8%80%81%E6%97%A7%E5%AE%89%E5%8D%93%E6%9C%BA%E6%94%B9%E8%A3%85%E6%9C%8D%E5%8A%A1%E5%99%A8"><span class="toc-text">老旧安卓机改装服务器</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%83%8C%E6%99%AF"><span class="toc-text">背景</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%87%86%E5%A4%87"><span class="toc-text">准备</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%9E%E6%96%BD"><span class="toc-text">实施</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Termux%E5%AE%89%E8%A3%85"><span class="toc-text">Termux安装</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#zerotier%E5%AE%89%E8%A3%85"><span class="toc-text">zerotier安装</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#zerotier-%E9%85%8D%E7%BD%AE"><span class="toc-text">zerotier 配置</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#ngrok%E5%AE%89%E8%A3%85"><span class="toc-text">ngrok安装</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#ngrok-%E9%85%8D%E7%BD%AE"><span class="toc-text">ngrok 配置</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%80%BB%E7%BB%93"><span class="toc-text">总结</span></a></li></ol></li></ol>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <!-- Sidebar Container -->
+
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                sidebar-container">
+
+                <!-- Featured Tags -->
+                
+                <section>
+                    <!-- no hr -->
+                    <h5 class="text-center">
+                        <a href="/tags/">FEATURED TAGS</a>
+                    </h5>
+                    <div class="tags">
+                        
+                        <a class="tag" href="/tags/#Termux"
+                           title="Termux">Termux</a>
+                        
+                        <a class="tag" href="/tags/#zerotier"
+                           title="zerotier">zerotier</a>
+                        
+                        <a class="tag" href="/tags/#ngrok"
+                           title="ngrok">ngrok</a>
+                        
+                    </div>
+                </section>
+                
+
+                <!-- Friends Blog -->
+                
+            </div>
+        </div>
+
+    </div>
+</article>
+
+
+
+
+
+
+
+<!-- Footer -->
+<!-- Footer -->
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 text-center">
+                <br>
+                <ul class="list-inline text-center">
+                
+                    <li>
+                        <a href="/atom.xml">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-rss fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+                
+                
+                    <li>
+                        <a target="_blank" href="https://www.zhihu.com/people/li-zong-rui-18">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa  fa-stack-1x fa-inverse">知</i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+                    <li>
+                        <a target="_blank" href="http://weibo.com/billy7x17">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-weibo fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+
+                
+                    <li>
+                        <a target="_blank"  href="https://github.com/billy7x17">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+
+                </ul>
+                <p class="copyright text-muted">
+                    Copyright &copy; Billy 2025
+                    <br>
+                    <span id="busuanzi_container_site_pv" style="font-size: 12px;">PV: <span id="busuanzi_value_site_pv"></span> Times</span>
+                    <br>
+                    Theme by <a target="_blank" rel="noopener" href="https://haojen.github.io/">Haojen Ma</a>
+                </p>
+
+            </div>
+        </div>
+    </div>
+</footer>
+
+<!-- jQuery -->
+
+<script src="/js/jquery.min.js"></script>
+
+
+<!-- Bootstrap Core JavaScript -->
+
+<script src="/js/bootstrap.min.js"></script>
+
+
+<!-- Custom Theme JavaScript -->
+
+<script src="/js/blog.js"></script>
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+
+<!-- jquery.tagcloud.js -->
+<script>
+    // only load tagcloud.js in tag.html
+    if($('#tag_cloud').length !== 0){
+        async("https://billy7x17.github.io/js/jquery.tagcloud.js",function(){
+            $.fn.tagcloud.defaults = {
+                //size: {start: 1, end: 1, unit: 'em'},
+                color: {start: '#bbbbee', end: '#0085a1'},
+            };
+            $('#tag_cloud a').tagcloud();
+        })
+    }
+</script>
+
+<!--fastClick.js -->
+<script>
+    async("//cdn.bootcss.com/fastclick/1.0.6/fastclick.min.js", function(){
+        var $nav = document.querySelector("nav");
+        if($nav) FastClick.attach($nav);
+    })
+</script>
+
+
+
+<!-- Google Analytics -->
+
+
+
+<!-- Baidu Tongji -->
+
+<script>
+    var _baId = 'd63b30f4b79f1151f194406afe5e9831';
+    // Originial
+    var _hmt = _hmt || [];
+    (function() {
+        var hm = document.createElement("script");
+        hm.src = "//hm.baidu.com/hm.js?" + _baId;
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(hm, s);
+    })();
+</script>
+
+
+<!-- swiftype -->
+<script type="text/javascript">
+  (function(w,d,t,u,n,s,e){w['SwiftypeObject']=n;w[n]=w[n]||function(){
+  (w[n].q=w[n].q||[]).push(arguments);};s=d.createElement(t);
+  e=d.getElementsByTagName(t)[0];s.async=1;s.src=u;e.parentNode.insertBefore(s,e);
+  })(window,document,'script','//s.swiftypecdn.com/install/v2/st.js','_st');
+
+  _st('install','','2.0.0');
+</script>
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+<!--wechat title img-->
+<img class="wechat-title-img" src="https://billy7x17.github.io/pics/laughMan.jpg">
+</body>
+
+</html>

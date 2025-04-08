@@ -1,0 +1,599 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Head tag -->
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Billy119在 Github 上的个人博客">
+    <meta name="keyword" content="Billy119">
+    <meta name="theme-color" content="#600090">
+    <meta name="msapplication-navbutton-color" content="#600090">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="#600090">
+    <link rel="shortcut icon" href="https://billy7x17.github.io/pics/laughMan-icon.png">
+    <link rel="alternate" type="application/atom+xml" title="Billy" href="/atom.xml">
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css">
+    <link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.css">
+    <title>
+        
+        openstack-cinder缓存机制｜Billy&#39;s blog
+        
+    </title>
+
+    <link rel="canonical" href="https://billy7x17.github.io/2017/05/16/openstack-cinder缓存机制/">
+
+    <!-- Bootstrap Core CSS -->
+    
+<link rel="stylesheet" href="/css/bootstrap.min.css">
+
+
+    <!-- Custom CSS -->
+    
+<link rel="stylesheet" href="/css/blog-style.css">
+
+
+    <!-- Pygments Github CSS -->
+    
+<link rel="stylesheet" href="/css/syntax.css">
+
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<style>
+
+    header.intro-header {
+        background-image: url('https://billy7x17.github.io/pics/head.jpg')
+    }
+</style>
+<!-- hack iOS CSS :active style -->
+<body ontouchstart="" class="animated fadeIn">
+<!-- Navigation -->
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top " id="nav-top" data-ispost = "true" data-istags="false
+" data-ishome = "false" >
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand animated pulse" href="/">
+                <span class="brand-logo">
+                    Billy
+                </span>
+                's Blog
+            </a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <!-- Known Issue, found by Hux:
+            <nav>'s height woule be hold on by its content.
+            so, when navbar scale out, the <nav> will cover tags.
+            also mask any touch event of tags, unfortunately.
+        -->
+        <!-- /.navbar-collapse -->
+        <div id="huxblog_navbar">
+            <div class="navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="/">Home</a>
+                    </li>
+					
+                    
+                        
+							
+                        <li>
+                            <a href="/tags/">tags</a>
+                        </li>
+							
+						
+                    
+					
+					
+                </ul>
+            </div>
+        </div>
+    </div>
+    <!-- /.container -->
+</nav>
+<script>
+    // Drop Bootstarp low-performance Navbar
+    // Use customize navbar with high-quality material design animation
+    // in high-perf jank-free CSS3 implementation
+//    var $body   = document.body;
+    var $toggle = document.querySelector('.navbar-toggle');
+    var $navbar = document.querySelector('#huxblog_navbar');
+    var $collapse = document.querySelector('.navbar-collapse');
+
+    $toggle.addEventListener('click', handleMagic)
+    function handleMagic(e){
+        if ($navbar.className.indexOf('in') > 0) {
+        // CLOSE
+            $navbar.className = " ";
+            // wait until animation end.
+            setTimeout(function(){
+                // prevent frequently toggle
+                if($navbar.className.indexOf('in') < 0) {
+                    $collapse.style.height = "0px"
+                }
+            },400)
+        }else{
+        // OPEN
+            $collapse.style.height = "auto"
+            $navbar.className += " in";
+        }
+    }
+</script>
+
+<!-- Main Content -->
+
+<!--only post-->
+
+
+<img class="wechat-title-img"
+     src="https://billy7x17.github.io/pics/image/site/head.jpg">
+
+
+<style>
+    
+    header.intro-header {
+        background-image: url('https://billy7x17.github.io/pics/image/site/head.jpg?imageView2/1/w/1400/h/400/interlace/1/q/90')
+    }
+
+    
+</style>
+
+<header class="intro-header">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 text-center">
+                <div class="post-heading">
+                    <h1>openstack-cinder缓存机制</h1>
+                    
+                    <span class="meta">
+                         作者 Billy
+                        <span>
+                          日期 2017-05-16
+                         </span>
+                    </span>
+                    <div class="tags text-center">
+                        
+                        <a class="tag" href="/tags/#openstack"
+                           title="openstack">openstack</a>
+                        
+                        <a class="tag" href="/tags/#cinder"
+                           title="cinder">cinder</a>
+                        
+                        <a class="tag" href="/tags/#cache"
+                           title="cache">cache</a>
+                        
+                        <a class="tag" href="/tags/#缓存"
+                           title="缓存">缓存</a>
+                        
+                        <a class="tag" href="/tags/#volume"
+                           title="volume">volume</a>
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="post-title-haojen">
+        <span>
+            openstack-cinder缓存机制
+        </span>
+    </div>
+</header>
+
+<!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
+            <!-- Post Container -->
+            <div class="col-lg-8 col-lg-offset-1 col-sm-9 post-container">
+                <h1 id="openstack-cinder缓存机制"><a href="#openstack-cinder缓存机制" class="headerlink" title="openstack-cinder缓存机制"></a>openstack-cinder缓存机制</h1><p>volume&#x2F;flows&#x2F;manager&#x2F;create_volume.py:</p>
+<pre><code># Try and use the image cache.
+should_create_cache_entry = False
+if self.image_volume_cache and not cloned:
+    internal_context = cinder_context.get_internal_tenant_context()
+    if not internal_context:
+        LOG.info(_LI(&#39;Unable to get Cinder internal context, will &#39;
+                     &#39;not use image-volume cache.&#39;))
+    else:
+        model_update, cloned = self._create_from_image_cache(
+            context,
+            internal_context,
+            volume,
+            image_id,
+            image_meta
+        )
+        # Don&#39;t cache encrypted volume.
+        if not cloned and not volume_is_encrypted:
+            should_create_cache_entry = True
+</code></pre>
+<p>下面逐行分析：</p>
+<ul>
+<li><p>从以上代码发现，通过一些配置，image_cache（镜像缓存）是可以实现的。</p>
+<pre><code>  if self.image_volume_cache and not cloned:
+      internal_context = cinder_context.get_internal_tenant_context()
+      if not internal_context:
+          LOG.info(_LI(&#39;Unable to get Cinder internal context, will &#39;
+                       &#39;not use image-volume cache.&#39;))
+</code></pre>
+</li>
+<li><p>首先判断image_volume_cache参数，这个参数从上层传下来的，追溯到最后是根据配置文件中的image_volume_cache_enabled属性的True&#x2F;False来决定的。<br>其次判断是否已经克隆cloned，如果还没有克隆：</p>
+<pre><code>  internal_context = cinder_context.get_internal_tenant_context()
+  if not internal_context:
+      LOG.info(_LI(&#39;Unable to get Cinder internal context, will &#39;
+                   &#39;not use image-volume cache.&#39;))
+</code></pre>
+</li>
+<li><p>获取“内部租户上下文”internal_tenant_context，其实就是配置文件中内部租户和其对应用户2个属性，配上就ok。这个上下文没有入库，好像通知时有用到，反正不影响核心业务。</p>
+<pre><code>  else:
+      model_update, cloned = self._create_from_image_cache(
+          context,
+          internal_context,
+          volume,
+          image_id,
+          image_meta
+      )
+</code></pre>
+</li>
+<li><p>如果“内部租户上下文”有值，则从镜像缓存中创建_create_from_image_cache，这个函数命名很有深意，表明了其作用：如果没有缓存hit，则本次创建这个镜像的缓存；如果缓存hit，则直接拿来用：</p>
+<pre><code>  def _create_from_image_cache(self, context, internal_context, volume,
+                           image_id, image_meta):
+      &quot;&quot;&quot;Attempt to create the volume using the image cache.
+
+      Best case this will simply clone the existing volume in the cache.
+      Worst case the image is out of date and will be evicted. In that case
+      a clone will not be created and the image must be downloaded again.
+      &quot;&quot;&quot;
+      LOG.info(&#39;Attempting to retrieve cache entry for image = &#39;
+                &#39;%(image_id)s on host %(host)s.&#39;,
+                &#123;&#39;image_id&#39;: image_id, &#39;host&#39;: volume.host&#125;)
+      # Currently can&#39;t create volume from source vol with different
+      # encryptions, so just return
+      if volume.encryption_key_id:
+          return None, False
+
+      try:
+          cache_entry = self.image_volume_cache.get_entry(internal_context,
+                                                          volume,
+                                                          image_id,
+                                                          image_meta)
+          if cache_entry:
+              LOG.info(&#39;Creating from source image-volume %(volume_id)s&#39;,
+                        &#123;&#39;volume_id&#39;: cache_entry[&#39;volume_id&#39;]&#125;)
+              model_update = self._create_from_source_volume(
+                  context,
+                  volume,
+                  cache_entry[&#39;volume_id&#39;]
+              )
+              return model_update, True
+      except exception.CinderException as e:
+          LOG.warning(_LW(&#39;Failed to create volume from image-volume cache, &#39;
+                          &#39;will fall back to default behavior. Error: &#39;
+                          &#39;%(exception)s&#39;), &#123;&#39;exception&#39;: e&#125;)
+      return None, False
+</code></pre>
+</li>
+</ul>
+<p>上面是_create_from_image_cache函数的代码，在image&#x2F;cache.py中，逐行分析：</p>
+<pre><code>if volume.encryption_key_id:
+    return None, False
+</code></pre>
+<ul>
+<li><p>首先判断是否加密，如果加密则不做缓存</p>
+<pre><code>  cache_entry = self.image_volume_cache.get_entry(internal_context,
+                                                          volume,
+                                                          image_id,
+                                                          image_meta)
+</code></pre>
+</li>
+<li><p>其次通过镜像和卷的信息获取缓存入口，也就是判断是否会hit</p>
+<pre><code>  if cache_entry:
+      LOG.info(&#39;Creating from source image-volume %(volume_id)s&#39;,
+                &#123;&#39;volume_id&#39;: cache_entry[&#39;volume_id&#39;]&#125;)
+      model_update = self._create_from_source_volume(
+          context,
+          volume,
+          cache_entry[&#39;volume_id&#39;]
+      )
+      return model_update, True
+</code></pre>
+</li>
+<li><p>如果hit，则更新模型(volume_id)，然后返回克隆成功。</p>
+</li>
+<li><p>如果miss，则返回False</p>
+<pre><code>  def get_entry(self, context, volume_ref, image_id, image_meta):
+      cache_entry = self.db.image_volume_cache_get_and_update_last_used(
+          context,
+          image_id,
+          volume_ref[&#39;host&#39;]
+      )
+
+      if cache_entry:
+          LOG.info(&#39;Found image-volume cache entry: %(entry)s.&#39;,
+                    &#123;&#39;entry&#39;: self._entry_to_str(cache_entry)&#125;)
+
+          if self._should_update_entry(cache_entry, image_meta):
+              LOG.info(&#39;Image-volume cache entry is out-dated, evicting: &#39;
+                        &#39;%(entry)s.&#39;,
+                        &#123;&#39;entry&#39;: self._entry_to_str(cache_entry)&#125;)
+              self._delete_image_volume(context, cache_entry)
+              cache_entry = None
+
+      if cache_entry:
+          self._notify_cache_hit(context, cache_entry[&#39;image_id&#39;],
+                                 cache_entry[&#39;host&#39;])
+      else:
+          self._notify_cache_miss(context, image_id,
+                                  volume_ref[&#39;host&#39;])
+      return cache_entry
+</code></pre>
+</li>
+<li><p>从上面get_entry函数的代码中可以看出，缓存是存在数据库中的。</p>
+</li>
+</ul>
+<p>在cinder的库中搜索，可以找到：</p>
+<p><img src="/image_volume_cache_entries%E8%A1%A8.jpg" alt="image_volume_cache_entries"></p>
+<p>刚刚缓存的镜像和卷的信息就可以看到了。</p>
+<p><strong>不仅是通过bdm以镜像为源、以卷为目的创建虚拟机，还是通过镜像创建卷，cinder都会使用缓存机制来提升性能。</strong></p>
+<p><strong>使用cinder的缓存机制能有效减少镜像从glance上传到各虚拟化的时间，因此建议使用此功能。</strong></p>
+
+<div id="gitalk-container"></div>
+<script src="https://cdn.bootcss.com/blueimp-md5/2.12.0/js/md5.min.js"></script><link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css"><script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+
+		<script>
+		var gitalkConfig = {"clientID":"Ov23liFG19AhSmVEYtNI","clientSecret":"236b24cf5e0eaf843c4a766f2e458b3b85702a04","repo":"billy7x17.github.io","owner":"billy7x17","admin":["billy7x17"],"distractionFreeMode":true};
+	    gitalkConfig.id = md5(location.pathname);
+		var gitalk = new Gitalk(gitalkConfig);
+	    gitalk.render("gitalk-container");
+	    </script>
+                <hr>
+                
+
+                <ul class="pager">
+                    
+                    <li class="previous">
+                        <a href="/2017/05/27/openstack-nova镜像缓存机制-vmware/" data-toggle="tooltip" data-placement="top"
+                           title="openstack nova镜像缓存机制(vmware)">&larr; Previous Post</a>
+                    </li>
+                    
+                    
+                    <li class="next">
+                        <a href="/2017/05/11/简述vmware对block-device-mapping的支持/" data-toggle="tooltip" data-placement="top"
+                           title="简述vmware对block_device_mapping的支持">Next Post &rarr;</a>
+                    </li>
+                    
+                </ul>
+
+                
+
+                
+
+
+                <!--加入新的评论系统-->
+                
+
+                
+
+            </div>
+
+            <div class="hidden-xs col-sm-3 toc-col">
+                <div class="toc-wrap">
+                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#openstack-cinder%E7%BC%93%E5%AD%98%E6%9C%BA%E5%88%B6"><span class="toc-text">openstack-cinder缓存机制</span></a></li></ol>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <!-- Sidebar Container -->
+
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                sidebar-container">
+
+                <!-- Featured Tags -->
+                
+                <section>
+                    <!-- no hr -->
+                    <h5 class="text-center">
+                        <a href="/tags/">FEATURED TAGS</a>
+                    </h5>
+                    <div class="tags">
+                        
+                        <a class="tag" href="/tags/#openstack"
+                           title="openstack">openstack</a>
+                        
+                        <a class="tag" href="/tags/#cinder"
+                           title="cinder">cinder</a>
+                        
+                        <a class="tag" href="/tags/#cache"
+                           title="cache">cache</a>
+                        
+                        <a class="tag" href="/tags/#缓存"
+                           title="缓存">缓存</a>
+                        
+                        <a class="tag" href="/tags/#volume"
+                           title="volume">volume</a>
+                        
+                    </div>
+                </section>
+                
+
+                <!-- Friends Blog -->
+                
+            </div>
+        </div>
+
+    </div>
+</article>
+
+
+
+
+
+
+
+<!-- Footer -->
+<!-- Footer -->
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 text-center">
+                <br>
+                <ul class="list-inline text-center">
+                
+                    <li>
+                        <a href="/atom.xml">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-rss fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+                
+                
+                    <li>
+                        <a target="_blank" href="https://www.zhihu.com/people/li-zong-rui-18">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa  fa-stack-1x fa-inverse">知</i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+                    <li>
+                        <a target="_blank" href="http://weibo.com/billy7x17">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-weibo fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+
+                
+                    <li>
+                        <a target="_blank"  href="https://github.com/billy7x17">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+
+                </ul>
+                <p class="copyright text-muted">
+                    Copyright &copy; Billy 2025
+                    <br>
+                    <span id="busuanzi_container_site_pv" style="font-size: 12px;">PV: <span id="busuanzi_value_site_pv"></span> Times</span>
+                    <br>
+                    Theme by <a target="_blank" rel="noopener" href="https://haojen.github.io/">Haojen Ma</a>
+                </p>
+
+            </div>
+        </div>
+    </div>
+</footer>
+
+<!-- jQuery -->
+
+<script src="/js/jquery.min.js"></script>
+
+
+<!-- Bootstrap Core JavaScript -->
+
+<script src="/js/bootstrap.min.js"></script>
+
+
+<!-- Custom Theme JavaScript -->
+
+<script src="/js/blog.js"></script>
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+
+<!-- jquery.tagcloud.js -->
+<script>
+    // only load tagcloud.js in tag.html
+    if($('#tag_cloud').length !== 0){
+        async("https://billy7x17.github.io/js/jquery.tagcloud.js",function(){
+            $.fn.tagcloud.defaults = {
+                //size: {start: 1, end: 1, unit: 'em'},
+                color: {start: '#bbbbee', end: '#0085a1'},
+            };
+            $('#tag_cloud a').tagcloud();
+        })
+    }
+</script>
+
+<!--fastClick.js -->
+<script>
+    async("//cdn.bootcss.com/fastclick/1.0.6/fastclick.min.js", function(){
+        var $nav = document.querySelector("nav");
+        if($nav) FastClick.attach($nav);
+    })
+</script>
+
+
+
+<!-- Google Analytics -->
+
+
+
+<!-- Baidu Tongji -->
+
+<script>
+    var _baId = 'd63b30f4b79f1151f194406afe5e9831';
+    // Originial
+    var _hmt = _hmt || [];
+    (function() {
+        var hm = document.createElement("script");
+        hm.src = "//hm.baidu.com/hm.js?" + _baId;
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(hm, s);
+    })();
+</script>
+
+
+<!-- swiftype -->
+<script type="text/javascript">
+  (function(w,d,t,u,n,s,e){w['SwiftypeObject']=n;w[n]=w[n]||function(){
+  (w[n].q=w[n].q||[]).push(arguments);};s=d.createElement(t);
+  e=d.getElementsByTagName(t)[0];s.async=1;s.src=u;e.parentNode.insertBefore(s,e);
+  })(window,document,'script','//s.swiftypecdn.com/install/v2/st.js','_st');
+
+  _st('install','','2.0.0');
+</script>
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+<!--wechat title img-->
+<img class="wechat-title-img" src="https://billy7x17.github.io/pics/laughMan.jpg">
+</body>
+
+</html>

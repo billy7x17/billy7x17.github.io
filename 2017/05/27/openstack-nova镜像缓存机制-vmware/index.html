@@ -1,0 +1,469 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Head tag -->
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Billy119在 Github 上的个人博客">
+    <meta name="keyword" content="Billy119">
+    <meta name="theme-color" content="#600090">
+    <meta name="msapplication-navbutton-color" content="#600090">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="#600090">
+    <link rel="shortcut icon" href="https://billy7x17.github.io/pics/laughMan-icon.png">
+    <link rel="alternate" type="application/atom+xml" title="Billy" href="/atom.xml">
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css">
+    <link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.css">
+    <title>
+        
+        openstack nova镜像缓存机制(vmware)｜Billy&#39;s blog
+        
+    </title>
+
+    <link rel="canonical" href="https://billy7x17.github.io/2017/05/27/openstack-nova镜像缓存机制-vmware/">
+
+    <!-- Bootstrap Core CSS -->
+    
+<link rel="stylesheet" href="/css/bootstrap.min.css">
+
+
+    <!-- Custom CSS -->
+    
+<link rel="stylesheet" href="/css/blog-style.css">
+
+
+    <!-- Pygments Github CSS -->
+    
+<link rel="stylesheet" href="/css/syntax.css">
+
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<style>
+
+    header.intro-header {
+        background-image: url('https://billy7x17.github.io/pics/head.jpg')
+    }
+</style>
+<!-- hack iOS CSS :active style -->
+<body ontouchstart="" class="animated fadeIn">
+<!-- Navigation -->
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top " id="nav-top" data-ispost = "true" data-istags="false
+" data-ishome = "false" >
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand animated pulse" href="/">
+                <span class="brand-logo">
+                    Billy
+                </span>
+                's Blog
+            </a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <!-- Known Issue, found by Hux:
+            <nav>'s height woule be hold on by its content.
+            so, when navbar scale out, the <nav> will cover tags.
+            also mask any touch event of tags, unfortunately.
+        -->
+        <!-- /.navbar-collapse -->
+        <div id="huxblog_navbar">
+            <div class="navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="/">Home</a>
+                    </li>
+					
+                    
+                        
+							
+                        <li>
+                            <a href="/tags/">tags</a>
+                        </li>
+							
+						
+                    
+					
+					
+                </ul>
+            </div>
+        </div>
+    </div>
+    <!-- /.container -->
+</nav>
+<script>
+    // Drop Bootstarp low-performance Navbar
+    // Use customize navbar with high-quality material design animation
+    // in high-perf jank-free CSS3 implementation
+//    var $body   = document.body;
+    var $toggle = document.querySelector('.navbar-toggle');
+    var $navbar = document.querySelector('#huxblog_navbar');
+    var $collapse = document.querySelector('.navbar-collapse');
+
+    $toggle.addEventListener('click', handleMagic)
+    function handleMagic(e){
+        if ($navbar.className.indexOf('in') > 0) {
+        // CLOSE
+            $navbar.className = " ";
+            // wait until animation end.
+            setTimeout(function(){
+                // prevent frequently toggle
+                if($navbar.className.indexOf('in') < 0) {
+                    $collapse.style.height = "0px"
+                }
+            },400)
+        }else{
+        // OPEN
+            $collapse.style.height = "auto"
+            $navbar.className += " in";
+        }
+    }
+</script>
+
+<!-- Main Content -->
+
+<!--only post-->
+
+
+<img class="wechat-title-img"
+     src="https://billy7x17.github.io/pics/image/site/head.jpg">
+
+
+<style>
+    
+    header.intro-header {
+        background-image: url('https://billy7x17.github.io/pics/image/site/head.jpg?imageView2/1/w/1400/h/400/interlace/1/q/90')
+    }
+
+    
+</style>
+
+<header class="intro-header">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 text-center">
+                <div class="post-heading">
+                    <h1>openstack nova镜像缓存机制(vmware)</h1>
+                    
+                    <span class="meta">
+                         作者 Billy
+                        <span>
+                          日期 2017-05-27
+                         </span>
+                    </span>
+                    <div class="tags text-center">
+                        
+                        <a class="tag" href="/tags/#openstack"
+                           title="openstack">openstack</a>
+                        
+                        <a class="tag" href="/tags/#image"
+                           title="image">image</a>
+                        
+                        <a class="tag" href="/tags/#nova"
+                           title="nova">nova</a>
+                        
+                        <a class="tag" href="/tags/#vmware"
+                           title="vmware">vmware</a>
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="post-title-haojen">
+        <span>
+            openstack nova镜像缓存机制(vmware)
+        </span>
+    </div>
+</header>
+
+<!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
+            <!-- Post Container -->
+            <div class="col-lg-8 col-lg-offset-1 col-sm-9 post-container">
+                <h1 id="openstack-nova镜像缓存机制-vmware"><a href="#openstack-nova镜像缓存机制-vmware" class="headerlink" title="openstack nova镜像缓存机制-vmware"></a>openstack nova镜像缓存机制-vmware</h1><p>实例的实际创建过程是通过调用libvirt函数来完成，在virt&#x2F;Libvirt&#x2F;driver.py中spawn方法来完成真正的虚拟机创建过程。</p>
+<pre><code>def spawn(self, context, instance, image_meta, injected_files,
+    admin_password, network_info=None, block_device_info=None):
+    disk_info = blockinfo.get_disk_info(CONF.libvirt_type, instance, block_device_info, image_meta)
+    xml = self.to_xml(instance, network_info,
+    disk_info, image_meta,
+    block_device_info=block_device_info)
+    self._create_image(context, instance, xml,disk_info[&#39;mapping&#39;],network_info=network_info,block_device_info=block_device_info,files=injected_files,admin_pass=admin_password)
+    self._create_domain_and_network(xml, instance, network_info, block_device_info)
+    LOG.debug(_(&quot;Instance is running&quot;), instance=instance)
+    def _wait_for_boot():
+    &quot;&quot;&quot;Called at an interval until the VM is running.&quot;&quot;&quot;
+    state = self.get_info(instance)[&#39;state&#39;]
+    if state == power_state.RUNNING:
+    LOG.info(_(&quot;Instance spawned successfully.&quot;),
+    instance=instance)
+    raise utils.LoopingCallDone()
+    timer = utils.FixedIntervalLoopingCall(_wait_for_boot)
+    timer.start(interval=0.5).wait()
+</code></pre>
+<p>to_xml就是利用传过来的各种参数，来构造libvirt用来创建虚拟机的xml文件，其中_create_image函数比较的复杂呢，里边处理了和镜像相关的相关逻辑，如从glance中下载各种类型的所需的文件，并进行备份，将备份的文件考入实例对应的目录下作为实例实际的disk。</p>
+<p>其中有几个非常重要的目录，系统的CONF.instances_path，也就是和实例相关的目录，实例所用到的文件都在此目录下，常见的目录是&#x2F;var&#x2F;lib&#x2F;nova&#x2F;instances，</p>
+<p>其中_base目录下存放着备份或者说缓存的镜像文件，snapshots放的是快照文件instance-xxxxx里边放的就是对应实例的相关文件console.log代表实例输出的日志，libvirt.xml就是libvirt用来生成实例的文件，disk就是对应实例的文件。关于_base目录要说的一点是。manager中有一个定时方法_run_image_cache_manager_pass定期清除同glance不相关的和超过配置文件中定义的时间的缓存。</p>
+<p>对于镜像的处理策略是，镜像从glance服务器上下载到_base目录，镜像的名字变为他的image_id的sha1 hash形式，如果镜像支持CoW，那么就会将镜像变为实例配置的大小，如果不支持CoW，就直接将镜像拷贝到实例对应的目录中，我想这就可以解释为什么会出现配置的硬盘大小同实际实例中的大小不一致的一个原因，另一个原因就是配置的镜像小于glance中的实际镜像，程序会直接忽略配置信息。</p>
+<p>（注：实例，虚拟机，域（dom）其实是一个概念）</p>
+
+<div id="gitalk-container"></div>
+<script src="https://cdn.bootcss.com/blueimp-md5/2.12.0/js/md5.min.js"></script><link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css"><script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+
+		<script>
+		var gitalkConfig = {"clientID":"Ov23liFG19AhSmVEYtNI","clientSecret":"236b24cf5e0eaf843c4a766f2e458b3b85702a04","repo":"billy7x17.github.io","owner":"billy7x17","admin":["billy7x17"],"distractionFreeMode":true};
+	    gitalkConfig.id = md5(location.pathname);
+		var gitalk = new Gitalk(gitalkConfig);
+	    gitalk.render("gitalk-container");
+	    </script>
+                <hr>
+                
+
+                <ul class="pager">
+                    
+                    <li class="previous">
+                        <a href="/2017/06/06/openstack控制节点高可用/" data-toggle="tooltip" data-placement="top"
+                           title="openstack控制节点高可用">&larr; Previous Post</a>
+                    </li>
+                    
+                    
+                    <li class="next">
+                        <a href="/2017/05/16/openstack-cinder缓存机制/" data-toggle="tooltip" data-placement="top"
+                           title="openstack-cinder缓存机制">Next Post &rarr;</a>
+                    </li>
+                    
+                </ul>
+
+                
+
+                
+
+
+                <!--加入新的评论系统-->
+                
+
+                
+
+            </div>
+
+            <div class="hidden-xs col-sm-3 toc-col">
+                <div class="toc-wrap">
+                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#openstack-nova%E9%95%9C%E5%83%8F%E7%BC%93%E5%AD%98%E6%9C%BA%E5%88%B6-vmware"><span class="toc-text">openstack nova镜像缓存机制-vmware</span></a></li></ol>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <!-- Sidebar Container -->
+
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                sidebar-container">
+
+                <!-- Featured Tags -->
+                
+                <section>
+                    <!-- no hr -->
+                    <h5 class="text-center">
+                        <a href="/tags/">FEATURED TAGS</a>
+                    </h5>
+                    <div class="tags">
+                        
+                        <a class="tag" href="/tags/#openstack"
+                           title="openstack">openstack</a>
+                        
+                        <a class="tag" href="/tags/#image"
+                           title="image">image</a>
+                        
+                        <a class="tag" href="/tags/#nova"
+                           title="nova">nova</a>
+                        
+                        <a class="tag" href="/tags/#vmware"
+                           title="vmware">vmware</a>
+                        
+                    </div>
+                </section>
+                
+
+                <!-- Friends Blog -->
+                
+            </div>
+        </div>
+
+    </div>
+</article>
+
+
+
+
+
+
+
+<!-- Footer -->
+<!-- Footer -->
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 text-center">
+                <br>
+                <ul class="list-inline text-center">
+                
+                    <li>
+                        <a href="/atom.xml">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-rss fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+                
+                
+                    <li>
+                        <a target="_blank" href="https://www.zhihu.com/people/li-zong-rui-18">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa  fa-stack-1x fa-inverse">知</i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+                    <li>
+                        <a target="_blank" href="http://weibo.com/billy7x17">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-weibo fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+
+                
+                    <li>
+                        <a target="_blank"  href="https://github.com/billy7x17">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+
+                </ul>
+                <p class="copyright text-muted">
+                    Copyright &copy; Billy 2025
+                    <br>
+                    <span id="busuanzi_container_site_pv" style="font-size: 12px;">PV: <span id="busuanzi_value_site_pv"></span> Times</span>
+                    <br>
+                    Theme by <a target="_blank" rel="noopener" href="https://haojen.github.io/">Haojen Ma</a>
+                </p>
+
+            </div>
+        </div>
+    </div>
+</footer>
+
+<!-- jQuery -->
+
+<script src="/js/jquery.min.js"></script>
+
+
+<!-- Bootstrap Core JavaScript -->
+
+<script src="/js/bootstrap.min.js"></script>
+
+
+<!-- Custom Theme JavaScript -->
+
+<script src="/js/blog.js"></script>
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+
+<!-- jquery.tagcloud.js -->
+<script>
+    // only load tagcloud.js in tag.html
+    if($('#tag_cloud').length !== 0){
+        async("https://billy7x17.github.io/js/jquery.tagcloud.js",function(){
+            $.fn.tagcloud.defaults = {
+                //size: {start: 1, end: 1, unit: 'em'},
+                color: {start: '#bbbbee', end: '#0085a1'},
+            };
+            $('#tag_cloud a').tagcloud();
+        })
+    }
+</script>
+
+<!--fastClick.js -->
+<script>
+    async("//cdn.bootcss.com/fastclick/1.0.6/fastclick.min.js", function(){
+        var $nav = document.querySelector("nav");
+        if($nav) FastClick.attach($nav);
+    })
+</script>
+
+
+
+<!-- Google Analytics -->
+
+
+
+<!-- Baidu Tongji -->
+
+<script>
+    var _baId = 'd63b30f4b79f1151f194406afe5e9831';
+    // Originial
+    var _hmt = _hmt || [];
+    (function() {
+        var hm = document.createElement("script");
+        hm.src = "//hm.baidu.com/hm.js?" + _baId;
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(hm, s);
+    })();
+</script>
+
+
+<!-- swiftype -->
+<script type="text/javascript">
+  (function(w,d,t,u,n,s,e){w['SwiftypeObject']=n;w[n]=w[n]||function(){
+  (w[n].q=w[n].q||[]).push(arguments);};s=d.createElement(t);
+  e=d.getElementsByTagName(t)[0];s.async=1;s.src=u;e.parentNode.insertBefore(s,e);
+  })(window,document,'script','//s.swiftypecdn.com/install/v2/st.js','_st');
+
+  _st('install','','2.0.0');
+</script>
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+<!--wechat title img-->
+<img class="wechat-title-img" src="https://billy7x17.github.io/pics/laughMan.jpg">
+</body>
+
+</html>

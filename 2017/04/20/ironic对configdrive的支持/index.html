@@ -1,0 +1,483 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Head tag -->
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Billy119在 Github 上的个人博客">
+    <meta name="keyword" content="Billy119">
+    <meta name="theme-color" content="#600090">
+    <meta name="msapplication-navbutton-color" content="#600090">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="#600090">
+    <link rel="shortcut icon" href="https://billy7x17.github.io/pics/laughMan-icon.png">
+    <link rel="alternate" type="application/atom+xml" title="Billy" href="/atom.xml">
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css">
+    <link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.css">
+    <title>
+        
+        ironic对configdrive的支持｜Billy&#39;s blog
+        
+    </title>
+
+    <link rel="canonical" href="https://billy7x17.github.io/2017/04/20/ironic对configdrive的支持/">
+
+    <!-- Bootstrap Core CSS -->
+    
+<link rel="stylesheet" href="/css/bootstrap.min.css">
+
+
+    <!-- Custom CSS -->
+    
+<link rel="stylesheet" href="/css/blog-style.css">
+
+
+    <!-- Pygments Github CSS -->
+    
+<link rel="stylesheet" href="/css/syntax.css">
+
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<style>
+
+    header.intro-header {
+        background-image: url('https://billy7x17.github.io/pics/head.jpg')
+    }
+</style>
+<!-- hack iOS CSS :active style -->
+<body ontouchstart="" class="animated fadeIn">
+<!-- Navigation -->
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top " id="nav-top" data-ispost = "true" data-istags="false
+" data-ishome = "false" >
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand animated pulse" href="/">
+                <span class="brand-logo">
+                    Billy
+                </span>
+                's Blog
+            </a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <!-- Known Issue, found by Hux:
+            <nav>'s height woule be hold on by its content.
+            so, when navbar scale out, the <nav> will cover tags.
+            also mask any touch event of tags, unfortunately.
+        -->
+        <!-- /.navbar-collapse -->
+        <div id="huxblog_navbar">
+            <div class="navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="/">Home</a>
+                    </li>
+					
+                    
+                        
+							
+                        <li>
+                            <a href="/tags/">tags</a>
+                        </li>
+							
+						
+                    
+					
+					
+                </ul>
+            </div>
+        </div>
+    </div>
+    <!-- /.container -->
+</nav>
+<script>
+    // Drop Bootstarp low-performance Navbar
+    // Use customize navbar with high-quality material design animation
+    // in high-perf jank-free CSS3 implementation
+//    var $body   = document.body;
+    var $toggle = document.querySelector('.navbar-toggle');
+    var $navbar = document.querySelector('#huxblog_navbar');
+    var $collapse = document.querySelector('.navbar-collapse');
+
+    $toggle.addEventListener('click', handleMagic)
+    function handleMagic(e){
+        if ($navbar.className.indexOf('in') > 0) {
+        // CLOSE
+            $navbar.className = " ";
+            // wait until animation end.
+            setTimeout(function(){
+                // prevent frequently toggle
+                if($navbar.className.indexOf('in') < 0) {
+                    $collapse.style.height = "0px"
+                }
+            },400)
+        }else{
+        // OPEN
+            $collapse.style.height = "auto"
+            $navbar.className += " in";
+        }
+    }
+</script>
+
+<!-- Main Content -->
+
+<!--only post-->
+
+
+<img class="wechat-title-img"
+     src="https://billy7x17.github.io/pics/image/site/head.jpg">
+
+
+<style>
+    
+    header.intro-header {
+        background-image: url('https://billy7x17.github.io/pics/image/site/head.jpg?imageView2/1/w/1400/h/400/interlace/1/q/90')
+    }
+
+    
+</style>
+
+<header class="intro-header">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 text-center">
+                <div class="post-heading">
+                    <h1>ironic对configdrive的支持</h1>
+                    
+                    <span class="meta">
+                         作者 Billy
+                        <span>
+                          日期 2017-04-20
+                         </span>
+                    </span>
+                    <div class="tags text-center">
+                        
+                        <a class="tag" href="/tags/#openstack"
+                           title="openstack">openstack</a>
+                        
+                        <a class="tag" href="/tags/#ironic"
+                           title="ironic">ironic</a>
+                        
+                        <a class="tag" href="/tags/#configdrive"
+                           title="configdrive">configdrive</a>
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="post-title-haojen">
+        <span>
+            ironic对configdrive的支持
+        </span>
+    </div>
+</header>
+
+<!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
+            <!-- Post Container -->
+            <div class="col-lg-8 col-lg-offset-1 col-sm-9 post-container">
+                <h1 id="ironic对configdrive的支持"><a href="#ironic对configdrive的支持" class="headerlink" title="ironic对configdrive的支持"></a>ironic对configdrive的支持</h1><p>openstack能为虚拟机设置网络、keypair、分区等等内容，但是对裸金属的支持如何呢？</p>
+<p>对虚拟机的配置主要是用了cloud-init软件(官方推荐)，当然亦可以自己写脚本来支持。</p>
+<p>对裸金属节点也是一样，至少newton版本还是通过cloud-init来执行对主机的配置。既然如此，openstack又是如何将传入的密码、网络等参数传递到裸金属节点上的呢？</p>
+<p>对ironic了解的人知道，ironic是独立于openstack的一套系统，有2个服务：openstack-ironic-api、openstack-ironic-conductor，他有自己的一套数据库。创建ironic云主机对ironic来说，仍然是由nova-compute传来的命令，这个nova-compute是支持ironic驱动的。</p>
+<p>ironic云主机的创建时，会将node中instance_info字段更新为云主机的信息，格式为json，这其中就有configdrive。</p>
+<p>大家不禁会想，configdrive不是个文件么？怎么通过存入一条数据来传递呢？这就体现了openstack的知识渊博。</p>
+<p>首先，openstack会判断是否需要生成configdrive，如果需要，那么组装、生成文件(其实是一个不小的文件堆)，然后用gzip压缩算法对其进行压缩，压缩成字符串后再用base64编码，通过rest接口传过来入库。</p>
+<p>由于我们要自己实现一套conductor，所以我对这段configdrive编码进行了一系列研究。base64解码并gzip解压后，生成了一个文件，这个文件类型让我非常恼火，因为使用好压软件是可以打开的，但是用代码怎么也敲不开，试了许多种文件类型，最后将其传到linux后发现可挂载，终于意识到是iso类型…  但java对iso类型无爱，也只能是上传至tftp服务器后由裸金属节点主动下载挂载后操作了，当然这是由脚本执行的。</p>
+<p>openstack-ironic-conductor正常会对其进行解码、解压，然后再挂载至裸金属节点上。</p>
+<p>下面是configdrive文件的结构：<br><img src="/ironic-configdrive%E7%9B%AE%E5%BD%95.png"></p>
+<p><img src="/ironic-configdrive%E7%9B%AE%E5%BD%952.png"></p>
+<p><img src="/ironic-configdrive%E7%9B%AE%E5%BD%953.png"></p>
+<p>meta_data.json</p>
+<pre><code>&#123;
+    &quot;admin_pass&quot;: &quot;199001122373&quot;,
+    &quot;random_seed&quot;: &quot;NQWogxECH5Y50kZf5X3+2rUNlEYrPSP5ZXpqD/0ej/pQCCKBjeBHBGoXqJK9CC6aVOIHzeNXPQgWG1gk5dX4V/iuOTGCpxTZMacMgB+c4jW9Flfn8948TlInuy7zK/cmkw9E1JwAv/4oaFc70RbJc3xkE9kwTxFAyECzEkfQ1xYDN6qz6b2unmoDHVsjUiMid5OxgVGjCiGFHIB4UWe943a7v+/odPxbMnhz/tHV3OTovbfbMacprp5gnUo1QwpjQvbMQGoygqSUBt8C1Oo+Xc+xwvZjhw1fQ0xw6ivwFw6PVqqSbVmJQWtGMTo6bfY+PLhNGbpBlKlUcCGkoMe4CE5hf03gdclC+4VEY+TXJ5s/wpxCsx/5xNtdc7FjVeewtQPxXY5apb3lpQuHK3pUIbwEmWJes9YVbuPwIRhLsDx1Zz4reufWD/9KWuAT4u8PEmJALmN4Gkc4SSUv92Uos2ILJSGGaFasbKOHaeu+EGWVYujxa8olH71+MoiVMnws4D2AbhSC77BXC1JdikxQni6TOJIAABvhNUg+K94Y+zkGEOPYikfZNuTK0zXet6fOmjdTE476X8Kjdl1qr/XimzzQ+ujn8ZY8PLTh6JkpLw0AAxqCPlo6Lng1WWRnV0nwSjzcnuGXei4YwFHf3nbO2JPulwtHyYicHbmC3+rcS5c=&quot;,
+    &quot;uuid&quot;: &quot;ee26d71e-70da-4da8-9924-2883fe7d4003&quot;,
+    &quot;availability_zone&quot;: &quot;nova&quot;,
+    &quot;hostname&quot;: &quot;test.novalocal&quot;,
+    &quot;launch_index&quot;: 0,
+    &quot;devices&quot;: [],
+    &quot;project_id&quot;: &quot;cf97c2d4b7634bb59bd2e4f8f128b54b&quot;,
+    &quot;name&quot;: &quot;test&quot;
+&#125;
+</code></pre>
+<p>network_data.json</p>
+<pre><code>&#123;
+    &quot;services&quot;: [&#123;
+        &quot;type&quot;: &quot;dns&quot;,
+        &quot;address&quot;: &quot;202.107.117.11&quot;&#125;],
+    &quot;networks&quot;: [&#123;
+        &quot;network_id&quot;: &quot;8db1ace5-e180-4735-a7db-3cc5a7474e1b&quot;,
+        &quot;link&quot;: &quot;tap8bd5d063-60&quot;,
+        &quot;type&quot;: &quot;ipv4_dhcp&quot;,
+        &quot;id&quot;: &quot;network0&quot;
+    &#125;],
+    &quot;links&quot;: [&#123;
+        &quot;ethernet_mac_address&quot;: &quot;90:fb:a6:06:17:dc&quot;,
+        &quot;mtu&quot;: 1500,
+        &quot;type&quot;: &quot;ovs&quot;,
+        &quot;id&quot;: &quot;tap8bd5d063-60&quot;,
+        &quot;vif_id&quot;: &quot;8bd5d063-6075-4068-bf2b-94c12a22f891&quot;
+    &#125;]
+&#125;
+</code></pre>
+
+<div id="gitalk-container"></div>
+<script src="https://cdn.bootcss.com/blueimp-md5/2.12.0/js/md5.min.js"></script><link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css"><script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+
+		<script>
+		var gitalkConfig = {"clientID":"Ov23liFG19AhSmVEYtNI","clientSecret":"236b24cf5e0eaf843c4a766f2e458b3b85702a04","repo":"billy7x17.github.io","owner":"billy7x17","admin":["billy7x17"],"distractionFreeMode":true};
+	    gitalkConfig.id = md5(location.pathname);
+		var gitalk = new Gitalk(gitalkConfig);
+	    gitalk.render("gitalk-container");
+	    </script>
+                <hr>
+                
+
+                <ul class="pager">
+                    
+                    <li class="previous">
+                        <a href="/2017/04/24/ironic对多网卡的支持/" data-toggle="tooltip" data-placement="top"
+                           title="ironic对多网卡的支持">&larr; Previous Post</a>
+                    </li>
+                    
+                    
+                    <li class="next">
+                        <a href="/2017/04/04/spring-aop对各作用域的支持/" data-toggle="tooltip" data-placement="top"
+                           title="spring aop对各作用域的支持">Next Post &rarr;</a>
+                    </li>
+                    
+                </ul>
+
+                
+
+                
+
+
+                <!--加入新的评论系统-->
+                
+
+                
+
+            </div>
+
+            <div class="hidden-xs col-sm-3 toc-col">
+                <div class="toc-wrap">
+                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#ironic%E5%AF%B9configdrive%E7%9A%84%E6%94%AF%E6%8C%81"><span class="toc-text">ironic对configdrive的支持</span></a></li></ol>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <!-- Sidebar Container -->
+
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                sidebar-container">
+
+                <!-- Featured Tags -->
+                
+                <section>
+                    <!-- no hr -->
+                    <h5 class="text-center">
+                        <a href="/tags/">FEATURED TAGS</a>
+                    </h5>
+                    <div class="tags">
+                        
+                        <a class="tag" href="/tags/#openstack"
+                           title="openstack">openstack</a>
+                        
+                        <a class="tag" href="/tags/#ironic"
+                           title="ironic">ironic</a>
+                        
+                        <a class="tag" href="/tags/#configdrive"
+                           title="configdrive">configdrive</a>
+                        
+                    </div>
+                </section>
+                
+
+                <!-- Friends Blog -->
+                
+            </div>
+        </div>
+
+    </div>
+</article>
+
+
+
+
+
+
+
+<!-- Footer -->
+<!-- Footer -->
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 text-center">
+                <br>
+                <ul class="list-inline text-center">
+                
+                    <li>
+                        <a href="/atom.xml">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-rss fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+                
+                
+                    <li>
+                        <a target="_blank" href="https://www.zhihu.com/people/li-zong-rui-18">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa  fa-stack-1x fa-inverse">知</i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+                    <li>
+                        <a target="_blank" href="http://weibo.com/billy7x17">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-weibo fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+
+                
+                    <li>
+                        <a target="_blank"  href="https://github.com/billy7x17">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+
+                </ul>
+                <p class="copyright text-muted">
+                    Copyright &copy; Billy 2025
+                    <br>
+                    <span id="busuanzi_container_site_pv" style="font-size: 12px;">PV: <span id="busuanzi_value_site_pv"></span> Times</span>
+                    <br>
+                    Theme by <a target="_blank" rel="noopener" href="https://haojen.github.io/">Haojen Ma</a>
+                </p>
+
+            </div>
+        </div>
+    </div>
+</footer>
+
+<!-- jQuery -->
+
+<script src="/js/jquery.min.js"></script>
+
+
+<!-- Bootstrap Core JavaScript -->
+
+<script src="/js/bootstrap.min.js"></script>
+
+
+<!-- Custom Theme JavaScript -->
+
+<script src="/js/blog.js"></script>
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+
+<!-- jquery.tagcloud.js -->
+<script>
+    // only load tagcloud.js in tag.html
+    if($('#tag_cloud').length !== 0){
+        async("https://billy7x17.github.io/js/jquery.tagcloud.js",function(){
+            $.fn.tagcloud.defaults = {
+                //size: {start: 1, end: 1, unit: 'em'},
+                color: {start: '#bbbbee', end: '#0085a1'},
+            };
+            $('#tag_cloud a').tagcloud();
+        })
+    }
+</script>
+
+<!--fastClick.js -->
+<script>
+    async("//cdn.bootcss.com/fastclick/1.0.6/fastclick.min.js", function(){
+        var $nav = document.querySelector("nav");
+        if($nav) FastClick.attach($nav);
+    })
+</script>
+
+
+
+<!-- Google Analytics -->
+
+
+
+<!-- Baidu Tongji -->
+
+<script>
+    var _baId = 'd63b30f4b79f1151f194406afe5e9831';
+    // Originial
+    var _hmt = _hmt || [];
+    (function() {
+        var hm = document.createElement("script");
+        hm.src = "//hm.baidu.com/hm.js?" + _baId;
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(hm, s);
+    })();
+</script>
+
+
+<!-- swiftype -->
+<script type="text/javascript">
+  (function(w,d,t,u,n,s,e){w['SwiftypeObject']=n;w[n]=w[n]||function(){
+  (w[n].q=w[n].q||[]).push(arguments);};s=d.createElement(t);
+  e=d.getElementsByTagName(t)[0];s.async=1;s.src=u;e.parentNode.insertBefore(s,e);
+  })(window,document,'script','//s.swiftypecdn.com/install/v2/st.js','_st');
+
+  _st('install','','2.0.0');
+</script>
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+<!--wechat title img-->
+<img class="wechat-title-img" src="https://billy7x17.github.io/pics/laughMan.jpg">
+</body>
+
+</html>

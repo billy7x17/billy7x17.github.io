@@ -1,0 +1,524 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Head tag -->
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Billy119在 Github 上的个人博客">
+    <meta name="keyword" content="Billy119">
+    <meta name="theme-color" content="#600090">
+    <meta name="msapplication-navbutton-color" content="#600090">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="#600090">
+    <link rel="shortcut icon" href="https://billy7x17.github.io/pics/laughMan-icon.png">
+    <link rel="alternate" type="application/atom+xml" title="Billy" href="/atom.xml">
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css">
+    <link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.css">
+    <title>
+        
+        裸金属控制台访问｜Billy&#39;s blog
+        
+    </title>
+
+    <link rel="canonical" href="https://billy7x17.github.io/2018/03/12/裸金属控制台访问/">
+
+    <!-- Bootstrap Core CSS -->
+    
+<link rel="stylesheet" href="/css/bootstrap.min.css">
+
+
+    <!-- Custom CSS -->
+    
+<link rel="stylesheet" href="/css/blog-style.css">
+
+
+    <!-- Pygments Github CSS -->
+    
+<link rel="stylesheet" href="/css/syntax.css">
+
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<style>
+
+    header.intro-header {
+        background-image: url('https://billy7x17.github.io/pics/head.jpg')
+    }
+</style>
+<!-- hack iOS CSS :active style -->
+<body ontouchstart="" class="animated fadeIn">
+<!-- Navigation -->
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top " id="nav-top" data-ispost = "true" data-istags="false
+" data-ishome = "false" >
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand animated pulse" href="/">
+                <span class="brand-logo">
+                    Billy
+                </span>
+                's Blog
+            </a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <!-- Known Issue, found by Hux:
+            <nav>'s height woule be hold on by its content.
+            so, when navbar scale out, the <nav> will cover tags.
+            also mask any touch event of tags, unfortunately.
+        -->
+        <!-- /.navbar-collapse -->
+        <div id="huxblog_navbar">
+            <div class="navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="/">Home</a>
+                    </li>
+					
+                    
+                        
+							
+                        <li>
+                            <a href="/tags/">tags</a>
+                        </li>
+							
+						
+                    
+					
+					
+                </ul>
+            </div>
+        </div>
+    </div>
+    <!-- /.container -->
+</nav>
+<script>
+    // Drop Bootstarp low-performance Navbar
+    // Use customize navbar with high-quality material design animation
+    // in high-perf jank-free CSS3 implementation
+//    var $body   = document.body;
+    var $toggle = document.querySelector('.navbar-toggle');
+    var $navbar = document.querySelector('#huxblog_navbar');
+    var $collapse = document.querySelector('.navbar-collapse');
+
+    $toggle.addEventListener('click', handleMagic)
+    function handleMagic(e){
+        if ($navbar.className.indexOf('in') > 0) {
+        // CLOSE
+            $navbar.className = " ";
+            // wait until animation end.
+            setTimeout(function(){
+                // prevent frequently toggle
+                if($navbar.className.indexOf('in') < 0) {
+                    $collapse.style.height = "0px"
+                }
+            },400)
+        }else{
+        // OPEN
+            $collapse.style.height = "auto"
+            $navbar.className += " in";
+        }
+    }
+</script>
+
+<!-- Main Content -->
+
+<!--only post-->
+
+
+<img class="wechat-title-img"
+     src="https://billy7x17.github.io/pics/image/site/head.jpg">
+
+
+<style>
+    
+    header.intro-header {
+        background-image: url('https://billy7x17.github.io/pics/image/site/head.jpg?imageView2/1/w/1400/h/400/interlace/1/q/90')
+    }
+
+    
+</style>
+
+<header class="intro-header">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 text-center">
+                <div class="post-heading">
+                    <h1>裸金属控制台访问</h1>
+                    
+                    <span class="meta">
+                         作者 Billy
+                        <span>
+                          日期 2018-03-12
+                         </span>
+                    </span>
+                    <div class="tags text-center">
+                        
+                        <a class="tag" href="/tags/#openstack"
+                           title="openstack">openstack</a>
+                        
+                        <a class="tag" href="/tags/#ironic"
+                           title="ironic">ironic</a>
+                        
+                        <a class="tag" href="/tags/#console"
+                           title="console">console</a>
+                        
+                        <a class="tag" href="/tags/#shellinabox"
+                           title="shellinabox">shellinabox</a>
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="post-title-haojen">
+        <span>
+            裸金属控制台访问
+        </span>
+    </div>
+</header>
+
+<!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
+            <!-- Post Container -->
+            <div class="col-lg-8 col-lg-offset-1 col-sm-9 post-container">
+                <h1 id="裸金属控制台访问"><a href="#裸金属控制台访问" class="headerlink" title="裸金属控制台访问"></a>裸金属控制台访问</h1><h2 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h2><p>裸金属的存在和虚拟机一样，都属于实例，但在<code>dashboard</code>中，虚拟机可以使用实例页面中的控制台页签直接访问，裸金属是不是也可以呢？</p>
+<h2 id="官方文档"><a href="#官方文档" class="headerlink" title="官方文档"></a>官方文档</h2><p>以<code>Ocata</code>版本为例：</p>
+<p><a target="_blank" rel="noopener" href="https://docs.openstack.org/ironic/ocata/deploy/console.html">https://docs.openstack.org/ironic/ocata/deploy/console.html</a></p>
+<p>主要支持2种控制台，一个是web控制台，一个是高级控制台：</p>
+<ul>
+<li>web控制台底层采用<code>shellinabox</code>软件，在<code>ironic-conductor</code>所在节点上开启端口转发，将ipmi控制台的tcp连接直接转发到web服务，因此最后以<a href="https://ip:port的形式呈现">https://ip:port的形式呈现</a></li>
+<li>高级控制台底层采用<code>socat</code>，将ipmi控制台的tcp连接转发出来，url格式为tcp:&#x2F;&#x2F;ip:port，<code>nova</code>有相应的组件来转发到dashboard上</li>
+</ul>
+<h2 id="详细"><a href="#详细" class="headerlink" title="详细"></a>详细</h2><h3 id="web控制台"><a href="#web控制台" class="headerlink" title="web控制台"></a>web控制台</h3><p><code>Queens</code>版本，<code>dashboard</code>增加了对<code>shellinabox</code>控制台的支持，不过目前还没时间测试。</p>
+<p><img src="/%E8%A3%B8%E9%87%91%E5%B1%9Eweb%E6%8E%A7%E5%88%B6%E5%8F%B0.png" alt="web console by shellinabox"></p>
+<h4 id="安装shellinabox"><a href="#安装shellinabox" class="headerlink" title="安装shellinabox"></a>安装<code>shellinabox</code></h4><pre><code>yum install shellinabox -y
+</code></pre>
+<p>注意，<code>shellinabox</code>包是在<code>epel</code>源中的。</p>
+<p>如果无法访问<code>epel</code>源，可以在<a href="shellinabox-2.20-1.el7.x86_64.rpm">此处</a>下载</p>
+<h4 id="更改ironic-conf配置"><a href="#更改ironic-conf配置" class="headerlink" title="更改ironic.conf配置"></a>更改<code>ironic.conf</code>配置</h4><pre><code>vi /etc/ironic/ironic.conf
+
+[pxe]
+pxe_append_params = nofb nomodeset vga=normal console=ttyS0,115200n8
+</code></pre>
+<h4 id="更改裸金属节点配置"><a href="#更改裸金属节点配置" class="headerlink" title="更改裸金属节点配置"></a>更改裸金属节点配置</h4><pre><code>ironic node-update &lt;node-uuid&gt; add driver_info/&lt;terminal_port&gt;=&lt;customized_port&gt;
+ironic node-set-console-mode &lt;node-uuid&gt; true
+</code></pre>
+<p>注：**<code>&lt;terminal_port&gt;</code>是根据驱动区分不同的终端端口，如<code>ipmi_terminal_port</code>等**</p>
+<p><strong><code>&lt;customized_port&gt;</code>是被监听的端口，在<code>ironic-conductor</code>上开放，因此所有<code>node</code>的控制台端口不允许重复</strong></p>
+<h4 id="获取裸金属节点的web控制台信息"><a href="#获取裸金属节点的web控制台信息" class="headerlink" title="获取裸金属节点的web控制台信息"></a>获取裸金属节点的web控制台信息</h4><pre><code>ironic node-get-console &lt;node-uuid&gt;
++-----------------+----------------------------------------------------------------------+
+| Property        | Value                                                                |
++-----------------+----------------------------------------------------------------------+
+| console_enabled | True                                                                 |
+| console_info    | &#123;u&#39;url&#39;: u&#39;http://&lt;url&gt;:&lt;customized_port&gt;&#39;, u&#39;type&#39;: u&#39;shellinabox&#39;&#125; |
++-----------------+----------------------------------------------------------------------+
+</code></pre>
+<p>你可以打开上述<code>url</code>中的地址，就可以看到控制台页面了。</p>
+<p>如果上述<code>console_enabled</code>值是False，<code>console_info</code>的值为空，则web控制台不可用。</p>
+<h3 id="高级控制台"><a href="#高级控制台" class="headerlink" title="高级控制台"></a>高级控制台</h3><p>在<code>Queens</code>版本之前，<code>dashboard</code>只对裸金属支持高级控制台的显示。</p>
+<p><img src="/%E8%A3%B8%E9%87%91%E5%B1%9E%E9%AB%98%E7%BA%A7%E6%8E%A7%E5%88%B6%E5%8F%B0.png" alt="serial console on dashboard"></p>
+<p><strong>传递的tcp连接是单连接，其他访问会中断当前控制台的状态。</strong></p>
+<p><strong>控制台下面的”Status: Open”就是当前控制台的状态，若被中断，会变成”Status: Closed”</strong></p>
+<p>只有少数几个<code>driver</code>支持<code>socat</code>，并且在<code>driver</code>名称上都有体现:</p>
+<ul>
+<li><code>agent_ipmitool_socat</code></li>
+<li><code>fake_ipmitool_socat</code></li>
+<li><code>pxe_ipmitool_socat</code></li>
+</ul>
+<h4 id="首先在ironic-conductor上安装socat"><a href="#首先在ironic-conductor上安装socat" class="headerlink" title="首先在ironic-conductor上安装socat"></a>首先在<code>ironic-conductor</code>上安装<code>socat</code></h4><pre><code>yum install socat -y
+</code></pre>
+<h4 id="更改ironic-conf配置-1"><a href="#更改ironic-conf配置-1" class="headerlink" title="更改ironic.conf配置"></a>更改<code>ironic.conf</code>配置</h4><pre><code>vi /etc/ironic/ironic.conf
+
+[pxe]
+pxe_append_params = nofb nomodeset vga=normal console=ttyS0,115200n8
+</code></pre>
+<h4 id="获取裸金属节点的web控制台信息-1"><a href="#获取裸金属节点的web控制台信息-1" class="headerlink" title="获取裸金属节点的web控制台信息"></a>获取裸金属节点的web控制台信息</h4><pre><code>ironic node-get-console &lt;node-uuid&gt;
++-----------------+----------------------------------------------------------------------+
+| Property        | Value                                                                |
++-----------------+----------------------------------------------------------------------+
+| console_enabled | True                                                                 |
+| console_info    | &#123;u&#39;url&#39;: u&#39;tcp://&lt;host&gt;:&lt;port&gt;&#39;, u&#39;type&#39;: u&#39;socat&#39;&#125;                  |
++-----------------+----------------------------------------------------------------------+
+</code></pre>
+<p>如果上述<code>console_enabled</code>值是False，<code>console_info</code>的值为空，则高级控制台不可用。</p>
+<h4 id="安装openstack-nova-serialproxy"><a href="#安装openstack-nova-serialproxy" class="headerlink" title="安装openstack-nova-serialproxy"></a>安装<code>openstack-nova-serialproxy</code></h4><p><code>openstack-nova-serialproxy</code>是nova为高级控制台作代理的组件</p>
+<pre><code>yum install openstack-nova-serialproxy -y
+</code></pre>
+<h4 id="更改裸金属节点配置-1"><a href="#更改裸金属节点配置-1" class="headerlink" title="更改裸金属节点配置"></a>更改裸金属节点配置</h4><pre><code>ironic node-update &lt;node-uuid&gt; add driver_info/&lt;terminal_port&gt;=&lt;customized_port&gt;
+ironic node-set-console-mode &lt;node-uuid&gt; true
+</code></pre>
+<p>注：**<code>&lt;terminal_port&gt;</code>是根据驱动区分不同的终端端口，如<code>ipmi_terminal_port</code>等**</p>
+<p><strong><code>&lt;customized_port&gt;</code>是被监听的端口，在<code>ironic-conductor</code>上开放，因此所有<code>node</code>的控制台端口不允许重复</strong></p>
+<h4 id="修改nova-conf"><a href="#修改nova-conf" class="headerlink" title="修改nova.conf"></a>修改<code>nova.conf</code></h4><pre><code>vi /etc/nova/nova.conf
+
+[console]
+allowed_origins = &lt;nova-serialproxy所在主机的ip&gt;
+
+[serial_console]
+enabled=True
+base_url=ws://&lt;ironic-conductor所在主机的ip&gt;:6083/
+proxyclient_address=&lt;nova-serialproxy所在主机的ip&gt;
+</code></pre>
+<h4 id="重启nova所有服务"><a href="#重启nova所有服务" class="headerlink" title="重启nova所有服务"></a>重启<code>nova</code>所有服务</h4><pre><code>systemctl restart openstack-nova-*
+</code></pre>
+
+<div id="gitalk-container"></div>
+<script src="https://cdn.bootcss.com/blueimp-md5/2.12.0/js/md5.min.js"></script><link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css"><script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+
+		<script>
+		var gitalkConfig = {"clientID":"Ov23liFG19AhSmVEYtNI","clientSecret":"236b24cf5e0eaf843c4a766f2e458b3b85702a04","repo":"billy7x17.github.io","owner":"billy7x17","admin":["billy7x17"],"distractionFreeMode":true};
+	    gitalkConfig.id = md5(location.pathname);
+		var gitalk = new Gitalk(gitalkConfig);
+	    gitalk.render("gitalk-container");
+	    </script>
+                <hr>
+                
+
+                <ul class="pager">
+                    
+                    <li class="previous">
+                        <a href="/2018/06/11/VHD镜像制作/" data-toggle="tooltip" data-placement="top"
+                           title="VHD镜像制作">&larr; Previous Post</a>
+                    </li>
+                    
+                    
+                    <li class="next">
+                        <a href="/2018/02/28/disk-image-builder/" data-toggle="tooltip" data-placement="top"
+                           title="disk-image-builder">Next Post &rarr;</a>
+                    </li>
+                    
+                </ul>
+
+                
+
+                
+
+
+                <!--加入新的评论系统-->
+                
+
+                
+
+            </div>
+
+            <div class="hidden-xs col-sm-3 toc-col">
+                <div class="toc-wrap">
+                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E8%A3%B8%E9%87%91%E5%B1%9E%E6%8E%A7%E5%88%B6%E5%8F%B0%E8%AE%BF%E9%97%AE"><span class="toc-text">裸金属控制台访问</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%83%8C%E6%99%AF"><span class="toc-text">背景</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%98%E6%96%B9%E6%96%87%E6%A1%A3"><span class="toc-text">官方文档</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%AF%A6%E7%BB%86"><span class="toc-text">详细</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#web%E6%8E%A7%E5%88%B6%E5%8F%B0"><span class="toc-text">web控制台</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%AE%89%E8%A3%85shellinabox"><span class="toc-text">安装shellinabox</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%9B%B4%E6%94%B9ironic-conf%E9%85%8D%E7%BD%AE"><span class="toc-text">更改ironic.conf配置</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%9B%B4%E6%94%B9%E8%A3%B8%E9%87%91%E5%B1%9E%E8%8A%82%E7%82%B9%E9%85%8D%E7%BD%AE"><span class="toc-text">更改裸金属节点配置</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%8E%B7%E5%8F%96%E8%A3%B8%E9%87%91%E5%B1%9E%E8%8A%82%E7%82%B9%E7%9A%84web%E6%8E%A7%E5%88%B6%E5%8F%B0%E4%BF%A1%E6%81%AF"><span class="toc-text">获取裸金属节点的web控制台信息</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%AB%98%E7%BA%A7%E6%8E%A7%E5%88%B6%E5%8F%B0"><span class="toc-text">高级控制台</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E9%A6%96%E5%85%88%E5%9C%A8ironic-conductor%E4%B8%8A%E5%AE%89%E8%A3%85socat"><span class="toc-text">首先在ironic-conductor上安装socat</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%9B%B4%E6%94%B9ironic-conf%E9%85%8D%E7%BD%AE-1"><span class="toc-text">更改ironic.conf配置</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%8E%B7%E5%8F%96%E8%A3%B8%E9%87%91%E5%B1%9E%E8%8A%82%E7%82%B9%E7%9A%84web%E6%8E%A7%E5%88%B6%E5%8F%B0%E4%BF%A1%E6%81%AF-1"><span class="toc-text">获取裸金属节点的web控制台信息</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%AE%89%E8%A3%85openstack-nova-serialproxy"><span class="toc-text">安装openstack-nova-serialproxy</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%9B%B4%E6%94%B9%E8%A3%B8%E9%87%91%E5%B1%9E%E8%8A%82%E7%82%B9%E9%85%8D%E7%BD%AE-1"><span class="toc-text">更改裸金属节点配置</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%BF%AE%E6%94%B9nova-conf"><span class="toc-text">修改nova.conf</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E9%87%8D%E5%90%AFnova%E6%89%80%E6%9C%89%E6%9C%8D%E5%8A%A1"><span class="toc-text">重启nova所有服务</span></a></li></ol></li></ol></li></ol></li></ol>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <!-- Sidebar Container -->
+
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                sidebar-container">
+
+                <!-- Featured Tags -->
+                
+                <section>
+                    <!-- no hr -->
+                    <h5 class="text-center">
+                        <a href="/tags/">FEATURED TAGS</a>
+                    </h5>
+                    <div class="tags">
+                        
+                        <a class="tag" href="/tags/#openstack"
+                           title="openstack">openstack</a>
+                        
+                        <a class="tag" href="/tags/#ironic"
+                           title="ironic">ironic</a>
+                        
+                        <a class="tag" href="/tags/#console"
+                           title="console">console</a>
+                        
+                        <a class="tag" href="/tags/#shellinabox"
+                           title="shellinabox">shellinabox</a>
+                        
+                    </div>
+                </section>
+                
+
+                <!-- Friends Blog -->
+                
+            </div>
+        </div>
+
+    </div>
+</article>
+
+
+
+
+
+
+
+<!-- Footer -->
+<!-- Footer -->
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 text-center">
+                <br>
+                <ul class="list-inline text-center">
+                
+                    <li>
+                        <a href="/atom.xml">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-rss fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+                
+                
+                    <li>
+                        <a target="_blank" href="https://www.zhihu.com/people/li-zong-rui-18">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa  fa-stack-1x fa-inverse">知</i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+                    <li>
+                        <a target="_blank" href="http://weibo.com/billy7x17">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-weibo fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+
+                
+                    <li>
+                        <a target="_blank"  href="https://github.com/billy7x17">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+
+                </ul>
+                <p class="copyright text-muted">
+                    Copyright &copy; Billy 2025
+                    <br>
+                    <span id="busuanzi_container_site_pv" style="font-size: 12px;">PV: <span id="busuanzi_value_site_pv"></span> Times</span>
+                    <br>
+                    Theme by <a target="_blank" rel="noopener" href="https://haojen.github.io/">Haojen Ma</a>
+                </p>
+
+            </div>
+        </div>
+    </div>
+</footer>
+
+<!-- jQuery -->
+
+<script src="/js/jquery.min.js"></script>
+
+
+<!-- Bootstrap Core JavaScript -->
+
+<script src="/js/bootstrap.min.js"></script>
+
+
+<!-- Custom Theme JavaScript -->
+
+<script src="/js/blog.js"></script>
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+
+<!-- jquery.tagcloud.js -->
+<script>
+    // only load tagcloud.js in tag.html
+    if($('#tag_cloud').length !== 0){
+        async("https://billy7x17.github.io/js/jquery.tagcloud.js",function(){
+            $.fn.tagcloud.defaults = {
+                //size: {start: 1, end: 1, unit: 'em'},
+                color: {start: '#bbbbee', end: '#0085a1'},
+            };
+            $('#tag_cloud a').tagcloud();
+        })
+    }
+</script>
+
+<!--fastClick.js -->
+<script>
+    async("//cdn.bootcss.com/fastclick/1.0.6/fastclick.min.js", function(){
+        var $nav = document.querySelector("nav");
+        if($nav) FastClick.attach($nav);
+    })
+</script>
+
+
+
+<!-- Google Analytics -->
+
+
+
+<!-- Baidu Tongji -->
+
+<script>
+    var _baId = 'd63b30f4b79f1151f194406afe5e9831';
+    // Originial
+    var _hmt = _hmt || [];
+    (function() {
+        var hm = document.createElement("script");
+        hm.src = "//hm.baidu.com/hm.js?" + _baId;
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(hm, s);
+    })();
+</script>
+
+
+<!-- swiftype -->
+<script type="text/javascript">
+  (function(w,d,t,u,n,s,e){w['SwiftypeObject']=n;w[n]=w[n]||function(){
+  (w[n].q=w[n].q||[]).push(arguments);};s=d.createElement(t);
+  e=d.getElementsByTagName(t)[0];s.async=1;s.src=u;e.parentNode.insertBefore(s,e);
+  })(window,document,'script','//s.swiftypecdn.com/install/v2/st.js','_st');
+
+  _st('install','','2.0.0');
+</script>
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+<!--wechat title img-->
+<img class="wechat-title-img" src="https://billy7x17.github.io/pics/laughMan.jpg">
+</body>
+
+</html>

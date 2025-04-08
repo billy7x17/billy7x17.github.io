@@ -1,0 +1,668 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Head tag -->
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Billy119在 Github 上的个人博客">
+    <meta name="keyword" content="Billy119">
+    <meta name="theme-color" content="#600090">
+    <meta name="msapplication-navbutton-color" content="#600090">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="#600090">
+    <link rel="shortcut icon" href="https://billy7x17.github.io/pics/laughMan-icon.png">
+    <link rel="alternate" type="application/atom+xml" title="Billy" href="/atom.xml">
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css">
+    <link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.css">
+    <title>
+        
+        openstack命令行清除垃圾数据｜Billy&#39;s blog
+        
+    </title>
+
+    <link rel="canonical" href="https://billy7x17.github.io/2017/09/25/openstack命令行清除垃圾数据/">
+
+    <!-- Bootstrap Core CSS -->
+    
+<link rel="stylesheet" href="/css/bootstrap.min.css">
+
+
+    <!-- Custom CSS -->
+    
+<link rel="stylesheet" href="/css/blog-style.css">
+
+
+    <!-- Pygments Github CSS -->
+    
+<link rel="stylesheet" href="/css/syntax.css">
+
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<style>
+
+    header.intro-header {
+        background-image: url('https://billy7x17.github.io/pics/head.jpg')
+    }
+</style>
+<!-- hack iOS CSS :active style -->
+<body ontouchstart="" class="animated fadeIn">
+<!-- Navigation -->
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top " id="nav-top" data-ispost = "true" data-istags="false
+" data-ishome = "false" >
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand animated pulse" href="/">
+                <span class="brand-logo">
+                    Billy
+                </span>
+                's Blog
+            </a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <!-- Known Issue, found by Hux:
+            <nav>'s height woule be hold on by its content.
+            so, when navbar scale out, the <nav> will cover tags.
+            also mask any touch event of tags, unfortunately.
+        -->
+        <!-- /.navbar-collapse -->
+        <div id="huxblog_navbar">
+            <div class="navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="/">Home</a>
+                    </li>
+					
+                    
+                        
+							
+                        <li>
+                            <a href="/tags/">tags</a>
+                        </li>
+							
+						
+                    
+					
+					
+                </ul>
+            </div>
+        </div>
+    </div>
+    <!-- /.container -->
+</nav>
+<script>
+    // Drop Bootstarp low-performance Navbar
+    // Use customize navbar with high-quality material design animation
+    // in high-perf jank-free CSS3 implementation
+//    var $body   = document.body;
+    var $toggle = document.querySelector('.navbar-toggle');
+    var $navbar = document.querySelector('#huxblog_navbar');
+    var $collapse = document.querySelector('.navbar-collapse');
+
+    $toggle.addEventListener('click', handleMagic)
+    function handleMagic(e){
+        if ($navbar.className.indexOf('in') > 0) {
+        // CLOSE
+            $navbar.className = " ";
+            // wait until animation end.
+            setTimeout(function(){
+                // prevent frequently toggle
+                if($navbar.className.indexOf('in') < 0) {
+                    $collapse.style.height = "0px"
+                }
+            },400)
+        }else{
+        // OPEN
+            $collapse.style.height = "auto"
+            $navbar.className += " in";
+        }
+    }
+</script>
+
+<!-- Main Content -->
+
+<!--only post-->
+
+
+<img class="wechat-title-img"
+     src="https://billy7x17.github.io/pics/image/site/head.jpg">
+
+
+<style>
+    
+    header.intro-header {
+        background-image: url('https://billy7x17.github.io/pics/image/site/head.jpg?imageView2/1/w/1400/h/400/interlace/1/q/90')
+    }
+
+    
+</style>
+
+<header class="intro-header">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 text-center">
+                <div class="post-heading">
+                    <h1>openstack命令行清除垃圾数据</h1>
+                    
+                    <span class="meta">
+                         作者 Billy
+                        <span>
+                          日期 2017-09-25
+                         </span>
+                    </span>
+                    <div class="tags text-center">
+                        
+                        <a class="tag" href="/tags/#openstack"
+                           title="openstack">openstack</a>
+                        
+                        <a class="tag" href="/tags/#命令行"
+                           title="命令行">命令行</a>
+                        
+                        <a class="tag" href="/tags/#性能测试"
+                           title="性能测试">性能测试</a>
+                        
+                        <a class="tag" href="/tags/#垃圾数据"
+                           title="垃圾数据">垃圾数据</a>
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="post-title-haojen">
+        <span>
+            openstack命令行清除垃圾数据
+        </span>
+    </div>
+</header>
+
+<!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
+            <!-- Post Container -->
+            <div class="col-lg-8 col-lg-offset-1 col-sm-9 post-container">
+                <h1 id="openstack命令行清除垃圾数据"><a href="#openstack命令行清除垃圾数据" class="headerlink" title="openstack命令行清除垃圾数据"></a>openstack命令行清除垃圾数据</h1><h2 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h2><p>性能测试我们采用jmeter工具，定长时间运行不能保证正在进行的流程运行结束，因此会产生一定数量的垃圾数据，使用dashboard清理会比较麻烦，故整理一套openstack命令行的简单操作，便于清理。</p>
+<h2 id="使用方法"><a href="#使用方法" class="headerlink" title="使用方法"></a>使用方法</h2><p>下面给出的命令都是<strong>单条命令</strong>，使用编辑软件的列模式，遍历资源后，拿到资源的id或名称，再批量组装删除命令，在控制节点上执行。</p>
+<h2 id="认证鉴权"><a href="#认证鉴权" class="headerlink" title="认证鉴权"></a>认证鉴权</h2><p>在执行cli命令时，openstack是需要用户名、密码或token等认证鉴权信息的，为了方便，我们将必要的鉴权信息写入环境变量，在执行时就不需要重复输入了。</p>
+<p>部署过程中，会创建admin-openrc文件，按我的习惯，会将<code>source /root/admin-openr</code>c命令写入~&#x2F;.bash_profile中，以便在当期会话中生效。因此，默认执行命令，都是使用admin租户&#x2F;用户来执行的。</p>
+<p>建议<strong>复制admin-openrc文件为local-openrc</strong>，并修改内容，<strong>将租户、用户信息更改</strong>，再更新变量：<code>source /source/local-openrc</code>，然后再执行命令，就会看到指定租户的内容了。</p>
+<h2 id="计算资源"><a href="#计算资源" class="headerlink" title="计算资源"></a>计算资源</h2><h3 id="遍历云主机"><a href="#遍历云主机" class="headerlink" title="遍历云主机"></a>遍历云主机</h3><ul>
+<li><p>命令</p>
+<pre><code>  nova list
+</code></pre>
+</li>
+<li><p>结果</p>
+<pre><code>  +--------------------------------------+---------------+---------+------------+-------------+------------------------------+
+  | ID                                   | Name          | Status  | Task State | Power State | Networks                     |
+  +--------------------------------------+---------------+---------+------------+-------------+------------------------------+
+  | 2c7cedba-2c12-4947-a941-10b02ffdae2d | test          | ACTIVE  | -          | Running     | vlan119=1.1.33.12            |
+  
+  | f68ef84c-8eef-4382-85c9-c948e5357ae5 | 虚拟机-咪咕9  | SHUTOFF | -          | Shutdown    | admin-network=192.168.30.12  |
+  +--------------------------------------+---------------+---------+------------+-------------+------------------------------+
+</code></pre>
+</li>
+</ul>
+<h3 id="删除虚拟机"><a href="#删除虚拟机" class="headerlink" title="删除虚拟机"></a>删除虚拟机</h3><ul>
+<li><p>命令</p>
+<pre><code>  nova delete &lt;uuid&gt;
+</code></pre>
+</li>
+<li><p>结果</p>
+<pre><code>  [root@controller53 ~]# nova delete 2c7cedba-2c12-4947-a941-10b02ffdae2d
+  
+  Request to delete server 2c7cedba-2c12-4947-a941-10b02ffdae2d has been accepted.
+</code></pre>
+</li>
+</ul>
+<h2 id="网络"><a href="#网络" class="headerlink" title="网络"></a>网络</h2><h3 id="遍历网络"><a href="#遍历网络" class="headerlink" title="遍历网络"></a>遍历网络</h3><ul>
+<li><p>命令</p>
+<pre><code>  neutron net-list
+</code></pre>
+</li>
+<li><p>结果</p>
+<pre><code>  +--------------------------------------+-----------------------+------------------------------------------------------+
+  | id                                   | name                  | subnets                                              |
+  +--------------------------------------+-----------------------+------------------------------------------------------+
+  | 139f1d75-7ff0-4662-899f-16131e4ef142 | admin-network         | 97ae34a4-0f73-4905-80b4-cb1175d7a81b 192.168.30.0/24 |
+  | 16ed40c3-518c-4de0-8ef9-298f7f10321c | baremetal_network     | 60d33b4b-ed79-4b1d-a4c9-e99c9db22539 10.10.127.0/24  |
+  | 185d6679-dca6-4674-bcb6-2a02c20ae0a4 | baremetal_network_201 | 943c9f84-02c7-49e5-b824-14ebc7cb1c0b 10.10.128.0/24  |
+  | 88e9d3ca-ce9b-4265-ab3e-a39badbb0899 | t3r24                 | 8e0c10a4-f900-4f27-87b4-96ad35b08f70 1.1.1.0/24      |
+  | 8bca3cc1-ba9b-4b6e-81c4-60e1311defab | t3r47                 |                                                      |
+  | b2278dfc-1ff8-454a-8039-f86dd4a5a2a6 | st3r45                |                                                      |
+  | b975a991-1f8a-4100-9e2c-2269a33e7d28 | B_116_vm              | dba9d016-1f25-487e-9b86-d7f0ce8b7d71 10.148.8.128/25 |
+  | fc7ebacd-031b-4cf4-b92b-6528918dc014 | vlan119               | 0d6fccb1-8684-4bd9-a21d-a35060a7c4e2 1.1.33.0/24     |
+  +--------------------------------------+-----------------------+------------------------------------------------------+
+</code></pre>
+</li>
+</ul>
+<h3 id="删除网络"><a href="#删除网络" class="headerlink" title="删除网络"></a>删除网络</h3><ul>
+<li><p>命令</p>
+<pre><code>  neutron net-delete &lt;uuid&gt;
+</code></pre>
+</li>
+<li><p>结果</p>
+<pre><code>  [root@controller53 ~]# neutron net-delete fc7ebacd-031b-4cf4-b92b-6528918dc014
+  Deleted network(s): fc7ebacd-031b-4cf4-b92b-6528918dc014
+</code></pre>
+</li>
+</ul>
+<h3 id="遍历端口"><a href="#遍历端口" class="headerlink" title="遍历端口"></a>遍历端口</h3><ul>
+<li><p>命令</p>
+<pre><code>  neutron port-list
+</code></pre>
+</li>
+<li><p>结果</p>
+<pre><code>  +--------------------------------------+------+-------------------+---------------------------------------------------------------------------------------+
+  | id                                   | name | mac_address       | fixed_ips                                                                             |
+  +--------------------------------------+------+-------------------+---------------------------------------------------------------------------------------+
+  | 013288cf-c127-4607-bb7f-fe23b045e728 |      | fa:16:3e:21:22:52 | &#123;&quot;subnet_id&quot;: &quot;97ae34a4-0f73-4905-80b4-cb1175d7a81b&quot;, &quot;ip_address&quot;: &quot;192.168.30.152&quot;&#125; |
+  
+  | ff70baae-2a68-487b-9969-ae3b5fc90de7 |      | fa:16:3e:cd:7d:80 | &#123;&quot;subnet_id&quot;: &quot;97ae34a4-0f73-4905-80b4-cb1175d7a81b&quot;, &quot;ip_address&quot;: &quot;192.168.30.11&quot;&#125;  |
+  +--------------------------------------+------+-------------------+---------------------------------------------------------------------------------------+
+</code></pre>
+</li>
+</ul>
+<h3 id="删除端口"><a href="#删除端口" class="headerlink" title="删除端口"></a>删除端口</h3><ul>
+<li><p>命令</p>
+<pre><code>  neutron port-delete &lt;uuid&gt;
+</code></pre>
+</li>
+<li><p>结果</p>
+<pre><code>  [root@controller53 ~]# neutron port-delete feaf33ff-b77c-4150-8c94-1b58ad287777
+  Deleted port(s): feaf33ff-b77c-4150-8c94-1b58ad287777
+</code></pre>
+</li>
+</ul>
+<h2 id="卷"><a href="#卷" class="headerlink" title="卷"></a>卷</h2><h3 id="遍历卷"><a href="#遍历卷" class="headerlink" title="遍历卷"></a>遍历卷</h3><ul>
+<li><p>命令</p>
+<pre><code>  cinder list
+</code></pre>
+</li>
+<li><p>结果</p>
+<pre><code>  +--------------------------------------+-----------+------+------+-------------+----------+-------------+
+  | ID                                   | Status    | Name | Size | Volume Type | Bootable | Attached to |
+  +--------------------------------------+-----------+------+------+-------------+----------+-------------+
+  | efd39c1b-f2aa-4191-9fe1-c3defa973fc4 | available | test | 1    | -           | false    |             |
+  +--------------------------------------+-----------+------+------+-------------+----------+-------------+
+</code></pre>
+</li>
+</ul>
+<h3 id="删除卷"><a href="#删除卷" class="headerlink" title="删除卷"></a>删除卷</h3><ul>
+<li><p>命令</p>
+<pre><code>  cinder delete &lt;uuid&gt;
+</code></pre>
+</li>
+<li><p>结果</p>
+<pre><code>  [root@controller53 ~]# cinder delete efd39c1b-f2aa-4191-9fe1-c3defa973fc4
+  Request to delete volume efd39c1b-f2aa-4191-9fe1-c3defa973fc4 has been accepted.
+</code></pre>
+</li>
+</ul>
+<h2 id="镜像"><a href="#镜像" class="headerlink" title="镜像"></a>镜像</h2><h3 id="遍历镜像"><a href="#遍历镜像" class="headerlink" title="遍历镜像"></a>遍历镜像</h3><ul>
+<li><p>命令</p>
+<pre><code>  glance image-list
+</code></pre>
+</li>
+<li><p>结果</p>
+<pre><code>  +--------------------------------------+------------------------------+
+  | ID                                   | Name                         |
+  +--------------------------------------+------------------------------+
+  | ac3529f5-99f7-4090-8e4d-414db340b6a8 | centos7                      |
+  | a30a4fa3-762f-402a-8f52-af67005c0eed | cirros                       |
+  | 2cdd0ae7-48ee-4253-83d1-e0fc73d5244e | cirros-0.3.1-x86_64-disk.img |
+  | bd2dc440-1735-4402-b7a8-2835abc19f9d | cirros_50m                   |
+  +--------------------------------------+------------------------------+
+</code></pre>
+</li>
+</ul>
+<h3 id="删除镜像"><a href="#删除镜像" class="headerlink" title="删除镜像"></a>删除镜像</h3><ul>
+<li><p>命令</p>
+<pre><code>  glance image-delete &lt;uuid&gt;
+</code></pre>
+</li>
+<li><p>结果</p>
+<pre><code>  无...
+</code></pre>
+</li>
+</ul>
+<h2 id="对象存储"><a href="#对象存储" class="headerlink" title="对象存储"></a>对象存储</h2><h3 id="遍历容器"><a href="#遍历容器" class="headerlink" title="遍历容器"></a>遍历容器</h3><ul>
+<li><p>命令</p>
+<pre><code>  swift list
+</code></pre>
+</li>
+<li><p>结果</p>
+<pre><code>  [root@controller53 ~]# swift list
+  咪咕1
+  咪咕10
+</code></pre>
+</li>
+</ul>
+<h3 id="删除容器-连带里面的文件一起删除"><a href="#删除容器-连带里面的文件一起删除" class="headerlink" title="删除容器(连带里面的文件一起删除)"></a>删除容器(连带里面的文件一起删除)</h3><ul>
+<li><p>命令</p>
+<pre><code>  swift delete &lt;容器名称&gt;
+</code></pre>
+</li>
+<li><p>结果</p>
+<pre><code>  [root@controller53 ~]# swift delete 咪咕10
+  test
+  咪咕10
+</code></pre>
+<p>  <em><strong>注： delete成功后会返回删除的文件和容器，先打印文件test，再打印容器 咪咕10</strong></em></p>
+</li>
+</ul>
+<h2 id="身份管理"><a href="#身份管理" class="headerlink" title="身份管理"></a>身份管理</h2><h3 id="遍历租户-项目"><a href="#遍历租户-项目" class="headerlink" title="遍历租户(项目)"></a>遍历租户(项目)</h3><ul>
+<li><p>命令</p>
+<pre><code>  openstack project list
+</code></pre>
+</li>
+<li><p>结果</p>
+<pre><code>  +----------------------------------+----------------+
+  | ID                               | Name           |
+  +----------------------------------+----------------+
+  | 29c09d64a0284ad38c7906e491f61b66 | service        |
+  | 569691175f034209933bdf4bfe59adf2 | remote_tenant1 |
+  | b093a1a350fe4de6916d309d6417bb64 | remote_tenant4 |
+  | b73a568781634a409dc0c93f5f8b3238 | admin          |
+  | c24231de5a1c4c88a7479829d0906066 | remote_tenant3 |
+  | d89c407ee0744c329b79ffd497f919bf | remote_tenant2 |
+  +----------------------------------+----------------+
+</code></pre>
+</li>
+</ul>
+<h3 id="删除租户-须慎重"><a href="#删除租户-须慎重" class="headerlink" title="删除租户 (须慎重)"></a>删除租户 <em><strong>(须慎重)</strong></em></h3><ul>
+<li><p>命令</p>
+<pre><code>  openstack project delete &lt;uuid&gt;
+</code></pre>
+</li>
+<li><p>结果</p>
+<pre><code>  无...
+</code></pre>
+</li>
+</ul>
+<h3 id="遍历用户"><a href="#遍历用户" class="headerlink" title="遍历用户"></a>遍历用户</h3><ul>
+<li><p>命令</p>
+<pre><code>  openstack user list
+</code></pre>
+</li>
+<li><p>结果</p>
+<pre><code>  +----------------------------------+----------------+
+  | ID                               | Name           |
+  +----------------------------------+----------------+
+  | 1062259d22eb4f7a87f3baae4d409c3f | user18         |
+  | 12f031d718f24cd5975a3fec079b106b | user30         |
+  | 1f84386e41e24396a6391c9193942930 | user3          |
+  +----------------------------------+----------------+
+</code></pre>
+</li>
+</ul>
+<h3 id="删除用户-须慎重"><a href="#删除用户-须慎重" class="headerlink" title="删除用户 (须慎重)"></a>删除用户 <em><strong>(须慎重)</strong></em></h3><ul>
+<li><p>命令</p>
+<pre><code>  openstack user delete &lt;uuid&gt;
+</code></pre>
+</li>
+<li><p>结果</p>
+<pre><code>  无...
+</code></pre>
+</li>
+</ul>
+
+<div id="gitalk-container"></div>
+<script src="https://cdn.bootcss.com/blueimp-md5/2.12.0/js/md5.min.js"></script><link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css"><script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+
+		<script>
+		var gitalkConfig = {"clientID":"Ov23liFG19AhSmVEYtNI","clientSecret":"236b24cf5e0eaf843c4a766f2e458b3b85702a04","repo":"billy7x17.github.io","owner":"billy7x17","admin":["billy7x17"],"distractionFreeMode":true};
+	    gitalkConfig.id = md5(location.pathname);
+		var gitalk = new Gitalk(gitalkConfig);
+	    gitalk.render("gitalk-container");
+	    </script>
+                <hr>
+                
+
+                <ul class="pager">
+                    
+                    <li class="previous">
+                        <a href="/2017/10/24/裸金属ironic-conductor调研/" data-toggle="tooltip" data-placement="top"
+                           title="裸金属ironic-conductor调研">&larr; Previous Post</a>
+                    </li>
+                    
+                    
+                    <li class="next">
+                        <a href="/2017/09/12/TCP重传/" data-toggle="tooltip" data-placement="top"
+                           title="TCP重传">Next Post &rarr;</a>
+                    </li>
+                    
+                </ul>
+
+                
+
+                
+
+
+                <!--加入新的评论系统-->
+                
+
+                
+
+            </div>
+
+            <div class="hidden-xs col-sm-3 toc-col">
+                <div class="toc-wrap">
+                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#openstack%E5%91%BD%E4%BB%A4%E8%A1%8C%E6%B8%85%E9%99%A4%E5%9E%83%E5%9C%BE%E6%95%B0%E6%8D%AE"><span class="toc-text">openstack命令行清除垃圾数据</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%83%8C%E6%99%AF"><span class="toc-text">背景</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BD%BF%E7%94%A8%E6%96%B9%E6%B3%95"><span class="toc-text">使用方法</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%AE%A4%E8%AF%81%E9%89%B4%E6%9D%83"><span class="toc-text">认证鉴权</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%AE%A1%E7%AE%97%E8%B5%84%E6%BA%90"><span class="toc-text">计算资源</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%81%8D%E5%8E%86%E4%BA%91%E4%B8%BB%E6%9C%BA"><span class="toc-text">遍历云主机</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%88%A0%E9%99%A4%E8%99%9A%E6%8B%9F%E6%9C%BA"><span class="toc-text">删除虚拟机</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%BD%91%E7%BB%9C"><span class="toc-text">网络</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%81%8D%E5%8E%86%E7%BD%91%E7%BB%9C"><span class="toc-text">遍历网络</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%88%A0%E9%99%A4%E7%BD%91%E7%BB%9C"><span class="toc-text">删除网络</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%81%8D%E5%8E%86%E7%AB%AF%E5%8F%A3"><span class="toc-text">遍历端口</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%88%A0%E9%99%A4%E7%AB%AF%E5%8F%A3"><span class="toc-text">删除端口</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8D%B7"><span class="toc-text">卷</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%81%8D%E5%8E%86%E5%8D%B7"><span class="toc-text">遍历卷</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%88%A0%E9%99%A4%E5%8D%B7"><span class="toc-text">删除卷</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%95%9C%E5%83%8F"><span class="toc-text">镜像</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%81%8D%E5%8E%86%E9%95%9C%E5%83%8F"><span class="toc-text">遍历镜像</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%88%A0%E9%99%A4%E9%95%9C%E5%83%8F"><span class="toc-text">删除镜像</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AF%B9%E8%B1%A1%E5%AD%98%E5%82%A8"><span class="toc-text">对象存储</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%81%8D%E5%8E%86%E5%AE%B9%E5%99%A8"><span class="toc-text">遍历容器</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%88%A0%E9%99%A4%E5%AE%B9%E5%99%A8-%E8%BF%9E%E5%B8%A6%E9%87%8C%E9%9D%A2%E7%9A%84%E6%96%87%E4%BB%B6%E4%B8%80%E8%B5%B7%E5%88%A0%E9%99%A4"><span class="toc-text">删除容器(连带里面的文件一起删除)</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%BA%AB%E4%BB%BD%E7%AE%A1%E7%90%86"><span class="toc-text">身份管理</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%81%8D%E5%8E%86%E7%A7%9F%E6%88%B7-%E9%A1%B9%E7%9B%AE"><span class="toc-text">遍历租户(项目)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%88%A0%E9%99%A4%E7%A7%9F%E6%88%B7-%E9%A1%BB%E6%85%8E%E9%87%8D"><span class="toc-text">删除租户 (须慎重)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%81%8D%E5%8E%86%E7%94%A8%E6%88%B7"><span class="toc-text">遍历用户</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%88%A0%E9%99%A4%E7%94%A8%E6%88%B7-%E9%A1%BB%E6%85%8E%E9%87%8D"><span class="toc-text">删除用户 (须慎重)</span></a></li></ol></li></ol></li></ol>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <!-- Sidebar Container -->
+
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                sidebar-container">
+
+                <!-- Featured Tags -->
+                
+                <section>
+                    <!-- no hr -->
+                    <h5 class="text-center">
+                        <a href="/tags/">FEATURED TAGS</a>
+                    </h5>
+                    <div class="tags">
+                        
+                        <a class="tag" href="/tags/#openstack"
+                           title="openstack">openstack</a>
+                        
+                        <a class="tag" href="/tags/#命令行"
+                           title="命令行">命令行</a>
+                        
+                        <a class="tag" href="/tags/#性能测试"
+                           title="性能测试">性能测试</a>
+                        
+                        <a class="tag" href="/tags/#垃圾数据"
+                           title="垃圾数据">垃圾数据</a>
+                        
+                    </div>
+                </section>
+                
+
+                <!-- Friends Blog -->
+                
+            </div>
+        </div>
+
+    </div>
+</article>
+
+
+
+
+
+
+
+<!-- Footer -->
+<!-- Footer -->
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 text-center">
+                <br>
+                <ul class="list-inline text-center">
+                
+                    <li>
+                        <a href="/atom.xml">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-rss fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+                
+                
+                    <li>
+                        <a target="_blank" href="https://www.zhihu.com/people/li-zong-rui-18">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa  fa-stack-1x fa-inverse">知</i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+                    <li>
+                        <a target="_blank" href="http://weibo.com/billy7x17">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-weibo fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+
+                
+                    <li>
+                        <a target="_blank"  href="https://github.com/billy7x17">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+
+                </ul>
+                <p class="copyright text-muted">
+                    Copyright &copy; Billy 2025
+                    <br>
+                    <span id="busuanzi_container_site_pv" style="font-size: 12px;">PV: <span id="busuanzi_value_site_pv"></span> Times</span>
+                    <br>
+                    Theme by <a target="_blank" rel="noopener" href="https://haojen.github.io/">Haojen Ma</a>
+                </p>
+
+            </div>
+        </div>
+    </div>
+</footer>
+
+<!-- jQuery -->
+
+<script src="/js/jquery.min.js"></script>
+
+
+<!-- Bootstrap Core JavaScript -->
+
+<script src="/js/bootstrap.min.js"></script>
+
+
+<!-- Custom Theme JavaScript -->
+
+<script src="/js/blog.js"></script>
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+
+<!-- jquery.tagcloud.js -->
+<script>
+    // only load tagcloud.js in tag.html
+    if($('#tag_cloud').length !== 0){
+        async("https://billy7x17.github.io/js/jquery.tagcloud.js",function(){
+            $.fn.tagcloud.defaults = {
+                //size: {start: 1, end: 1, unit: 'em'},
+                color: {start: '#bbbbee', end: '#0085a1'},
+            };
+            $('#tag_cloud a').tagcloud();
+        })
+    }
+</script>
+
+<!--fastClick.js -->
+<script>
+    async("//cdn.bootcss.com/fastclick/1.0.6/fastclick.min.js", function(){
+        var $nav = document.querySelector("nav");
+        if($nav) FastClick.attach($nav);
+    })
+</script>
+
+
+
+<!-- Google Analytics -->
+
+
+
+<!-- Baidu Tongji -->
+
+<script>
+    var _baId = 'd63b30f4b79f1151f194406afe5e9831';
+    // Originial
+    var _hmt = _hmt || [];
+    (function() {
+        var hm = document.createElement("script");
+        hm.src = "//hm.baidu.com/hm.js?" + _baId;
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(hm, s);
+    })();
+</script>
+
+
+<!-- swiftype -->
+<script type="text/javascript">
+  (function(w,d,t,u,n,s,e){w['SwiftypeObject']=n;w[n]=w[n]||function(){
+  (w[n].q=w[n].q||[]).push(arguments);};s=d.createElement(t);
+  e=d.getElementsByTagName(t)[0];s.async=1;s.src=u;e.parentNode.insertBefore(s,e);
+  })(window,document,'script','//s.swiftypecdn.com/install/v2/st.js','_st');
+
+  _st('install','','2.0.0');
+</script>
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+<!--wechat title img-->
+<img class="wechat-title-img" src="https://billy7x17.github.io/pics/laughMan.jpg">
+</body>
+
+</html>
