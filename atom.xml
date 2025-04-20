@@ -6,7 +6,7 @@
   <link href="https://billy7x17.github.io/atom.xml" rel="self"/>
   
   <link href="https://billy7x17.github.io/"/>
-  <updated>2025-04-08T08:25:45.455Z</updated>
+  <updated>2025-04-20T03:55:22.772Z</updated>
   <id>https://billy7x17.github.io/</id>
   
   <author>
@@ -15,6 +15,26 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>工作12年，头一次碰见这样的公司</title>
+    <link href="https://billy7x17.github.io/2025/04/20/%E5%B7%A5%E4%BD%9C12%E5%B9%B4%EF%BC%8C%E5%A4%B4%E4%B8%80%E6%AC%A1%E7%A2%B0%E8%A7%81%E8%BF%99%E6%A0%B7%E7%9A%84%E5%85%AC%E5%8F%B8/"/>
+    <id>https://billy7x17.github.io/2025/04/20/%E5%B7%A5%E4%BD%9C12%E5%B9%B4%EF%BC%8C%E5%A4%B4%E4%B8%80%E6%AC%A1%E7%A2%B0%E8%A7%81%E8%BF%99%E6%A0%B7%E7%9A%84%E5%85%AC%E5%8F%B8/</id>
+    <published>2025-04-20T02:53:50.000Z</published>
+    <updated>2025-04-20T03:55:22.772Z</updated>
+    
+    
+      
+      
+    <summary type="html">&lt;h2 id=&quot;背景&quot;&gt;&lt;a href=&quot;#背景&quot; class=&quot;headerlink&quot; title=&quot;背景&quot;&gt;&lt;/a&gt;背景&lt;/h2&gt;&lt;p&gt;去年6月末上一家公司提出离职，原因是团队太小，决策层对于软件流程、架构不是特别的理解，且业务方向有一定的敏感性，虽然是国外的项目，但带有色情</summary>
+      
+    
+    
+    
+    
+    <category term="职场" scheme="https://billy7x17.github.io/tags/%E8%81%8C%E5%9C%BA/"/>
+    
+  </entry>
   
   <entry>
     <title>前端异步调用无法保证先后顺序的处理方式</title>

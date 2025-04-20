@@ -18,11 +18,11 @@
     <link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.css">
     <title>
         
-        前端异步调用无法保证先后顺序的处理方式｜Billy&#39;s blog
+        工作12年，头一次碰见这样的公司｜Billy&#39;s blog
         
     </title>
 
-    <link rel="canonical" href="https://billy7x17.github.io/2025/04/08/前端异步调用无法保证先后顺序的处理方式/">
+    <link rel="canonical" href="https://billy7x17.github.io/2025/04/20/工作12年，头一次碰见这样的公司/">
 
     <!-- Bootstrap Core CSS -->
     
@@ -151,27 +151,18 @@
         <div class="row">
             <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 text-center">
                 <div class="post-heading">
-                    <h1>前端异步调用无法保证先后顺序的处理方式</h1>
+                    <h1>工作12年，头一次碰见这样的公司</h1>
                     
                     <span class="meta">
                          作者 Billy
                         <span>
-                          日期 2025-04-08
+                          日期 2025-04-20
                          </span>
                     </span>
                     <div class="tags text-center">
                         
-                        <a class="tag" href="/tags/#vuejs"
-                           title="vuejs">vuejs</a>
-                        
-                        <a class="tag" href="/tags/#javascript"
-                           title="javascript">javascript</a>
-                        
-                        <a class="tag" href="/tags/#前端"
-                           title="前端">前端</a>
-                        
-                        <a class="tag" href="/tags/#Promise"
-                           title="Promise">Promise</a>
+                        <a class="tag" href="/tags/#职场"
+                           title="职场">职场</a>
                         
                     </div>
                 </div>
@@ -180,7 +171,7 @@
     </div>
     <div class="post-title-haojen">
         <span>
-            前端异步调用无法保证先后顺序的处理方式
+            工作12年，头一次碰见这样的公司
         </span>
     </div>
 </header>
@@ -191,32 +182,36 @@
         <div class="row">
             <!-- Post Container -->
             <div class="col-lg-8 col-lg-offset-1 col-sm-9 post-container">
-                <h2 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h2><ol>
-<li>vuejs2 nodejs14</li>
-<li>问题页面加载时，created()中调用数据的初始化加载函数，初始化函数是异步的</li>
-<li>父页面调用问题页面时，直接调用handleSearch(val)函数，函数内异步调用后端接口进行查询操作，后端接口返回数据时，会根据初始化的数据进行页面渲染</li>
-<li>当#3步骤中的数据查询接口返回响应时，无法保证#2中的初始化函数已经执行完毕，所以页面渲染时，会因为初始化函数未执行完毕而报错</li>
-<li>从浏览器控制台上观察到的结果，一旦初始化函数执行时间高于查询接口的调用时间，就会报错</li>
-<li>除了以上步骤简化的描述以外，还包含了多个异步调用的步骤，由于与问题无关，没有详细描述，但正是这些异步调用，导致重构成本大大提升</li>
+                <h2 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h2><p>去年6月末上一家公司提出离职，原因是团队太小，决策层对于软件流程、架构不是特别的理解，且业务方向有一定的敏感性，虽然是国外的项目，但带有色情趋向的内容还是会让人比较介意。<br>再加上6月末家里出了一些事情，爸爸操作煤气时出现意外，轻度烧伤，住院半个多月，导致当时面试的进程被迫中断。<br>其实当时还是有一家比较有倾向的公司，但工资相对低，仍处于斡旋的阶段，然后被迫搁浅了。</p>
+<h2 id="入职"><a href="#入职" class="headerlink" title="入职"></a>入职</h2><p>老头儿出院后，7月重新开始面试，就找到了这个公司。<br>简历投递后没不久就收到了面试邀请，当时觉得面试的难度很低，甚至都没有问什么具体的技术问题。<br>技术面试之后，直接就跟人事进行面试，然后谈了薪资(看样子是没问题)，我提出的薪资是比上一家涨了20%，貌似直接就通过了，这让我比较意外，毕竟看起来像<strong>一点门槛都没有</strong>的样子。</p>
+<h2 id="初来乍到"><a href="#初来乍到" class="headerlink" title="初来乍到"></a>初来乍到</h2><p>入职后简单接了个项目，说白了就是接手维护之前的旧项目，有一个简单的需求，将列表查询增加字段和筛选排序，我心想确实没什么难度，就按部就班做了。<br>过了将近一周，由给我安排了一个新的旧项目，一开始的工作也是一样，开发一个小需求，看似简单，做起来之后发现需要关联的业务是很多的，而且仅仅是知道还不行，每个细节都需要详细地去考虑，差一点就会出现致命性的问题。<br>就这样，稀里糊涂的接手了2个项目，在这之后，只要是这2个项目相关的问题，不管是不是我开发的，都会去找我。</p>
+<h2 id="形势转变"><a href="#形势转变" class="headerlink" title="形势转变"></a>形势转变</h2><p>就这样日复一日，项目越来越多，直到有一天，公司总经理找我约谈，说有一个重大的项目交给你来做，“公司非常相信你的能力，且这个项目是一个从零开始的项目，完全由你来负责。”<br>说实话，一开始还是很让人激动的，毕竟终于能结束缝缝补补的边缘工作了。<br>谁能想到是带着之前的旧项目一起，进入新的开发流程。<br>产品给出产品示意图之后，轻描淡写地给出了功能列表，说新的功能只有2大块，其他的都是<strong>有现成的，可以复用的</strong>。<br>然后总经理<strong>直接拍板</strong>工期一个月(我心想我还没报工期呢，你怎么就给我拍板了？)，然后一顿描述项目的重要性和成长性，组长在旁边衬托，仿佛就是让我认下这个工期一样。  </p>
+<h2 id="急转直下"><a href="#急转直下" class="headerlink" title="急转直下"></a>急转直下</h2><p>在工期的趋势下，我开始进入项目，并且逐一设计、实现功能，但我发现，只要涉及到之前提及的“可以复用的”模块，一定会遇到多多少少的问题。<br>而且，前端的支持迟迟没有响应，我记得是前端在半个月左右才进项目。所以我这边只能是一路向前设计、实现。<br>大概1个月的时候，由于我一直加班，勉强完成了后端的功能及前后端联调的接口。  </p>
+<h2 id="坠入底谷"><a href="#坠入底谷" class="headerlink" title="坠入底谷"></a>坠入底谷</h2><p>因为约定的工期已到，总经理开始联系运营人员安排测试流程(我是头一回听说用运营人员来测试的)，但是当时刚刚开始前后端联调，因此整体流程就开始一点点地滞后了。<br>当然，这只是个开始。更刺激的还在后面<br>在这种情况下进行开发，难免会遇到问题，比如前端打版的问题，以及自动升级的问题，国产化os适配的问题…  这些都是未知领域的探索，是一个无法预测的。<br>大部分问题，包括前端的，都由我带头冲锋，一个一个消灭掉了。但此时工期已经没法看了。<br>约定之日近在眼前，而且公司是面向政府的，期间还夹杂了多次演示，培训…  需要我们进行数据上的配合，有的功能没开发或对接完成，就需要配演示数据(假数据)。<br>配合的过程中，需求仍在<strong>持续增加，持续变更</strong>，这时出现一个很奇怪的现象：这个项目该怎么做，它的定义是什么类似这种问题，在需求探讨会议中，重点逐渐从产品经理转向了我。<br>我慢慢觉得不对劲了，产品一开始的设计我根本没参与，整体的流程我在开发时确实感到有问题，但由于工期压着，我没办法也没心思去提出修改的意见。你现在去质疑流程，我觉得我没办法去给你解释。<br>慢慢地，运营人员测试也开始了，果不其然，提出的问题都是设计上的问题。而且<strong>新需求根本就没有同步到测试人员</strong>，导致提出的bug有一大半都是无效bug，还得我去一个个地解释。</p>
+<h2 id="崩溃"><a href="#崩溃" class="headerlink" title="崩溃"></a>崩溃</h2><p>bug修复不完，需求勉强实现，需求变更频繁，其他项目运维…<br>在这种条件下，项目就这样上线了，用户直接使用。<br>结果可想而知，评价是非常差，有的用户直接反馈用不了…  投诉到公司综合部后，压力再次爆发。</p>
+<h2 id="离职"><a href="#离职" class="headerlink" title="离职"></a>离职</h2><p>我是在项目上线之前提出离职的，因为我早就预见了后果。<br>提出离职后，仍然有新需求到达我这里，我按部就班地加班，处理问题，完成新需求。直到约定之日的前一周，才开始安排到具体的人进行交接。<br>我心想这怎么可能交接得完？业务逻辑如此庞大。  我努力开始写文档，将需要注意的地方，注释，能加的都加上了。<br>最后，看到接手的人在我项目的第一次提交之后，我觉得放弃拯救，因为我做的一切都是徒劳，他根本就没有理解，或是根本没想去理解我的项目。<br>我在本地回退了他的提交，连接到自己的git源，上传了源码，然后删除了自己的git源，让源码保留在我自己开发的阶段。后续这个项目变成什么样，我都不关心了。  </p>
+<h2 id="现象"><a href="#现象" class="headerlink" title="现象"></a>现象</h2><p>在这个公司，我发现了几个非常奇怪的现象：  </p>
+<ol>
+<li><p>综合部的设立，业务上层都是由综合部进行管理的，包括与客户沟通，项目进度把控，项目流程管理，还有人事管理</p>
+</li>
+<li><p>综合部全是女性，隔三差五就会因压力过大而吵架或放声哭泣(歇斯底里)，声音极大，影响比较深远</p>
+</li>
+<li><p>开发人员一共13人，前端<strong>只有2人</strong>。这2个前端要对所有项目进行负责，包括维护、新建项目的开发，还有难点攻克，所以这两个前端不会对所有业务熟悉，因为业务太多了，导致前后端联调时很难弄，前端压根就不清楚业务，产品也不会同步业务逻辑给前端</p>
+</li>
+<li><p>运营人员负责测试，运营人员全是女性，主要负责处理用户提出的问题(可以理解为售后)，售后时间如果有空闲，会进行测试。</p>
+</li>
+<li><p>旧代码中，很多“防御性编程”，没有注释，变量命名无意义，给阅读和再开发带来非常大的困扰</p>
+</li>
+<li><p>其他模块的负责人，在接口联调工作中，只关注正向流程，没有异常处理，数据校验都是口头约定，没有接口文档。</p>
+<ul>
+<li>有一次我跟XX联调接口，由于他那边暂时没时间，我先按照我的逻辑进行接口设计，并使用apifox来记录接口的具体字段和类型，写得非常详细</li>
+<li>但是在联调时，他根本没看我写的文档，每次我调用他接口报错时，都是空指针</li>
+<li>需要我<strong>一个字段一个字段的去问他</strong>。  <em><strong>一个接口调了一天</strong></em></li>
+<li>说实话，应该就是这个契机，我才会想跑路的，太可恨了</li>
+</ul>
+</li>
 </ol>
-<h2 id="解决方案"><a href="#解决方案" class="headerlink" title="解决方案"></a>解决方案</h2><ol>
-<li>统一入口，由于进入该页面的入口只有一个，因此将初始化函数放入handleSearch()函数中的头部位置</li>
-<li>将初始化函数用async标记，调用时使用await标记</li>
-<li>使用Promise构造函数，将初始化函数重构：</li>
-</ol>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 初始化函数</span></span><br><span class="line"><span class="keyword">async</span> <span class="title function_">init</span>(<span class="params"></span>) &#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">Promise</span>(<span class="keyword">async</span> (resolve, reject) =&gt;&#123;</span><br><span class="line">    <span class="keyword">if</span>(<span class="title class_">Object</span>.<span class="title function_">keys</span>(<span class="variable language_">this</span>.<span class="property">allOptions</span>).<span class="property">length</span> === <span class="number">0</span>) &#123;</span><br><span class="line">    <span class="comment">// 主要、导致问题的初始化逻辑</span></span><br><span class="line">    <span class="keyword">const</span> res = <span class="keyword">await</span> <span class="title function_">getSpotList</span>();</span><br><span class="line">    <span class="keyword">if</span> (res.<span class="property">code</span> == <span class="number">200</span>) &#123;</span><br><span class="line">      <span class="variable language_">this</span>.<span class="property">allOptions</span> = res.<span class="property">data</span>;</span><br><span class="line">      <span class="variable language_">this</span>.<span class="property">zbtbName</span> = res.<span class="property">data</span>.<span class="property">matterFirst</span>[<span class="number">0</span>].<span class="property">name</span>;</span><br><span class="line">      <span class="variable language_">this</span>.<span class="property">zbtbFor</span> = res.<span class="property">data</span>.<span class="property">matterSecond</span>.<span class="title function_">map</span>(<span class="function"><span class="params">t</span> =&gt;</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> &#123;</span><br><span class="line">          <span class="attr">code</span>: t.<span class="property">code</span>,</span><br><span class="line">          <span class="attr">name</span>: t.<span class="property">name</span>,</span><br><span class="line">          <span class="attr">count</span>: <span class="number">0</span>,</span><br><span class="line">        &#125;;</span><br><span class="line">      &#125;);</span><br><span class="line">      <span class="title function_">resolve</span>(<span class="variable language_">this</span>.<span class="property">allOptions</span>);</span><br><span class="line">      <span class="variable language_">this</span>.<span class="title function_">handleFilterMain</span>(); <span class="comment">// 其他无关紧要的初始化逻辑</span></span><br><span class="line">      &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  &#125;)</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<ol start="4">
-<li>Promise 构造函数接受一个函数作为参数，该函数是同步的并且会被立即执行，所以我们称之为起始函数。起始函数包含两个参数 resolve 和 reject，分别表示 Promise 成功和失败的状态。</li>
-<li>在本例中，<code>this.allOptions</code>是导致问题出现的值，因此在它初始化完成后，执行resolve(this.allOptions)，表示异步函数已执行成功，后续逻辑<code>this.handleFilterMain()</code>继续异步执行</li>
-</ol>
-<h2 id="问题分析"><a href="#问题分析" class="headerlink" title="问题分析"></a>问题分析</h2><ol>
-<li>本项目是一个提交时间跨度极大，人员跨度极大的老旧项目，由于一些原因，一直处于维护中的状态，会出现很多类似的找不到原因和首要提交人的代码，相信很多人也会遇到类似问题</li>
-<li>我们能做的，只能是找寻问题根因，然后从尽量不影响原有逻辑的情况下，进行修改，一般来讲，重构会引发更多的问题..</li>
-</ol>
-<h2 id="参考链接"><a href="#参考链接" class="headerlink" title="参考链接"></a>参考链接</h2><ol>
-<li><a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Promise">Promise</a></li>
-</ol>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>入职没有门槛，还是要小心一些。<br>多看看其他人对待上级的方式，以及上级在处理问题时的态度。<br>如果发现不对的情况，尽早跑路，不要心存侥幸拖拖拉拉，浪费的是自己的生命。</p>
 
 <div id="gitalk-container"></div>
 <script src="https://cdn.bootcss.com/blueimp-md5/2.12.0/js/md5.min.js"></script><link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css"><script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
@@ -232,15 +227,10 @@
 
                 <ul class="pager">
                     
-                    <li class="previous">
-                        <a href="/2025/04/20/工作12年，头一次碰见这样的公司/" data-toggle="tooltip" data-placement="top"
-                           title="工作12年，头一次碰见这样的公司">&larr; Previous Post</a>
-                    </li>
-                    
                     
                     <li class="next">
-                        <a href="/2025/01/07/VIM灵活切换/" data-toggle="tooltip" data-placement="top"
-                           title="VIM灵活切换">Next Post &rarr;</a>
+                        <a href="/2025/04/08/前端异步调用无法保证先后顺序的处理方式/" data-toggle="tooltip" data-placement="top"
+                           title="前端异步调用无法保证先后顺序的处理方式">Next Post &rarr;</a>
                     </li>
                     
                 </ul>
@@ -259,7 +249,7 @@
 
             <div class="hidden-xs col-sm-3 toc-col">
                 <div class="toc-wrap">
-                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%97%AE%E9%A2%98%E6%8F%8F%E8%BF%B0"><span class="toc-text">问题描述</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88"><span class="toc-text">解决方案</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%97%AE%E9%A2%98%E5%88%86%E6%9E%90"><span class="toc-text">问题分析</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8F%82%E8%80%83%E9%93%BE%E6%8E%A5"><span class="toc-text">参考链接</span></a></li></ol>
+                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%83%8C%E6%99%AF"><span class="toc-text">背景</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%85%A5%E8%81%8C"><span class="toc-text">入职</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%88%9D%E6%9D%A5%E4%B9%8D%E5%88%B0"><span class="toc-text">初来乍到</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%BD%A2%E5%8A%BF%E8%BD%AC%E5%8F%98"><span class="toc-text">形势转变</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%80%A5%E8%BD%AC%E7%9B%B4%E4%B8%8B"><span class="toc-text">急转直下</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%9D%A0%E5%85%A5%E5%BA%95%E8%B0%B7"><span class="toc-text">坠入底谷</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%B4%A9%E6%BA%83"><span class="toc-text">崩溃</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%A6%BB%E8%81%8C"><span class="toc-text">离职</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%8E%B0%E8%B1%A1"><span class="toc-text">现象</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%80%BB%E7%BB%93"><span class="toc-text">总结</span></a></li></ol>
                 </div>
             </div>
         </div>
@@ -281,17 +271,8 @@
                     </h5>
                     <div class="tags">
                         
-                        <a class="tag" href="/tags/#vuejs"
-                           title="vuejs">vuejs</a>
-                        
-                        <a class="tag" href="/tags/#javascript"
-                           title="javascript">javascript</a>
-                        
-                        <a class="tag" href="/tags/#前端"
-                           title="前端">前端</a>
-                        
-                        <a class="tag" href="/tags/#Promise"
-                           title="Promise">Promise</a>
+                        <a class="tag" href="/tags/#职场"
+                           title="职场">职场</a>
                         
                     </div>
                 </section>
