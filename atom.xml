@@ -6,7 +6,7 @@
   <link href="https://billy7x17.github.io/atom.xml" rel="self"/>
   
   <link href="https://billy7x17.github.io/"/>
-  <updated>2025-04-12T03:58:50.914Z</updated>
+  <updated>2025-08-14T02:03:19.259Z</updated>
   <id>https://billy7x17.github.io/</id>
   
   <author>
@@ -15,6 +15,30 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>arthas获取、更改静态变量值</title>
+    <link href="https://billy7x17.github.io/2025/08/14/%E6%96%B0%E7%AD%BE%E7%AB%A0%E8%A7%A3%E9%94%81/"/>
+    <id>https://billy7x17.github.io/2025/08/14/%E6%96%B0%E7%AD%BE%E7%AB%A0%E8%A7%A3%E9%94%81/</id>
+    <published>2025-08-14T02:03:50.000Z</published>
+    <updated>2025-08-14T02:03:19.259Z</updated>
+    
+    
+      
+      
+    <summary type="html">&lt;h2 id=&quot;背景&quot;&gt;&lt;a href=&quot;#背景&quot; class=&quot;headerlink&quot; title=&quot;背景&quot;&gt;&lt;/a&gt;背景&lt;/h2&gt;&lt;p&gt;农业盲盒：&lt;br&gt;单投标人签章异常后，即使修复了，可能也会由于第一次将文件锁住，没有办法重新签章。&lt;br&gt;由于jingyi将锁写在内存中，原</summary>
+      
+    
+    
+    
+    
+    <category term="arthas" scheme="https://billy7x17.github.io/tags/arthas/"/>
+    
+    <category term="静态变量" scheme="https://billy7x17.github.io/tags/%E9%9D%99%E6%80%81%E5%8F%98%E9%87%8F/"/>
+    
+    <category term="锁" scheme="https://billy7x17.github.io/tags/%E9%94%81/"/>
+    
+  </entry>
   
   <entry>
     <title>前端异步调用无法保证先后顺序的处理方式</title>
