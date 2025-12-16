@@ -6,7 +6,7 @@
   <link href="https://billy7x17.github.io/atom.xml" rel="self"/>
   
   <link href="https://billy7x17.github.io/"/>
-  <updated>2025-08-14T02:03:19.259Z</updated>
+  <updated>2025-12-16T08:55:56.814Z</updated>
   <id>https://billy7x17.github.io/</id>
   
   <author>
@@ -15,6 +15,32 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>IDEA中.gitignore无法生效</title>
+    <link href="https://billy7x17.github.io/2025/12/16/IDEA%E4%B8%AD.gitignore%E6%97%A0%E6%B3%95%E7%94%9F%E6%95%88/"/>
+    <id>https://billy7x17.github.io/2025/12/16/IDEA%E4%B8%AD.gitignore%E6%97%A0%E6%B3%95%E7%94%9F%E6%95%88/</id>
+    <published>2025-12-16T08:42:09.000Z</published>
+    <updated>2025-12-16T08:55:56.814Z</updated>
+    
+    
+      
+      
+    <summary type="html">&lt;h2 id=&quot;问题描述&quot;&gt;&lt;a href=&quot;#问题描述&quot; class=&quot;headerlink&quot; title=&quot;问题描述&quot;&gt;&lt;/a&gt;问题描述&lt;/h2&gt;&lt;p&gt;在IDEA管理Java项目时，会自动在根目录下生成&lt;code&gt;.idea&lt;/code&gt;文件夹，文件夹下的内容都是给IDEA使</summary>
+      
+    
+    
+    
+    
+    <category term="git" scheme="https://billy7x17.github.io/tags/git/"/>
+    
+    <category term="IDE" scheme="https://billy7x17.github.io/tags/IDE/"/>
+    
+    <category term="IDEA" scheme="https://billy7x17.github.io/tags/IDEA/"/>
+    
+    <category term=".gitignore" scheme="https://billy7x17.github.io/tags/gitignore/"/>
+    
+  </entry>
   
   <entry>
     <title>arthas获取、更改静态变量值</title>
